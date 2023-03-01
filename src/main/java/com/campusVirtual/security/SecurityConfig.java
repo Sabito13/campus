@@ -10,10 +10,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) 
 public class SecurityConfig {
     
-    
+ 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http){
        
@@ -25,7 +25,7 @@ public class SecurityConfig {
                         .anyRequest()
                         .authenticated()
                         .and()
-                        .httpBasic()
+                        .httpBasic() 
                         .and()
                         .build();
                                  

@@ -4,11 +4,12 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-@RestController("/v1/autentificar")
+@RestController
+@RequestMapping("v1/auth")
 public class AutentificacionController {
     
-    @GetMapping("/login")
-    public String getHola(){
-        return "hola";
+    @GetMapping(path ="/login")
+    public String getLogin(){
+        return "login succesful";
     }
 }
