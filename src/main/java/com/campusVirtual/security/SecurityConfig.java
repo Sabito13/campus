@@ -1,5 +1,7 @@
 package com.campusVirtual.security;
 
+public class SecurityConfig{ 
+/* 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,6 +24,7 @@ public class SecurityConfig {
                         //.csrf().disable()
                         .authorizeRequests()
                         .antMatchers(HttpMethod.GET, "/v1/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "/v1/**").permitAll()
                         .anyRequest()
                         .authenticated()
                         .and()
@@ -35,6 +38,6 @@ public class SecurityConfig {
             return null;
         }
     }
-
+*/
 
 }
