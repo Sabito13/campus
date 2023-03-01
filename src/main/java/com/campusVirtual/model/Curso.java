@@ -1,13 +1,12 @@
 package com.campusVirtual.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.util.List;
+import java.util.ArrayList;
+
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import javax.persistence.*;
 
 @Entity(name="Curso")
 @Table(
@@ -43,6 +42,30 @@ public class Curso {
     )
     private String nombre;
 
+    
+    @OneToMany(
+        mappedBy = "curso",
+        orphanRemoval = true,
+        cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+        fetch = FetchType.LAZY
+        )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Ensenia> ensenia = new ArrayList<Ensenia>();
+    //private Ensenia ensenia;
+
+    public void addEnsenia(Ensenia ensenia) {
+        if (!this.ensenia.contains(ensenia)) {
+            this.ensenia.add(ensenia);
+            //empleado.setSucursal(this);
+        }
+    }
+
+    /*public void removeEmpleado(Empleado empleado) {
+        if (this.empleados.contains(empleado)) {
+            this.empleados.remove(empleado);
+            empleado.setSucursal(null);
+        }
+    }*/
 
     public Curso(){}
     public Curso(String nombre){
