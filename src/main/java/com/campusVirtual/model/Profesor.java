@@ -58,12 +58,12 @@ public class Profesor {
             fetch = FetchType.LAZY
             )
         //@OnDelete(action = OnDeleteAction.CASCADE)
-        private List<Ensenia> ensenia = new ArrayList<Ensenia>();
+        private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
         //private Ensenia ensenia;
     
-        public void addEnsenia(Ensenia ensenia) {
-            if (!this.ensenia.contains(ensenia)) {
-                this.ensenia.add(ensenia);
+        public void addEnsenia(ProfesorEnCurso profesorEnCurso) {
+            if (!this.profesorEnCurso.contains(profesorEnCurso)) {
+                this.profesorEnCurso.add(profesorEnCurso);
                 //empleado.setSucursal(this);
             }
         }
@@ -92,5 +92,15 @@ public class Profesor {
             this.nombre = nombre;
         }
         
-        
+        @Override
+        public String toString() {
+    
+        return "profesor: "+this.nombre+", especialidad: "+this.especialidad;
+        }
+
+
+
+        public List<ProfesorEnCurso> getProfesorEnCurso() {
+            return this.profesorEnCurso;
+        }
     }

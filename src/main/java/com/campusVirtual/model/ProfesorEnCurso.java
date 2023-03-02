@@ -3,25 +3,25 @@ package com.campusVirtual.model;
 import javax.persistence.*;
     
 
-    @Entity(name="Ensenia")
+    @Entity(name="ProfesorEnCurso")
     @Table(
-        name="ensenia",
+        name="profesorencurso",
         uniqueConstraints = {
             @UniqueConstraint(
-                    name="ensenia_id_constraint",
+                    name="profesorencurso_id_constraint",
                     columnNames = "id")
         }
     )
-    public class Ensenia {
+    public class ProfesorEnCurso {
         @Id
         @SequenceGenerator(
-            name = "generadoIdEnsenia",
-            sequenceName = "ENSENIA_GENERADOR_ID",
+            name = "generadoIdProfesorEnCurso",
+            sequenceName = "PROFESORENCURSO_GENERADOR_ID",
             initialValue=1,
             allocationSize = 1
         )
         @GeneratedValue(
-            generator = "generadoIdEnsenia",
+            generator = "generadoIdProfesorEnCurso",
             strategy = GenerationType.SEQUENCE)
         @Column(
             name = "id",
@@ -39,7 +39,7 @@ import javax.persistence.*;
             nullable = true,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "profesor_ensenia_fk"
+                    name = "profesor_curso_fk"
             )
     )
     private Profesor profesor;
@@ -50,13 +50,13 @@ import javax.persistence.*;
             nullable = true,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "curso_ensenia_fk"
+                    name = "curso_profesor_fk"
             )
     )
     private Curso curso;
 
-        public Ensenia(){        }
-    public Ensenia(Profesor profesor,Curso curso){
+        public ProfesorEnCurso(){        }
+    public ProfesorEnCurso(Profesor profesor,Curso curso){
         this.profesor = profesor;
         this.curso = curso;
         }
@@ -68,5 +68,16 @@ import javax.persistence.*;
             public void setCurso(Curso curso){
                 this.curso = curso;
             }
-            
+            public Curso getCurso() {
+                return curso;
+            }
+
+            public Profesor getProfesor() {
+                return profesor;
+            }
+
+            @Override
+            public String toString() {
+                return ""+this.profesor+""+this.curso;
+            }
         }

@@ -14,4 +14,11 @@ public class ProfesorController {
     public void crearProfesor(){
 
     }
+
+
+    @PostMapping(path = "asignarProfesor")
+    public String asignarProfesorCurso(){
+        return "profesor creado";
+    }
+    
 }
