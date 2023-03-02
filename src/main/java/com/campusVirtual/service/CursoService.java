@@ -29,6 +29,10 @@ public class CursoService {
         return this.cursoRepository.save(curso);
     }
 
+    public Curso guardarCursoBd(Curso curso){
+        return this.cursoRepository.save(curso);
+    }
+
 
     public List<CursoDto> obtenerTodosLosCursos(){
         List<CursoDto> cursoDto = cursoMapper.manyCursoToCursoDto(
@@ -37,5 +41,9 @@ public class CursoService {
       return cursoDto;
 
     } 
+
+    public Curso obtenerCursoPorId(Long id){
+        return this.cursoRepository.findById(id).get();
+    }
     
 }

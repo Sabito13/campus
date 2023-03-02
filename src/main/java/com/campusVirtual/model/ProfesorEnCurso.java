@@ -76,6 +76,16 @@ import javax.persistence.*;
                 return profesor;
             }
 
+
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public Long getId() {
+                return this.id;
+            }
+
             @Override
             public String toString() {
                 return ""+this.profesor+""+this.curso;

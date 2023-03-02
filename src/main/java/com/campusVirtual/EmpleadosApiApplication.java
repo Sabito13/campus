@@ -40,27 +40,27 @@ public class EmpleadosApiApplication {
 	
 
 	ProfesorEnCurso enseniaRedes = profesorEnCursoService.asignarProfesorCurso(proRedes, redes);
-	proRedes.addEnsenia(enseniaRedes);
-	redes.addEnsenia(enseniaRedes);
+	proRedes.addProfesorEnCurso(enseniaRedes);
+	redes.addProfesorEnCurso(enseniaRedes);
 	profesorService.guardarProfesorBd(proRedes);
 	cursoService.crearCurso(redes);
 	
 	ProfesorEnCurso enseniaIngles = profesorEnCursoService.asignarProfesorCurso(proIngles, ingles);
-	proIngles.addEnsenia(enseniaIngles);
-	ingles.addEnsenia(enseniaIngles);
+	proIngles.addProfesorEnCurso(enseniaIngles);
+	ingles.addProfesorEnCurso(enseniaIngles);
 	profesorService.guardarProfesorBd(proIngles);
 	cursoService.crearCurso(ingles);
 
 
 	ProfesorEnCurso enseniaIngles2 = profesorEnCursoService.asignarProfesorCurso(proIngles, ingles2);
-	proIngles.addEnsenia(enseniaIngles2);
-	ingles2.addEnsenia(enseniaIngles2);
+	proIngles.addProfesorEnCurso(enseniaIngles2);
+	ingles2.addProfesorEnCurso(enseniaIngles2);
 	profesorService.guardarProfesorBd(proIngles);
 	cursoService.crearCurso(ingles2);
 
 	ProfesorEnCurso enseniaIngles3 = profesorEnCursoService.asignarProfesorCurso(proIngles, ingles3);
-	proIngles.addEnsenia(enseniaIngles3);
-	ingles3.addEnsenia(enseniaIngles3);
+	proIngles.addProfesorEnCurso(enseniaIngles3);
+	ingles3.addProfesorEnCurso(enseniaIngles3);
 	profesorService.guardarProfesorBd(proIngles);
 	cursoService.crearCurso(ingles3);
 	

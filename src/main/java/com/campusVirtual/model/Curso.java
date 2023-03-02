@@ -53,17 +53,15 @@ public class Curso {
     private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
     //private Ensenia ensenia;
 
-    public void addEnsenia(ProfesorEnCurso profesorEnCurso) {
+   
+    public void addProfesorEnCurso(ProfesorEnCurso profesorEnCurso) {
         if (!this.profesorEnCurso.contains(profesorEnCurso)) {
             this.profesorEnCurso.add(profesorEnCurso);
-            //empleado.setSucursal(this);
         }
     }
-
-    /*public void removeEmpleado(Empleado empleado) {
-        if (this.empleados.contains(empleado)) {
-            this.empleados.remove(empleado);
-            empleado.setSucursal(null);
+    /*public void removeProfesorEnCurso(ProfesorEnCurso profesorEnCurso) {
+        if (this.profesorEnCurso.contains(profesorEnCurso)) {
+            this.profesorEnCurso.remove(profesorEnCurso);
         }
     }*/
 
@@ -92,5 +90,7 @@ public class Curso {
     public String toString() {
         return "curso: "+this.nombre;
     }
+
+    
     
 }

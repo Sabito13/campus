@@ -61,10 +61,9 @@ public class Profesor {
         private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
         //private Ensenia ensenia;
     
-        public void addEnsenia(ProfesorEnCurso profesorEnCurso) {
+        public void addProfesorEnCurso(ProfesorEnCurso profesorEnCurso) {
             if (!this.profesorEnCurso.contains(profesorEnCurso)) {
                 this.profesorEnCurso.add(profesorEnCurso);
-                //empleado.setSucursal(this);
             }
         }
 
@@ -103,4 +102,8 @@ public class Profesor {
         public List<ProfesorEnCurso> getProfesorEnCurso() {
             return this.profesorEnCurso;
         }
+
+
+
+    
     }

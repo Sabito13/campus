@@ -19,4 +19,8 @@ public class ProfesorService {
     public Profesor guardarProfesorBd(Profesor profesor){
         return this.profesorRepository.save(profesor);
     }
+
+    public Profesor obtenerProfesorPorId(Long id){
+        return this.profesorRepository.findById(id).get();
+    }
 }
