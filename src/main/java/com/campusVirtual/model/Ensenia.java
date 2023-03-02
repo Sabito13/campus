@@ -55,7 +55,7 @@ import javax.persistence.*;
     )
     private Curso curso;
 
-
+        public Ensenia(){        }
     public Ensenia(Profesor profesor,Curso curso){
         this.profesor = profesor;
         this.curso = curso;

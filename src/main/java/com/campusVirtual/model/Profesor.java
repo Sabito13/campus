@@ -52,12 +52,12 @@ public class Profesor {
 
 
         @OneToMany(
-            mappedBy = "Profesor",
+            mappedBy = "profesor",
             orphanRemoval = true,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
             )
-        @OnDelete(action = OnDeleteAction.CASCADE)
+        //@OnDelete(action = OnDeleteAction.CASCADE)
         private List<Ensenia> ensenia = new ArrayList<Ensenia>();
         //private Ensenia ensenia;
     

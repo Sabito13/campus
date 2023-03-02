@@ -25,6 +25,10 @@ public class CursoService {
        this.cursoRepository.save(nuevoCurso);
     }
 
+    public Curso crearCurso(Curso curso){
+        return this.cursoRepository.save(curso);
+    }
+
 
     public List<CursoDto> obtenerTodosLosCursos(){
         List<CursoDto> cursoDto = cursoMapper.manyCursoToCursoDto(
