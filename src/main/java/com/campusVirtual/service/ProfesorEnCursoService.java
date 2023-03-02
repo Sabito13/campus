@@ -1,6 +1,8 @@
 package com.campusVirtual.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +38,8 @@ public class ProfesorEnCursoService {
     }
 
     public ProfesorEnCursoDto asignarProfesorCurso(Long idProfesor,Long Idcurso){
-        Profesor profesorPorId=profesorService.obtenerProfesorPorId(idProfesor);
-        Curso cursoPorId=cursoService.obtenerCursoPorId(Idcurso);
+        Profesor profesorPorId=profesorService.getProfesorNoDtoById(idProfesor);
+        Curso cursoPorId=cursoService.getCursoNoDtoById(Idcurso);
         
         ProfesorEnCurso profesorCursoRelacion = new ProfesorEnCurso(profesorPorId, cursoPorId);
         profesorCursoRelacion =  this.profesorEnCursoRepository.save(profesorCursoRelacion);
@@ -45,9 +47,14 @@ public class ProfesorEnCursoService {
         profesorPorId.addProfesorEnCurso(profesorCursoRelacion);
         cursoPorId.addProfesorEnCurso(profesorCursoRelacion);
 
-        profesorService.guardarProfesorBd(profesorPorId);
-        cursoService.guardarCursoBd(cursoPorId);
+        profesorService.saveProfesorNoDto(profesorPorId);
+        cursoService.saveCursoNoDto(cursoPorId);
 
         return  pecMapper.profesorEnCursoToDto(profesorCursoRelacion);  
+    }
+
+    public List<ProfesorEnCursoDto> getAllPecDto() {
+        List<ProfesorEnCurso> pecs=profesorEnCursoRepository.findAll();
+        return pecMapper.manyProfesorEnCursoToDto(pecs);
     }
 }

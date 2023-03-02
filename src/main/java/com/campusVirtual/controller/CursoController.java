@@ -25,12 +25,12 @@ public class CursoController {
     
     @GetMapping(path="/cursos")
     public List<CursoDto> verCursos(){
-        return this.cursoService.obtenerTodosLosCursos();
+        return this.cursoService.getAllCursosDto();
     }
 
     @PostMapping(path="/nuevo")
     public String crearCursos(@RequestBody CursoDto cursoDto){
-        this.cursoService.crearCurso(cursoDto);
+        this.cursoService.saveCursoDto(cursoDto);
         return "curso creado";
     }
 }

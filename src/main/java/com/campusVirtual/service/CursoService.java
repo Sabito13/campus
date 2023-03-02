@@ -20,30 +20,35 @@ public class CursoService {
     public CursoService(CursoRepository cursoRepository){
         this.cursoRepository=cursoRepository;
     }
-    public void crearCurso(CursoDto cursoDto) {
+
+
+    public void saveCursoDto(CursoDto cursoDto) {
        Curso nuevoCurso = cursoMapper.cursoDtoToCurso(cursoDto);
        this.cursoRepository.save(nuevoCurso);
     }
 
-    public Curso crearCurso(Curso curso){
-        return this.cursoRepository.save(curso);
-    }
-
-    public Curso guardarCursoBd(Curso curso){
+    public Curso saveCursoNoDto(Curso curso){
         return this.cursoRepository.save(curso);
     }
 
 
-    public List<CursoDto> obtenerTodosLosCursos(){
+    public Curso getCursoNoDtoById(Long id){
+        return this.cursoRepository.findById(id).get();
+    }
+
+    public CursoDto getCursoDtoById(Long id){
+        Curso curso = this.cursoRepository.findById(id).get();
+        return cursoMapper.cursoToCursoDto(curso); 
+    }
+
+
+    public List<CursoDto> getAllCursosDto(){
         List<CursoDto> cursoDto = cursoMapper.manyCursoToCursoDto(
             this.cursoRepository.findAll());
         
       return cursoDto;
-
     } 
 
-    public Curso obtenerCursoPorId(Long id){
-        return this.cursoRepository.findById(id).get();
-    }
+   
     
 }

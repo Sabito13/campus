@@ -76,13 +76,17 @@ public class Profesor {
         }
     
         public Long getId() {
-            return id;
+            return this.id;
         }
     
         public String getNombre() {
-            return nombre;
+            return this.nombre;
         }
-    
+        
+        public String getEspecialidad() {
+            return this.especialidad;
+        }
+        
         public void setId(Long id) {
             this.id = id;
         }
@@ -90,7 +94,10 @@ public class Profesor {
         public void setNombre(String nombre) {
             this.nombre = nombre;
         }
-        
+        public void setEspecialidad(String especialidad) {
+            this.especialidad = especialidad;
+        }
+
         @Override
         public String toString() {
     

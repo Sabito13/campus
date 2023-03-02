@@ -13,12 +13,18 @@ public class CursoMapper {
         return nuevoCurso;
     }
 
+    public CursoDto cursoToCursoDto(Curso curso){
+       CursoDto cursoDto= new CursoDto(curso.getId(),curso.getNombre());
+    
+       return cursoDto;
+    }
+
     public List<CursoDto> manyCursoToCursoDto(List<Curso>  cursos) {
         List<CursoDto> cursosDtos = new ArrayList<>();
         
         for (Curso curso : cursos) {
             cursosDtos.add(
-                new CursoDto(curso.getId(),curso.getNombre())
+                cursoToCursoDto(curso)
             );
         }
 

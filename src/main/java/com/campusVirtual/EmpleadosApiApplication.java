@@ -26,43 +26,43 @@ public class EmpleadosApiApplication {
 			CursoService cursoService,
 			ProfesorEnCursoService profesorEnCursoService){
 	return args -> {
-	Profesor proIngles=profesorService.guardarProfesorBd(new Profesor("matias","ingles"));
+	Profesor proIngles=profesorService.saveProfesorNoDto(new Profesor("matias","ingles"));
 	//Profesor proIngles2=profesorService.guardarProfesorBd(new Profesor("matia22s","ingles"));
-	Profesor proMate=profesorService.guardarProfesorBd(new Profesor("pablo","matematica"));
-	Profesor proRedes=profesorService.guardarProfesorBd(new Profesor("Juan","redes"));
+	profesorService.saveProfesorNoDto(new Profesor("pablo","matematica"));
+	Profesor proRedes=profesorService.saveProfesorNoDto(new Profesor("Juan","redes"));
 	
 	
-	Curso redes=cursoService.crearCurso(new Curso("redes"));
-	Curso ingles=cursoService.crearCurso(new Curso("ingles"));
-	Curso ingles2=cursoService.crearCurso(new Curso("ingles avanzado"));
-	Curso ingles3=cursoService.crearCurso(new Curso("ingles medio"));
+	Curso redes=cursoService.saveCursoNoDto(new Curso("redes"));
+	Curso ingles=cursoService.saveCursoNoDto(new Curso("ingles"));
+	Curso ingles2=cursoService.saveCursoNoDto(new Curso("ingles avanzado"));
+	Curso ingles3=cursoService.saveCursoNoDto(new Curso("ingles medio"));
 	
 	
 
 	ProfesorEnCurso enseniaRedes = profesorEnCursoService.asignarProfesorCurso(proRedes, redes);
 	proRedes.addProfesorEnCurso(enseniaRedes);
 	redes.addProfesorEnCurso(enseniaRedes);
-	profesorService.guardarProfesorBd(proRedes);
-	cursoService.crearCurso(redes);
+	profesorService.saveProfesorNoDto(proRedes);
+	cursoService.saveCursoNoDto(redes);
 	
 	ProfesorEnCurso enseniaIngles = profesorEnCursoService.asignarProfesorCurso(proIngles, ingles);
 	proIngles.addProfesorEnCurso(enseniaIngles);
 	ingles.addProfesorEnCurso(enseniaIngles);
-	profesorService.guardarProfesorBd(proIngles);
-	cursoService.crearCurso(ingles);
+	profesorService.saveProfesorNoDto(proIngles);
+	cursoService.saveCursoNoDto(ingles);
 
 
 	ProfesorEnCurso enseniaIngles2 = profesorEnCursoService.asignarProfesorCurso(proIngles, ingles2);
 	proIngles.addProfesorEnCurso(enseniaIngles2);
 	ingles2.addProfesorEnCurso(enseniaIngles2);
-	profesorService.guardarProfesorBd(proIngles);
-	cursoService.crearCurso(ingles2);
+	profesorService.saveProfesorNoDto(proIngles);
+	cursoService.saveCursoNoDto(ingles2);
 
 	ProfesorEnCurso enseniaIngles3 = profesorEnCursoService.asignarProfesorCurso(proIngles, ingles3);
 	proIngles.addProfesorEnCurso(enseniaIngles3);
 	ingles3.addProfesorEnCurso(enseniaIngles3);
-	profesorService.guardarProfesorBd(proIngles);
-	cursoService.crearCurso(ingles3);
+	profesorService.saveProfesorNoDto(proIngles);
+	cursoService.saveCursoNoDto(ingles3);
 	
 	System.out.println(proIngles.getProfesorEnCurso());	
 		};
