@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.campusVirtual.dto.AlumnoEnCursoDto;
 import com.campusVirtual.dto.ProfesorEnCursoDto;
+import com.campusVirtual.service.AlumnoEnCursoService;
 import com.campusVirtual.service.ProfesorEnCursoService;
 
 
@@ -17,14 +19,26 @@ import com.campusVirtual.service.ProfesorEnCursoService;
 @RequestMapping(path="v1/admin")
 public class AdminController {
 
-    ProfesorEnCursoService profesorEnCursoService;
+    private ProfesorEnCursoService profesorEnCursoService;
+    private AlumnoEnCursoService alumnoEnCursoService;
 
     @Autowired
     public AdminController(
-        ProfesorEnCursoService profesorEnCursoService){
+        ProfesorEnCursoService profesorEnCursoService,
+        AlumnoEnCursoService alumnoEnCursoService){
             this.profesorEnCursoService=profesorEnCursoService;
+            this.alumnoEnCursoService=alumnoEnCursoService;
+    }
+    @GetMapping("/pec")
+    public List<ProfesorEnCursoDto> profesoresCursos(){
+        return this.profesorEnCursoService.getAllPecDto();
     }
 
+
+    @GetMapping("/aec")
+    public List<AlumnoEnCursoDto> alumnosCurso(){
+        return this.alumnoEnCursoService.getAllAecDto();
+    }
 
     @PostMapping(path ="/profesor/{idProfesor}/curso/{idCurso}")
     public ProfesorEnCursoDto asignarProfesorCurso(
@@ -34,10 +48,7 @@ public class AdminController {
             return  this.profesorEnCursoService.asignarProfesorCurso(idProfesor,idCurso);
     }
 
-    @GetMapping("/pec")
-    public List<ProfesorEnCursoDto> crearAdmin(){
-        return this.profesorEnCursoService.getAllPecDto();
-    }
+   
 
     
 

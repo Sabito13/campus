@@ -63,6 +63,10 @@ public class AlumnoEnCurso {
         public void setCurso(Curso curso) {
             this.curso = curso;
         }
+        
+        public void setId(Long id) {
+            this.id = id;
+        }
 
         public Alumno getAlumno() {
             return alumno;
@@ -70,6 +74,10 @@ public class AlumnoEnCurso {
 
         public Curso getCurso() {
             return curso;
+        }
+
+        public Long getId() {
+            return this.id;
         }
 
         @Override

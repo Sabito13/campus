@@ -52,11 +52,16 @@ public class EmpleadosApiApplication {
 	System.out.println(profesorService.getProfesorNoDtoById(proIngles.getId()).getProfesorEnCurso());	
 
 	Alumno alumno1 =alumnoService.saveAlumnoNoDto(new Alumno("Pablo"));
-	Alumno alumno2 =alumnoService.saveAlumnoNoDto(new Alumno("Pablo"));
+	Alumno alumno2 =alumnoService.saveAlumnoNoDto(new Alumno("juan"));
+
+	Alumno alumno3 =alumnoService.saveAlumnoNoDto(new Alumno("ro"));
+	Alumno alumno4 =alumnoService.saveAlumnoNoDto(new Alumno("tiago"));
 
 	alumnoEnCursoService.asignarAlumnoCurso(alumno1.getId(),ingles.getId());
 	alumnoEnCursoService.asignarAlumnoCurso(alumno2.getId(),ingles.getId());
 	alumnoEnCursoService.asignarAlumnoCurso(alumno2.getId(),redes.getId());
+	alumnoEnCursoService.asignarAlumnoCurso(alumno3.getId(),redes.getId());
+	alumnoEnCursoService.asignarAlumnoCurso(alumno4.getId(),redes.getId());
 
 	System.out.println(alumnoService.getAlumnoNoDtoById(alumno2.getId()).getAlumnoEnCurso());
 	//profesorService.deleteProfesorById(proIngles.getId());

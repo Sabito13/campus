@@ -1,7 +1,11 @@
 package com.campusVirtual.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.campusVirtual.dto.AlumnoEnCursoDto;
+import com.campusVirtual.mapper.AlumnoEnCursoMapper;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.model.AlumnoEnCurso;
 import com.campusVirtual.model.Curso;
@@ -9,7 +13,7 @@ import com.campusVirtual.repository.AlumnoEnCursoRepository;
 
 @Service
 public class AlumnoEnCursoService {
-    
+    private AlumnoEnCursoMapper alumnoEnCursoMapper = new AlumnoEnCursoMapper();
     private AlumnoService alumnoService;
     private CursoService cursoService;
     private AlumnoEnCursoRepository alumnoEnCursoRepository;
@@ -42,5 +46,14 @@ public class AlumnoEnCursoService {
     
         return alumnoEnCurso;
     }
+
+    public List<AlumnoEnCursoDto> getAllAecDto() {
+    List<AlumnoEnCursoDto>  aecdto= this.alumnoEnCursoMapper.
+    manyAlumnoEnCursoToDto(alumnoEnCursoRepository.findAll());
+        
+        return aecdto;
+    }
+
+   
 
 }
