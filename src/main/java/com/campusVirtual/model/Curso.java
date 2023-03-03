@@ -3,7 +3,8 @@ package com.campusVirtual.model;
 import java.util.List;
 import java.util.ArrayList;
 
-
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
@@ -46,10 +47,11 @@ public class Curso {
     @OneToMany(
         mappedBy = "curso",
         orphanRemoval = true,
-        cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-        fetch = FetchType.EAGER
+        cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+        //,fetch = FetchType.EAGER
         )
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
     //private Ensenia ensenia;
 
@@ -69,9 +71,10 @@ public class Curso {
     @OneToMany(
             mappedBy = "curso",
             orphanRemoval = true,
-            cascade ={CascadeType.PERSIST,CascadeType.REMOVE},
-            fetch = FetchType.LAZY
+            cascade ={CascadeType.PERSIST,CascadeType.REMOVE}
+            //fetch = FetchType.EAGER
         )
+        @LazyCollection(LazyCollectionOption.FALSE)
         private List<AlumnoEnCurso> alumnoEnCurso = new ArrayList<AlumnoEnCurso>();
         
     

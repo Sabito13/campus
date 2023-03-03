@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 @Entity(name="Alumno")
 @Table(
@@ -45,9 +48,10 @@ public class Alumno {
         @OneToMany(
             mappedBy = "alumno",
             orphanRemoval = true,
-            cascade ={CascadeType.PERSIST,CascadeType.REMOVE},
-            fetch = FetchType.LAZY
+            cascade ={CascadeType.PERSIST,CascadeType.REMOVE}
+            //fetch = //FetchType.EAGER
         )
+        @LazyCollection(LazyCollectionOption.FALSE)
         private List<AlumnoEnCurso> alumnoEnCurso = new ArrayList<AlumnoEnCurso>();
         
     

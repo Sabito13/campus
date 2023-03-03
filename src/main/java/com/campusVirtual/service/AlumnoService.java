@@ -17,7 +17,7 @@ public class AlumnoService {
         this.alumnoRepository=alumnoRepository;
     }
 
-    public Alumno saveCursoNoDto(Alumno alumno){
+    public Alumno saveAlumnoNoDto(Alumno alumno){
         return this.alumnoRepository.save(alumno);
     }
 

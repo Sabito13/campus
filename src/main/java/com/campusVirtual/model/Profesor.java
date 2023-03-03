@@ -2,6 +2,8 @@ package com.campusVirtual.model;
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity(name="Profesor")
 @Table(
@@ -52,9 +54,10 @@ public class Profesor {
         @OneToMany(
             mappedBy = "profesor",
             orphanRemoval = true,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch = FetchType.EAGER
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+            //,fetch = FetchType.EAGER
             )
+            @LazyCollection(LazyCollectionOption.FALSE)
         private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
         
     
