@@ -49,6 +49,11 @@ public class CursoService {
       return cursoDto;
     } 
 
+
+    public void deleteCursoById(Long idCurso){
+        this.cursoRepository.deleteById(idCurso);
+    }
+
    
     
 }

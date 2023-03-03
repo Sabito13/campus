@@ -27,7 +27,7 @@ public class EmpleadosApiApplication {
 			ProfesorEnCursoService profesorEnCursoService){
 	return args -> {
 	Profesor proIngles=profesorService.saveProfesorNoDto(new Profesor("matias","ingles"));
-	//Profesor proIngles2=profesorService.guardarProfesorBd(new Profesor("matia22s","ingles"));
+	Profesor proIngles2=profesorService.saveProfesorNoDto(new Profesor("matia22s","ingles"));
 	profesorService.saveProfesorNoDto(new Profesor("pablo","matematica"));
 	Profesor proRedes=profesorService.saveProfesorNoDto(new Profesor("Juan","redes"));
 	
@@ -63,8 +63,19 @@ public class EmpleadosApiApplication {
 	ingles3.addProfesorEnCurso(enseniaIngles3);
 	profesorService.saveProfesorNoDto(proIngles);
 	cursoService.saveCursoNoDto(ingles3);
+
+
+	ProfesorEnCurso enseniaIngles4 = profesorEnCursoService.asignarProfesorCurso(proIngles2, ingles3);
+	proIngles2.addProfesorEnCurso(enseniaIngles4);
+	ingles3.addProfesorEnCurso(enseniaIngles4);
+	profesorService.saveProfesorNoDto(proIngles2);
+	cursoService.saveCursoNoDto(ingles3);
 	
 	System.out.println(proIngles.getProfesorEnCurso());	
+
+
+
+	profesorService.deleteProfesorById(proIngles.getId());
 		};
 	
 	}

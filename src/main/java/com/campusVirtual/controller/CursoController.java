@@ -33,4 +33,11 @@ public class CursoController {
         this.cursoService.saveCursoDto(cursoDto);
         return "curso creado";
     }
+
+
+
+    @DeleteMapping("/eliminar/id")
+    public void eliminarCurso(@PathVariable("id") Long id){
+        this.cursoService.deleteCursoById(id);
+    }
 }

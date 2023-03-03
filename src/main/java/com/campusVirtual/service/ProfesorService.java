@@ -25,12 +25,20 @@ public class ProfesorService {
     public Profesor saveProfesorNoDto(Profesor profesor) {
         return this.profesorRepository.save(profesor);
     }
+
+    public void saveProfesorDto(ProfesorDto profesorDto) {
+        Profesor profesor = this.profesorMapper.profesorDtoToProfesor(profesorDto);
+        this.profesorRepository.save(profesor);
+    }
     
 
     public Profesor getProfesorNoDtoById(Long id) {
         return this.profesorRepository.findById(id).get();
+    }
 
-    
+    public ProfesorDto getProfesorDtoById(Long id) {
+        Profesor profesor= this.profesorRepository.findById(id).get();
+        return profesorMapper.profesorToProfesorDto(profesor);
     }
 
     public List<ProfesorDto> getAllProfesorDto(){
@@ -41,15 +49,7 @@ public class ProfesorService {
     }
 
 
-
-    public void saveProfesorDto(ProfesorDto profesorDto) {
-        Profesor profesor = this.profesorMapper.profesorDtoToProfesor(profesorDto);
-        this.profesorRepository.save(profesor);
-    }
-    
-
-    public ProfesorDto getProfesorDtoById(Long id) {
-        Profesor profesor= this.profesorRepository.findById(id).get();
-        return profesorMapper.profesorToProfesorDto(profesor);
+    public void deleteProfesorById(Long idProfesor){
+        this.profesorRepository.deleteById(idProfesor);
     }
 }

@@ -33,5 +33,9 @@ public class ProfesorController {
     public List<ProfesorDto> asignarProfesorCurso(){
         return profesorService.getAllProfesorDto();
     }
-    
+
+    @DeleteMapping("/eliminar/{id}")
+    public void deleteProfesorById(@PathVariable("id") Long id){
+        this.profesorService.deleteProfesorById(id);
+    }
 }
