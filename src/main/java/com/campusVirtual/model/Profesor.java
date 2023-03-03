@@ -1,7 +1,5 @@
 package com.campusVirtual.model;
 import javax.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -57,9 +55,8 @@ public class Profesor {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
             )
-        //@OnDelete(action = OnDeleteAction.CASCADE)
         private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
-        //private Ensenia ensenia;
+        
     
         public void addProfesorEnCurso(ProfesorEnCurso profesorEnCurso) {
             if (!this.profesorEnCurso.contains(profesorEnCurso)) {

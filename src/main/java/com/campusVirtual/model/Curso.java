@@ -65,6 +65,22 @@ public class Curso {
         }
     }*/
 
+
+    @OneToMany(
+            mappedBy = "curso",
+            orphanRemoval = true,
+            cascade ={CascadeType.PERSIST,CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+        )
+        private List<AlumnoEnCurso> alumnoEnCurso = new ArrayList<AlumnoEnCurso>();
+        
+    
+        public void addAlumnoEnCurso(AlumnoEnCurso alumnoEnCurso) {
+            if (!this.alumnoEnCurso.contains(alumnoEnCurso)) {
+                this.alumnoEnCurso.add(alumnoEnCurso);
+            }
+        }
+
     public Curso(){}
     public Curso(String nombre){
         this.nombre = nombre;
@@ -85,6 +101,10 @@ public class Curso {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public List<AlumnoEnCurso> getAlumnoEnCurso() {
+        return alumnoEnCurso;
+    }
+
     
     @Override
     public String toString() {
