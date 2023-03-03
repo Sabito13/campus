@@ -47,7 +47,7 @@ public class Curso {
         mappedBy = "curso",
         orphanRemoval = true,
         cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-        fetch = FetchType.LAZY
+        fetch = FetchType.EAGER
         )
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();

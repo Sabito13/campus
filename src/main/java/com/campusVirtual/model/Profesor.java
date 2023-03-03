@@ -53,7 +53,7 @@ public class Profesor {
             mappedBy = "profesor",
             orphanRemoval = true,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
             )
         private List<ProfesorEnCurso> profesorEnCurso = new ArrayList<ProfesorEnCurso>();
         

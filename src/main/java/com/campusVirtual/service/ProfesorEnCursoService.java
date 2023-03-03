@@ -32,10 +32,10 @@ public class ProfesorEnCursoService {
         this.cursoService=cursoService;
     }
 
-    public ProfesorEnCurso asignarProfesorCurso(Profesor profesor,Curso curso){
-        ProfesorEnCurso ensenia = new ProfesorEnCurso(profesor, curso);
-        return this.profesorEnCursoRepository.save(ensenia);
-    }
+    //public ProfesorEnCurso asignarProfesorCurso(Profesor profesor,Curso curso){
+    //    ProfesorEnCurso ensenia = new ProfesorEnCurso(profesor, curso);
+    //    return this.profesorEnCursoRepository.save(ensenia);
+    //}
 
     public ProfesorEnCursoDto asignarProfesorCurso(Long idProfesor,Long Idcurso){
         Profesor profesorPorId=profesorService.getProfesorNoDtoById(idProfesor);
