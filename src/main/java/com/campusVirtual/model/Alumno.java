@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity(name="Alumno")
@@ -51,6 +53,7 @@ public class Alumno {
             cascade ={CascadeType.PERSIST,CascadeType.REMOVE}
             //fetch = //FetchType.EAGER
         )
+        @OnDelete(action = OnDeleteAction.CASCADE)
         @LazyCollection(LazyCollectionOption.FALSE)
         private List<AlumnoEnCurso> alumnoEnCurso = new ArrayList<AlumnoEnCurso>();
         

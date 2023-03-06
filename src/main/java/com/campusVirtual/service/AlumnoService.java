@@ -1,13 +1,23 @@
 package com.campusVirtual.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import com.campusVirtual.mapper.AlumnoMapper;
+import com.campusVirtual.mapper.CursoMapper;
+import com.campusVirtual.dto.AlumnoDto;
+import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.repository.AlumnoRepository;
 
 @Service
 public class AlumnoService {
+    private AlumnoMapper alumnoMapper = new AlumnoMapper();
+    private CursoMapper cursoMapper = new CursoMapper();
+
     private AlumnoRepository alumnoRepository;
 
     @Autowired
@@ -24,6 +34,44 @@ public class AlumnoService {
 
     public Alumno getAlumnoNoDtoById(Long idAlumno){
        return this.alumnoRepository.findById(idAlumno).get();
+    }
+
+
+    public AlumnoDto saveAlumnoDto(AlumnoDto alumnoDto){
+        Alumno alumno= this.alumnoMapper.alumnoDtoToAlumno(alumnoDto);
+
+        alumno = this.alumnoRepository.save(alumno);
+
+        return this.alumnoMapper.alumnoToAlumnoDto(alumno);
+    }
+
+
+    public AlumnoDto getAlumnoDtoById(Long idAlumno){
+        Alumno alumno = this.alumnoRepository.findById(idAlumno).get();
+        
+        AlumnoDto alumnoDto = this.alumnoMapper.alumnoToAlumnoDto(alumno);
+
+        return alumnoDto;
+    }
+
+
+
+    public List<AlumnoDto> getAllAlumnoDto(){
+        List<Alumno> alumnos= this.alumnoRepository.findAll();
+        
+        List<AlumnoDto> alumnosDto = this.alumnoMapper.manyAlumnoToAlumnoDto(alumnos);
+
+        return alumnosDto;
+    }
+
+    public List<CursoDto> getAllCursosAlumno(Long idAlumno){
+        Alumno alumno = this.alumnoRepository.findById(idAlumno).get();
+        return cursoMapper.manyAlumnoEnCursoToCursoDto(alumno.getAlumnoEnCurso()); 
+    }
+    
+
+    public void deleteAlumnoById(Long idAlumno){
+        this.alumnoRepository.deleteById(idAlumno);
     }
 
 
