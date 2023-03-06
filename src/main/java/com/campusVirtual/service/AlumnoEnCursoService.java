@@ -54,6 +54,12 @@ public class AlumnoEnCursoService {
         return aecdto;
     }
 
+
+
+    public void desvincularProfesorCurso(Long idAlumno, Long idCurso) {
+        this.alumnoEnCursoRepository.deleteAlumnoEnCursoByBothId(idAlumno,idCurso);
+    }
+
     
 
    

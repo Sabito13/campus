@@ -59,7 +59,7 @@ public class AdminController {
 
 
     
-    @PostMapping(path ="/alumno/{idAlumno}/curso/{idCurso}")
+    @PostMapping(path ="asingnar/alumno/{idAlumno}/curso/{idCurso}")
     public AlumnoEnCursoDto asignarAlumnoCurso(
         @PathVariable("idAlumno") Long idAlumno,
         @PathVariable("idCurso") Long idCurso){
@@ -67,6 +67,13 @@ public class AdminController {
             return  this.alumnoEnCursoService.asignarAlumnoCurso(idAlumno,idCurso);
     }
 
+    @DeleteMapping(path ="/desvincular/alumno/{idAlumno}/curso/{idCurso}")
+    public void desvincularAlumnoCurso(
+        @PathVariable("idAlumno") Long idAlumno,
+        @PathVariable("idCurso") Long idCurso){
+            
+            this.alumnoEnCursoService.desvincularProfesorCurso(idAlumno,idCurso);
+    }
    
 
     
