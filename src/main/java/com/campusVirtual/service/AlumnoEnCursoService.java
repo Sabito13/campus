@@ -28,7 +28,7 @@ public class AlumnoEnCursoService {
         this.alumnoEnCursoRepository=alumnoEnCursoRepository;
     }
 
-    public AlumnoEnCurso asignarAlumnoCurso(Long alumnoId,Long cursoId){
+    public AlumnoEnCursoDto asignarAlumnoCurso(Long alumnoId,Long cursoId){
         Alumno alumno = this.alumnoService.getAlumnoNoDtoById(alumnoId);
         Curso curso = this.cursoService.getCursoNoDtoById(cursoId);
 
@@ -44,7 +44,7 @@ public class AlumnoEnCursoService {
         cursoService.saveCursoNoDto(curso);
         alumnoService.saveAlumnoNoDto(alumno);
     
-        return alumnoEnCurso;
+        return alumnoEnCursoMapper.alumnoEnCursoToDto(alumnoEnCurso);
     }
 
     public List<AlumnoEnCursoDto> getAllAecDto() {
@@ -53,6 +53,8 @@ public class AlumnoEnCursoService {
         
         return aecdto;
     }
+
+    
 
    
 

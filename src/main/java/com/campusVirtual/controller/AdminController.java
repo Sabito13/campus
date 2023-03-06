@@ -48,6 +48,17 @@ public class AdminController {
             return  this.profesorEnCursoService.asignarProfesorCurso(idProfesor,idCurso);
     }
 
+
+
+    
+    @PostMapping(path ="/alumno/{idAlumno}/curso/{idCurso}")
+    public AlumnoEnCursoDto asignarAlumnoCurso(
+        @PathVariable("idAlumno") Long idAlumno,
+        @PathVariable("idCurso") Long idCurso){
+            
+            return  this.alumnoEnCursoService.asignarAlumnoCurso(idAlumno,idCurso);
+    }
+
    
 
     

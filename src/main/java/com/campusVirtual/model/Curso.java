@@ -74,6 +74,7 @@ public class Curso {
             cascade ={CascadeType.PERSIST,CascadeType.REMOVE}
             //fetch = FetchType.EAGER
         )
+        @OnDelete(action = OnDeleteAction.CASCADE)
         @LazyCollection(LazyCollectionOption.FALSE)
         private List<AlumnoEnCurso> alumnoEnCurso = new ArrayList<AlumnoEnCurso>();
         

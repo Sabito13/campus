@@ -22,8 +22,7 @@ public class AlumnoService {
 
     @Autowired
     public AlumnoService(
-        AlumnoRepository alumnoRepository
-    ){
+        AlumnoRepository alumnoRepository){
         this.alumnoRepository=alumnoRepository;
     }
 
@@ -66,15 +65,15 @@ public class AlumnoService {
 
     public List<CursoDto> getAllCursosAlumno(Long idAlumno){
         Alumno alumno = this.alumnoRepository.findById(idAlumno).get();
-        return cursoMapper.manyAlumnoEnCursoToCursoDto(alumno.getAlumnoEnCurso()); 
+        
+        List<CursoDto> cursosAlumnoById= cursoMapper.manyAlumnoEnCursoToCursoDto(alumno.getAlumnoEnCurso()); 
+        
+        return cursosAlumnoById;
     }
     
 
     public void deleteAlumnoById(Long idAlumno){
         this.alumnoRepository.deleteById(idAlumno);
     }
-
-
-
 
 }

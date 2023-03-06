@@ -6,6 +6,7 @@ import java.util.List;
 import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.model.AlumnoEnCurso;
 import com.campusVirtual.model.Curso;
+import com.campusVirtual.model.ProfesorEnCurso;
 
 public class CursoMapper {
 
@@ -36,11 +37,23 @@ public class CursoMapper {
 
     public List<CursoDto> manyAlumnoEnCursoToCursoDto(List<AlumnoEnCurso> alumnoEnCurso) {
         List<CursoDto> cursosDto = new ArrayList<CursoDto>();
-        
 
         for (AlumnoEnCurso aec : alumnoEnCurso) {
             cursosDto.add(
                 cursoToCursoDto(aec.getCurso())
+            );
+        }
+        
+        return cursosDto;
+    }
+
+
+    public List<CursoDto> manyProfesorEnCursoToCursoDto(List<ProfesorEnCurso> profesorEnCurso) {
+        List<CursoDto> cursosDto = new ArrayList<CursoDto>();
+        
+        for (ProfesorEnCurso pec : profesorEnCurso) {
+            cursosDto.add(
+                cursoToCursoDto(pec.getCurso())
             );
         }
         

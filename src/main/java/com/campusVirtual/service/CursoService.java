@@ -22,9 +22,13 @@ public class CursoService {
     }
 
 
-    public void saveCursoDto(CursoDto cursoDto) {
+    public CursoDto saveCursoDto(CursoDto cursoDto) {
        Curso nuevoCurso = cursoMapper.cursoDtoToCurso(cursoDto);
-       this.cursoRepository.save(nuevoCurso);
+       nuevoCurso = this.cursoRepository.save(nuevoCurso);
+
+       CursoDto cursoDtos=this.cursoMapper.cursoToCursoDto(nuevoCurso);
+    
+        return cursoDtos;
     }
 
     public Curso saveCursoNoDto(Curso curso){
@@ -46,7 +50,7 @@ public class CursoService {
         List<CursoDto> cursoDto = cursoMapper.manyCursoToCursoDto(
             this.cursoRepository.findAll());
         
-      return cursoDto;
+      return cursoDto; 
     } 
 
 

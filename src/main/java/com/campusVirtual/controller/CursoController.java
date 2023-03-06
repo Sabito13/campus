@@ -10,7 +10,7 @@ import com.campusVirtual.service.CursoService;
 
 
 @RestController
-@RequestMapping(path="v1/api/curso")
+@RequestMapping(path="v1/curso")
 public class CursoController {
 
     private CursoService cursoService;
@@ -21,23 +21,28 @@ public class CursoController {
     }
 
 
+    @GetMapping(path="/id/{id}")
+    public CursoDto getCursoDtoById(@PathVariable("id") Long id){
+        return this.cursoService.getCursoDtoById(id);
+    }
 
-    
     @GetMapping(path="/cursos")
-    public List<CursoDto> verCursos(){
+    public List<CursoDto> getCursoDtoById(){
         return this.cursoService.getAllCursosDto();
     }
+    
+  
 
     @PostMapping(path="/nuevo")
-    public String crearCursos(@RequestBody CursoDto cursoDto){
-        this.cursoService.saveCursoDto(cursoDto);
-        return "curso creado";
+    public CursoDto crearCursos(@RequestBody CursoDto cursoDto){
+        return this.cursoService.saveCursoDto(cursoDto);
     }
 
 
 
-    @DeleteMapping("/eliminar/id")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminarCurso(@PathVariable("id") Long id){
         this.cursoService.deleteCursoById(id);
     }
+
 }

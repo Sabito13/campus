@@ -48,7 +48,7 @@ public class ProfesorEnCursoService {
         cursoPorId.addProfesorEnCurso(profesorCursoRelacion);
 
         profesorService.saveProfesorNoDto(profesorPorId);
-        cursoService.saveCursoNoDto(cursoPorId);
+        cursoService.saveCursoNoDto(cursoPorId); 
 
         return  pecMapper.profesorEnCursoToDto(profesorCursoRelacion);  
     }

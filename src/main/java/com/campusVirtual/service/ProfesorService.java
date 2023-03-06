@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.dto.ProfesorDto;
 import com.campusVirtual.mapper.ProfesorMapper;
+import com.campusVirtual.mapper.CursoMapper;
 import com.campusVirtual.model.Profesor;
 import com.campusVirtual.repository.ProfesorRepository;
 
@@ -15,6 +17,7 @@ public class ProfesorService {
     
     ProfesorRepository profesorRepository;
     ProfesorMapper profesorMapper = new ProfesorMapper();
+    private CursoMapper cursoMapper = new CursoMapper();
 
     @Autowired
     public ProfesorService( ProfesorRepository profesorRepository){
@@ -25,27 +28,45 @@ public class ProfesorService {
     public Profesor saveProfesorNoDto(Profesor profesor) {
         return this.profesorRepository.save(profesor);
     }
-
-    public void saveProfesorDto(ProfesorDto profesorDto) {
-        Profesor profesor = this.profesorMapper.profesorDtoToProfesor(profesorDto);
-        this.profesorRepository.save(profesor);
-    }
     
-
     public Profesor getProfesorNoDtoById(Long id) {
         return this.profesorRepository.findById(id).get();
     }
+    
+    
+    public ProfesorDto saveProfesorDto(ProfesorDto profesorDto) {
+        Profesor profesor = this.profesorMapper.profesorDtoToProfesor(profesorDto);
+        
+        profesor = this.profesorRepository.save(profesor);
+
+        ProfesorDto profesorDtoCreado = this.profesorMapper.profesorToProfesorDto(profesor);
+        
+        return profesorDtoCreado;
+    }
+    
 
     public ProfesorDto getProfesorDtoById(Long id) {
         Profesor profesor= this.profesorRepository.findById(id).get();
-        return profesorMapper.profesorToProfesorDto(profesor);
+        
+        ProfesorDto profesorDto =  profesorMapper.profesorToProfesorDto(profesor);
+        
+        return profesorDto;
     }
 
     public List<ProfesorDto> getAllProfesorDto(){
         List<Profesor> profesores =this.profesorRepository.findAll();
         
-        return profesorMapper.manyProfesorToProfesorDto(profesores);
-    
+        List<ProfesorDto> profesoresDto = profesorMapper.manyProfesorToProfesorDto(profesores);
+        
+        return profesoresDto;
+    }
+
+    public List<CursoDto> getAllCursosProfesor(Long idProfesor){
+        Profesor profesorById = this.profesorRepository.findById(idProfesor).get();
+        
+        List<CursoDto> cursosProfesorById= cursoMapper.manyProfesorEnCursoToCursoDto(profesorById.getProfesorEnCurso()); 
+        
+        return cursosProfesorById;
     }
 
 
