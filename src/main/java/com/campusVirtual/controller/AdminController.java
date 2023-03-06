@@ -40,12 +40,20 @@ public class AdminController {
         return this.alumnoEnCursoService.getAllAecDto();
     }
 
-    @PostMapping(path ="/profesor/{idProfesor}/curso/{idCurso}")
+    @PostMapping(path ="/asignar/profesor/{idProfesor}/curso/{idCurso}")
     public ProfesorEnCursoDto asignarProfesorCurso(
         @PathVariable("idProfesor") Long idProfesor,
         @PathVariable("idCurso") Long idCurso){
             
             return  this.profesorEnCursoService.asignarProfesorCurso(idProfesor,idCurso);
+    }
+
+    @DeleteMapping(path ="/desvincular/profesor/{idProfesor}/curso/{idCurso}")
+    public void desvincularProfesorCurso(
+        @PathVariable("idProfesor") Long idProfesor,
+        @PathVariable("idCurso") Long idCurso){
+            
+            this.profesorEnCursoService.desvincularProfesorCurso(idProfesor,idCurso);
     }
 
 

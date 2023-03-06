@@ -57,4 +57,8 @@ public class ProfesorEnCursoService {
         List<ProfesorEnCurso> pecs=profesorEnCursoRepository.findAll();
         return pecMapper.manyProfesorEnCursoToDto(pecs);
     }
+
+    public void desvincularProfesorCurso(Long idProfesor, Long idCurso) {
+        this.profesorEnCursoRepository.deleteProfesorEnCursoByBothId(idProfesor,idCurso);
+    }
 }
