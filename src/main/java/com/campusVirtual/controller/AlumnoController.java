@@ -27,23 +27,27 @@ public class AlumnoController {
     
     @GetMapping(path="/id/{id}")
     public  ResponseEntity<AlumnoDto> getAlumnoDtoById(@PathVariable("id") Long id){
-        return  ResponseEntity.ok().body(this.alumnoService.getAlumnoDtoById(id));
+        return  ResponseEntity.ok()
+                .body(this.alumnoService.getAlumnoDtoById(id));
     }
 
     @GetMapping(path="/todos")
     public ResponseEntity<List<AlumnoDto>> getAllAlumnoDto(){
-        return ResponseEntity.ok().body(this.alumnoService.getAllAlumnoDto());
+        return ResponseEntity.ok()
+                .body(this.alumnoService.getAllAlumnoDto());
     }
 
     @GetMapping(path="cursos/alumno/{id}")
     public ResponseEntity<List<CursoDto>> getAllCursosAlumno(@PathVariable("id") Long id){
-        return ResponseEntity.ok().body(this.alumnoService.getAllCursosAlumno(id));
+        return ResponseEntity.ok()
+                .body(this.alumnoService.getAllCursosAlumno(id));
     }
     
 
     @PostMapping(path="/nuevo")
     public ResponseEntity<AlumnoDto> nuevoAlumno(@RequestBody AlumnoDto alumnoDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.saveAlumnoDto(alumnoDto));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.alumnoService.saveAlumnoDto(alumnoDto));
     }
 
     @DeleteMapping(path="/eliminar/{id}")

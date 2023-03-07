@@ -2,6 +2,8 @@ package com.campusVirtual.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -22,27 +24,31 @@ public class CursoController {
 
 
     @GetMapping(path="/id/{id}")
-    public CursoDto getCursoDtoById(@PathVariable("id") Long id){
-        return this.cursoService.getCursoDtoById(id);
+    public ResponseEntity<CursoDto> getCursoDtoById(@PathVariable("id") Long id){
+        return ResponseEntity.ok()
+        .body(this.cursoService.getCursoDtoById(id));
     }
 
     @GetMapping(path="/cursos")
-    public List<CursoDto> getCursoDtoById(){
-        return this.cursoService.getAllCursosDto();
+    public ResponseEntity<List<CursoDto>> getCursoDtoById(){
+        return ResponseEntity.ok()
+        .body(this.cursoService.getAllCursosDto());
     }
     
   
 
     @PostMapping(path="/nuevo")
-    public CursoDto crearCursos(@RequestBody CursoDto cursoDto){
-        return this.cursoService.saveCursoDto(cursoDto);
+    public ResponseEntity<CursoDto> crearCursos(@RequestBody CursoDto cursoDto){
+        return ResponseEntity.status(HttpStatus.CREATED)
+        .body(this.cursoService.saveCursoDto(cursoDto));
     }
 
 
 
     @DeleteMapping("/eliminar/{id}")
-    public void eliminarCurso(@PathVariable("id") Long id){
+    public ResponseEntity<?> eliminarCurso(@PathVariable("id") Long id){
         this.cursoService.deleteCursoById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

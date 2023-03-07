@@ -1,6 +1,8 @@
 package com.campusVirtual.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.CursoDto;
@@ -21,32 +23,37 @@ public class ProfesorController {
     }
 
     @GetMapping(path = "/id/{id}")
-    public ProfesorDto getProfesorDtoById(
+    public ResponseEntity<ProfesorDto> getProfesorDtoById(
         @PathVariable("id") Long id){
-        return profesorService.getProfesorDtoById(id);
+        return ResponseEntity.ok()
+        .body(profesorService.getProfesorDtoById(id));
     }
 
     @GetMapping(path = "/todos")
-    public List<ProfesorDto> getAllProfesorDto(){
-        return this.profesorService.getAllProfesorDto();
+    public ResponseEntity<List<ProfesorDto>> getAllProfesorDto(){
+        return ResponseEntity.ok()
+        .body(this.profesorService.getAllProfesorDto());
     }
 
 
     @GetMapping(path ="/cursos/profesor/{id}")
-    public List<CursoDto> getAllCursosProfesor(
+    public ResponseEntity<List<CursoDto>> getAllCursosProfesor(
         @PathVariable("id") Long id){
-        return this.profesorService.getAllCursosProfesor(id);
+        return ResponseEntity.ok()
+        .body(this.profesorService.getAllCursosProfesor(id));
     }
 
     @PostMapping(path ="/nuevo")
-    public ProfesorDto nuevoProfesor(
+    public ResponseEntity<ProfesorDto> nuevoProfesor(
         @RequestBody ProfesorDto profesorDto){
-        return this.profesorService.saveProfesorDto(profesorDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.profesorService.saveProfesorDto(profesorDto));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public void deleteProfesorById(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteProfesorById(@PathVariable("id") Long id){
         this.profesorService.deleteProfesorById(id);
+        return ResponseEntity.noContent().build();
     }
 
 
