@@ -31,7 +31,7 @@ public class ProfesorService {
     }
     
     public Profesor getProfesorNoDtoById(Long id) {
-        return this.profesorRepository.findById(id).get();
+        return this.profesorRepository.findById(id).orElseThrow(()-> new ProfesorNotFoundException(id));
     }
     
     
@@ -72,6 +72,16 @@ public class ProfesorService {
 
 
     public void deleteProfesorById(Long idProfesor){
-        this.profesorRepository.deleteById(idProfesor);
+        if(this.profesorRepository.existsById(idProfesor)){
+            this.profesorRepository.deleteById(idProfesor);
+        }else{
+            throw new ProfesorNotFoundException(idProfesor);
+        }
+        
+    }
+
+
+    public boolean existsProfesorById(Long idProfesor) {
+        return this.profesorRepository.existsById(idProfesor);
     }
 }

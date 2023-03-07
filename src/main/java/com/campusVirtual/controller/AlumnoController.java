@@ -3,6 +3,7 @@ package com.campusVirtual.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,13 +42,14 @@ public class AlumnoController {
     
 
     @PostMapping(path="/nuevo")
-    public AlumnoDto nuevoAlumno(@RequestBody AlumnoDto alumnoDto){
-        return this.alumnoService.saveAlumnoDto(alumnoDto);
+    public ResponseEntity<AlumnoDto> nuevoAlumno(@RequestBody AlumnoDto alumnoDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.alumnoService.saveAlumnoDto(alumnoDto));
     }
 
     @DeleteMapping(path="/eliminar/{id}")
-    public void deleteAlumno(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteAlumno(@PathVariable("id") Long id){
         this.alumnoService.deleteAlumnoById(id);
+        return ResponseEntity.noContent().build();
     }
 
 

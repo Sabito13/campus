@@ -4,6 +4,8 @@ package com.campusVirtual.service;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.AlumnoEnCursoDto;
+import com.campusVirtual.exception.AlumnoNotFoundException;
+import com.campusVirtual.exception.CursoNotFoundException;
 import com.campusVirtual.mapper.AlumnoEnCursoMapper;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.model.AlumnoEnCurso;
@@ -47,11 +49,20 @@ public class AlumnoEnCursoService {
     }
 
     public void desvincularProfesorCurso(Long idAlumno, Long idCurso) {
+        if(!this.alumnoService.existsAlumnoById(idAlumno)){
+            throw new AlumnoNotFoundException(idAlumno);
+        }
+
+        if(!this.cursoService.existsCursoById(idCurso)){
+            throw new CursoNotFoundException(idCurso);
+        }
+       
         this.alumnoEnCursoRepository.deleteAlumnoEnCursoByBothId(idAlumno,idCurso);
     }
+}
 
     
 
    
 
-}
+

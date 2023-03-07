@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.ProfesorEnCursoDto;
+import com.campusVirtual.exception.CursoNotFoundException;
+import com.campusVirtual.exception.ProfesorNotFoundException;
 import com.campusVirtual.mapper.ProfesorEnCursoMapper;
 import com.campusVirtual.model.Curso;
 import com.campusVirtual.model.ProfesorEnCurso;
@@ -54,6 +56,13 @@ public class ProfesorEnCursoService {
 
 
     public void desvincularProfesorCurso(Long idProfesor, Long idCurso) {
+        if(!this.profesorService.existsProfesorById(idProfesor)){
+            throw new ProfesorNotFoundException(idCurso);
+        }
+
+        if(!this.cursoService.existsCursoById(idCurso)){
+            throw new CursoNotFoundException(idCurso);
+        }
         this.profesorEnCursoRepository.deleteProfesorEnCursoByBothId(idProfesor,idCurso);
     }
 }

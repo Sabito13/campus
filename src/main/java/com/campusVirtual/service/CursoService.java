@@ -56,7 +56,16 @@ public class CursoService {
 
 
     public void deleteCursoById(Long idCurso){
-        this.cursoRepository.deleteById(idCurso);
+        if(this.cursoRepository.existsById(idCurso)){
+            this.cursoRepository.deleteById(idCurso);
+        }else{
+            throw new CursoNotFoundException(idCurso);
+        }
+    }
+
+
+    public boolean existsCursoById(Long idCurso) {
+        return this.cursoRepository.existsById(idCurso);
     }
 
    

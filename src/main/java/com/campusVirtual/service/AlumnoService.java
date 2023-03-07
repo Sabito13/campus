@@ -33,7 +33,7 @@ public class AlumnoService {
 
 
     public Alumno getAlumnoNoDtoById(Long idAlumno){
-       return this.alumnoRepository.findById(idAlumno).get();
+       return this.alumnoRepository.findById(idAlumno).orElseThrow(()-> new AlumnoNotFoundException(idAlumno));
     }
 
 
@@ -74,7 +74,14 @@ public class AlumnoService {
     
 
     public void deleteAlumnoById(Long idAlumno){
-        this.alumnoRepository.deleteById(idAlumno);
+        if(this.alumnoRepository.existsById(idAlumno)){
+            this.alumnoRepository.deleteById(idAlumno);
+        }else{
+            throw new AlumnoNotFoundException(idAlumno);
+        }
     }
 
+    public boolean existsAlumnoById(Long idAlumno) {
+        return this.alumnoRepository.existsById(idAlumno);
+    }
 }
