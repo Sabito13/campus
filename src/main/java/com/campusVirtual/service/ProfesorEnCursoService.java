@@ -1,7 +1,6 @@
 package com.campusVirtual.service;
 
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,10 +52,6 @@ public class ProfesorEnCursoService {
         return  pecMapper.profesorEnCursoToDto(profesorCursoRelacion);  
     }
 
-    public List<ProfesorEnCursoDto> getAllPecDto() {
-        List<ProfesorEnCurso> pecs=profesorEnCursoRepository.findAll();
-        return pecMapper.manyProfesorEnCursoToDto(pecs);
-    }
 
     public void desvincularProfesorCurso(Long idProfesor, Long idCurso) {
         this.profesorEnCursoRepository.deleteProfesorEnCursoByBothId(idProfesor,idCurso);

@@ -1,6 +1,5 @@
 package com.campusVirtual.service;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -46,15 +45,6 @@ public class AlumnoEnCursoService {
     
         return alumnoEnCursoMapper.alumnoEnCursoToDto(alumnoEnCurso);
     }
-
-    public List<AlumnoEnCursoDto> getAllAecDto() {
-    List<AlumnoEnCursoDto>  aecdto= this.alumnoEnCursoMapper.
-    manyAlumnoEnCursoToDto(alumnoEnCursoRepository.findAll());
-        
-        return aecdto;
-    }
-
-
 
     public void desvincularProfesorCurso(Long idAlumno, Long idCurso) {
         this.alumnoEnCursoRepository.deleteAlumnoEnCursoByBothId(idAlumno,idCurso);

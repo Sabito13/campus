@@ -10,6 +10,7 @@ import com.campusVirtual.mapper.AlumnoMapper;
 import com.campusVirtual.mapper.CursoMapper;
 import com.campusVirtual.dto.AlumnoDto;
 import com.campusVirtual.dto.CursoDto;
+import com.campusVirtual.exception.AlumnoNotFoundException;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.repository.AlumnoRepository;
 
@@ -46,7 +47,7 @@ public class AlumnoService {
 
 
     public AlumnoDto getAlumnoDtoById(Long idAlumno){
-        Alumno alumno = this.alumnoRepository.findById(idAlumno).get();
+        Alumno alumno = this.alumnoRepository.findById(idAlumno).orElseThrow(()-> new AlumnoNotFoundException(idAlumno));
         
         AlumnoDto alumnoDto = this.alumnoMapper.alumnoToAlumnoDto(alumno);
 

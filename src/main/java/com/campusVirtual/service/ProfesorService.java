@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.dto.ProfesorDto;
+import com.campusVirtual.exception.ProfesorNotFoundException;
 import com.campusVirtual.mapper.ProfesorMapper;
 import com.campusVirtual.mapper.CursoMapper;
 import com.campusVirtual.model.Profesor;
@@ -46,7 +47,7 @@ public class ProfesorService {
     
 
     public ProfesorDto getProfesorDtoById(Long id) {
-        Profesor profesor= this.profesorRepository.findById(id).get();
+        Profesor profesor= this.profesorRepository.findById(id).orElseThrow(()-> new ProfesorNotFoundException(id));
         
         ProfesorDto profesorDto =  profesorMapper.profesorToProfesorDto(profesor);
         

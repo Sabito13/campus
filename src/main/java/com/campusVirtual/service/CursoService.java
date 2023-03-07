@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.CursoDto;
+import com.campusVirtual.exception.CursoNotFoundException;
 import com.campusVirtual.mapper.CursoMapper;
 import com.campusVirtual.model.Curso;
 import com.campusVirtual.repository.CursoRepository;
@@ -37,11 +38,11 @@ public class CursoService {
 
 
     public Curso getCursoNoDtoById(Long id){
-        return this.cursoRepository.findById(id).get();
+        return this.cursoRepository.findById(id).orElseThrow(()-> new CursoNotFoundException(id));
     }
 
     public CursoDto getCursoDtoById(Long id){
-        Curso curso = this.cursoRepository.findById(id).get();
+        Curso curso = this.cursoRepository.findById(id).orElseThrow(()-> new CursoNotFoundException(id));;
         return cursoMapper.cursoToCursoDto(curso); 
     }
 

@@ -3,8 +3,6 @@ package com.campusVirtual.controller;
 
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +27,7 @@ public class AdminController {
             this.profesorEnCursoService=profesorEnCursoService;
             this.alumnoEnCursoService=alumnoEnCursoService;
     }
-    @GetMapping("/pec")
-    public List<ProfesorEnCursoDto> profesoresCursos(){
-        return this.profesorEnCursoService.getAllPecDto();
-    }
-
-
-    @GetMapping("/aec")
-    public List<AlumnoEnCursoDto> alumnosCurso(){
-        return this.alumnoEnCursoService.getAllAecDto();
-    }
+  
 
     @PostMapping(path ="/asignar/profesor/{idProfesor}/curso/{idCurso}")
     public ProfesorEnCursoDto asignarProfesorCurso(

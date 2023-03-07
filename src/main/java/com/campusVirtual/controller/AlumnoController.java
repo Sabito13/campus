@@ -3,6 +3,7 @@ package com.campusVirtual.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.AlumnoDto;
@@ -24,18 +25,18 @@ public class AlumnoController {
     
     
     @GetMapping(path="/id/{id}")
-    public AlumnoDto getAlumnoDtoById(@PathVariable("id") Long id){
-        return this.alumnoService.getAlumnoDtoById(id);
+    public  ResponseEntity<AlumnoDto> getAlumnoDtoById(@PathVariable("id") Long id){
+        return  ResponseEntity.ok().body(this.alumnoService.getAlumnoDtoById(id));
     }
 
     @GetMapping(path="/todos")
-    public List<AlumnoDto> getAllAlumnoDto(){
-        return this.alumnoService.getAllAlumnoDto();
+    public ResponseEntity<List<AlumnoDto>> getAllAlumnoDto(){
+        return ResponseEntity.ok().body(this.alumnoService.getAllAlumnoDto());
     }
 
     @GetMapping(path="cursos/alumno/{id}")
-    public List<CursoDto> getAllCursosAlumno(@PathVariable("id") Long id){
-        return this.alumnoService.getAllCursosAlumno(id);
+    public ResponseEntity<List<CursoDto>> getAllCursosAlumno(@PathVariable("id") Long id){
+        return ResponseEntity.ok().body(this.alumnoService.getAllCursosAlumno(id));
     }
     
 
