@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.dto.ProfesorDto;
-import com.campusVirtual.service.ProfesorService;
+import com.campusVirtual.service.IProfesorService;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping(path="v1/profesor")
 public class ProfesorController {
 
-    ProfesorService profesorService;
+    private IProfesorService profesorService;
 
     @Autowired
-    public ProfesorController(ProfesorService profesorService){
+    public ProfesorController(IProfesorService profesorService){
        this.profesorService=profesorService;
     }
 

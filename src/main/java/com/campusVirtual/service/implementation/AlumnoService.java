@@ -1,4 +1,4 @@
-package com.campusVirtual.service;
+package com.campusVirtual.service.implementation;
 
 import java.util.List;
 
@@ -13,9 +13,10 @@ import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.exception.AlumnoNotFoundException;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.repository.AlumnoRepository;
+import com.campusVirtual.service.IAlumnoService;
 
 @Service
-public class AlumnoService {
+public class AlumnoService implements IAlumnoService {
     private AlumnoMapper alumnoMapper = new AlumnoMapper();
     private CursoMapper cursoMapper = new CursoMapper();
 
@@ -27,16 +28,17 @@ public class AlumnoService {
         this.alumnoRepository=alumnoRepository;
     }
 
+    @Override
     public Alumno saveAlumnoNoDto(Alumno alumno){
         return this.alumnoRepository.save(alumno);
     }
 
-
+    @Override
     public Alumno getAlumnoNoDtoById(Long idAlumno){
        return this.alumnoRepository.findById(idAlumno).orElseThrow(()-> new AlumnoNotFoundException(idAlumno));
     }
 
-
+    @Override
     public AlumnoDto saveAlumnoDto(AlumnoDto alumnoDto){
         Alumno alumno= this.alumnoMapper.alumnoDtoToAlumno(alumnoDto);
 
@@ -45,7 +47,7 @@ public class AlumnoService {
         return this.alumnoMapper.alumnoToAlumnoDto(alumno);
     }
 
-
+    @Override
     public AlumnoDto getAlumnoDtoById(Long idAlumno){
         Alumno alumno = this.alumnoRepository.findById(idAlumno).orElseThrow(()-> new AlumnoNotFoundException(idAlumno));
         
@@ -55,7 +57,7 @@ public class AlumnoService {
     }
 
 
-
+    @Override
     public List<AlumnoDto> getAllAlumnoDto(){
         List<Alumno> alumnos= this.alumnoRepository.findAll();
         
@@ -64,6 +66,7 @@ public class AlumnoService {
         return alumnosDto;
     }
 
+    @Override
     public List<CursoDto> getAllCursosAlumno(Long idAlumno){
         Alumno alumno = this.alumnoRepository.findById(idAlumno).get();
         
@@ -72,7 +75,7 @@ public class AlumnoService {
         return cursosAlumnoById;
     }
     
-
+    @Override
     public void deleteAlumnoById(Long idAlumno){
         if(this.alumnoRepository.existsById(idAlumno)){
             this.alumnoRepository.deleteById(idAlumno);
@@ -81,6 +84,7 @@ public class AlumnoService {
         }
     }
 
+    @Override
     public boolean existsAlumnoById(Long idAlumno) {
         return this.alumnoRepository.existsById(idAlumno);
     }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.AlumnoDto;
 import com.campusVirtual.dto.CursoDto;
-import com.campusVirtual.service.AlumnoService;
+import com.campusVirtual.service.IAlumnoService;
 
 
 
@@ -17,10 +17,10 @@ import com.campusVirtual.service.AlumnoService;
 @RequestMapping(path="v1/alumno")
 public class AlumnoController {
 
-    private AlumnoService alumnoService;
+    private IAlumnoService alumnoService;
 
     @Autowired
-    public AlumnoController(AlumnoService alumnoService){
+    public AlumnoController(IAlumnoService alumnoService){
         this.alumnoService=alumnoService;
     }
     

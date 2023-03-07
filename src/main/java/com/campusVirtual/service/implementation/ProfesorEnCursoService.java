@@ -1,4 +1,4 @@
-package com.campusVirtual.service;
+package com.campusVirtual.service.implementation;
 
 
 
@@ -13,21 +13,24 @@ import com.campusVirtual.model.Curso;
 import com.campusVirtual.model.ProfesorEnCurso;
 import com.campusVirtual.model.Profesor;
 import com.campusVirtual.repository.ProfesorEnCursoRepository;
+import com.campusVirtual.service.ICursoService;
+import com.campusVirtual.service.IProfesorEnCursoService;
+import com.campusVirtual.service.IProfesorService;
 
 @Service
-public class ProfesorEnCursoService {
+public class ProfesorEnCursoService implements IProfesorEnCursoService{
     
     private ProfesorEnCursoRepository profesorEnCursoRepository;
-    private ProfesorService profesorService;
-    private CursoService cursoService;
+    private IProfesorService profesorService;
+    private ICursoService cursoService;
     private ProfesorEnCursoMapper pecMapper= new ProfesorEnCursoMapper();
     
 
     @Autowired
     public ProfesorEnCursoService( 
         ProfesorEnCursoRepository profesorEnCursoRepository,
-        ProfesorService profesorService,
-        CursoService cursoService){
+        IProfesorService profesorService,
+        ICursoService cursoService){
         this.profesorEnCursoRepository=profesorEnCursoRepository;
         this.profesorService=profesorService;
         this.cursoService=cursoService;
@@ -38,6 +41,7 @@ public class ProfesorEnCursoService {
     //    return this.profesorEnCursoRepository.save(ensenia);
     //}
 
+    @Override
     public ProfesorEnCursoDto asignarProfesorCurso(Long idProfesor,Long Idcurso){
         Profesor profesorPorId=profesorService.getProfesorNoDtoById(idProfesor);
         Curso cursoPorId=cursoService.getCursoNoDtoById(Idcurso);
@@ -54,7 +58,7 @@ public class ProfesorEnCursoService {
         return  pecMapper.profesorEnCursoToDto(profesorCursoRelacion);  
     }
 
-
+    @Override
     public void desvincularProfesorCurso(Long idProfesor, Long idCurso) {
         if(!this.profesorService.existsProfesorById(idProfesor)){
             throw new ProfesorNotFoundException(idCurso);

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.AlumnoEnCursoDto;
 import com.campusVirtual.dto.ProfesorEnCursoDto;
-import com.campusVirtual.service.AlumnoEnCursoService;
-import com.campusVirtual.service.ProfesorEnCursoService;
+import com.campusVirtual.service.IAlumnoEnCursoService;
+import com.campusVirtual.service.IProfesorEnCursoService;
 
 
 
@@ -19,13 +19,13 @@ import com.campusVirtual.service.ProfesorEnCursoService;
 @RequestMapping(path="v1/admin")
 public class AdminController {
 
-    private ProfesorEnCursoService profesorEnCursoService;
-    private AlumnoEnCursoService alumnoEnCursoService;
+    private IProfesorEnCursoService profesorEnCursoService;
+    private IAlumnoEnCursoService alumnoEnCursoService;
 
     @Autowired
     public AdminController(
-        ProfesorEnCursoService profesorEnCursoService,
-        AlumnoEnCursoService alumnoEnCursoService){
+        IProfesorEnCursoService profesorEnCursoService,
+        IAlumnoEnCursoService alumnoEnCursoService){
             this.profesorEnCursoService=profesorEnCursoService;
             this.alumnoEnCursoService=alumnoEnCursoService;
     }
@@ -66,7 +66,7 @@ public class AdminController {
         @PathVariable("idAlumno") Long idAlumno,
         @PathVariable("idCurso") Long idCurso){
             
-        this.alumnoEnCursoService.desvincularProfesorCurso(idAlumno,idCurso);
+        this.alumnoEnCursoService.desvincularAlumnoCurso(idAlumno,idCurso);
         return ResponseEntity.noContent().build();
     }
    

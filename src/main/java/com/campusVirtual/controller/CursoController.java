@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 
 import com.campusVirtual.dto.CursoDto;
-import com.campusVirtual.service.CursoService;
+import com.campusVirtual.service.ICursoService;
 
 
 @RestController
 @RequestMapping(path="v1/curso")
 public class CursoController {
 
-    private CursoService cursoService;
+    private ICursoService cursoService;
 
     @Autowired
-    public CursoController(CursoService cursoService){
+    public CursoController(ICursoService cursoService){
         this.cursoService=cursoService;
     }
 

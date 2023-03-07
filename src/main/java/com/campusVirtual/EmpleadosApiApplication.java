@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Bean;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.model.Curso;
 import com.campusVirtual.model.Profesor;
-import com.campusVirtual.service.AlumnoEnCursoService;
-import com.campusVirtual.service.AlumnoService;
-import com.campusVirtual.service.CursoService;
-import com.campusVirtual.service.ProfesorEnCursoService;
-import com.campusVirtual.service.ProfesorService;
+import com.campusVirtual.service.implementation.AlumnoEnCursoService;
+import com.campusVirtual.service.implementation.AlumnoService;
+import com.campusVirtual.service.implementation.CursoService;
+import com.campusVirtual.service.implementation.ProfesorEnCursoService;
+import com.campusVirtual.service.implementation.ProfesorService;
 
 @SpringBootApplication
 public class EmpleadosApiApplication {

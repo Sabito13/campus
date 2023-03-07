@@ -1,4 +1,4 @@
-package com.campusVirtual.service;
+package com.campusVirtual.service.implementation;
 
 import java.util.List;
 
@@ -12,9 +12,10 @@ import com.campusVirtual.mapper.ProfesorMapper;
 import com.campusVirtual.mapper.CursoMapper;
 import com.campusVirtual.model.Profesor;
 import com.campusVirtual.repository.ProfesorRepository;
+import com.campusVirtual.service.IProfesorService;
 
 @Service
-public class ProfesorService {
+public class ProfesorService implements IProfesorService{
     
     ProfesorRepository profesorRepository;
     ProfesorMapper profesorMapper = new ProfesorMapper();
@@ -25,16 +26,17 @@ public class ProfesorService {
         this.profesorRepository=profesorRepository;
     }
 
-    
+    @Override
     public Profesor saveProfesorNoDto(Profesor profesor) {
         return this.profesorRepository.save(profesor);
     }
     
+    @Override
     public Profesor getProfesorNoDtoById(Long id) {
         return this.profesorRepository.findById(id).orElseThrow(()-> new ProfesorNotFoundException(id));
     }
     
-    
+    @Override
     public ProfesorDto saveProfesorDto(ProfesorDto profesorDto) {
         Profesor profesor = this.profesorMapper.profesorDtoToProfesor(profesorDto);
         
@@ -45,7 +47,7 @@ public class ProfesorService {
         return profesorDtoCreado;
     }
     
-
+    @Override
     public ProfesorDto getProfesorDtoById(Long id) {
         Profesor profesor= this.profesorRepository.findById(id).orElseThrow(()-> new ProfesorNotFoundException(id));
         
@@ -54,6 +56,7 @@ public class ProfesorService {
         return profesorDto;
     }
 
+    @Override
     public List<ProfesorDto> getAllProfesorDto(){
         List<Profesor> profesores =this.profesorRepository.findAll();
         
@@ -62,6 +65,7 @@ public class ProfesorService {
         return profesoresDto;
     }
 
+    @Override
     public List<CursoDto> getAllCursosProfesor(Long idProfesor){
         Profesor profesorById = this.profesorRepository.findById(idProfesor).get();
         
@@ -70,7 +74,7 @@ public class ProfesorService {
         return cursosProfesorById;
     }
 
-
+    @Override
     public void deleteProfesorById(Long idProfesor){
         if(this.profesorRepository.existsById(idProfesor)){
             this.profesorRepository.deleteById(idProfesor);
@@ -80,7 +84,7 @@ public class ProfesorService {
         
     }
 
-
+    @Override
     public boolean existsProfesorById(Long idProfesor) {
         return this.profesorRepository.existsById(idProfesor);
     }
