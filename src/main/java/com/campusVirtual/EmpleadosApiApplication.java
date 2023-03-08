@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.model.Curso;
@@ -14,6 +15,7 @@ import com.campusVirtual.service.implementation.AlumnoService;
 import com.campusVirtual.service.implementation.CursoService;
 import com.campusVirtual.service.implementation.ProfesorEnCursoService;
 import com.campusVirtual.service.implementation.ProfesorService;
+
 
 @SpringBootApplication
 public class EmpleadosApiApplication {
@@ -28,7 +30,8 @@ public class EmpleadosApiApplication {
 			CursoService cursoService,
 			AlumnoService alumnoService,
 			ProfesorEnCursoService profesorEnCursoService,
-			AlumnoEnCursoService alumnoEnCursoService){
+			AlumnoEnCursoService alumnoEnCursoService,
+			PasswordEncoder passwordEncoder){
 	return args -> {
 	Profesor proIngles=profesorService.saveProfesorNoDto(new Profesor("matias","ingles"));
 	Profesor proIngles2=profesorService.saveProfesorNoDto(new Profesor("matia22s","ingles"));
@@ -65,6 +68,10 @@ public class EmpleadosApiApplication {
 
 	System.out.println(alumnoService.getAlumnoNoDtoById(alumno2.getId()).getAlumnoEnCurso());
 	//profesorService.deleteProfesorById(proIngles.getId());
+
+	System.out.println(passwordEncoder.encode("1"));
+	
+
 		};
 	
 	}

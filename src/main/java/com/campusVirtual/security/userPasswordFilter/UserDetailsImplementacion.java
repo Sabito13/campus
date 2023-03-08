@@ -3,10 +3,12 @@ package com.campusVirtual.security.userPasswordFilter;
 import java.util.Collections;
 import java.util.Collection;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.campusVirtual.model.Alumno;
+
 
 import lombok.AllArgsConstructor;
 
@@ -15,7 +17,6 @@ import lombok.AllArgsConstructor;
 public class UserDetailsImplementacion implements UserDetails {
 
     private final Alumno alumno;
-
 
 
     @Override
@@ -27,7 +28,7 @@ public class UserDetailsImplementacion implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "1";
+        return "$2a$10$rPulPOsOyLYSu3dl2BHUJuG1yUyWU1UXmkSyanaiecfus.vqOE8qS";//1
     }
 
     @Override
