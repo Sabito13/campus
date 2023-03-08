@@ -7,8 +7,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.campusVirtual.model.Alumno;
-
+import com.campusVirtual.model.AuthCredentials;
 
 import lombok.AllArgsConstructor;
 
@@ -16,7 +15,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserDetailsImplementacion implements UserDetails {
 
-    private final Alumno alumno;
+    private final AuthCredentials userAuth;
 
 
     @Override
@@ -33,7 +32,7 @@ public class UserDetailsImplementacion implements UserDetails {
 
     @Override
     public String getUsername() {
-       return this.alumno.getNombre();
+       return "Pablo";
     }
 
     @Override
@@ -57,7 +56,7 @@ public class UserDetailsImplementacion implements UserDetails {
     }
 
     public Long getId(){
-        return this.alumno.getId();
+        return this.userAuth.getDni();
     }
     
 }

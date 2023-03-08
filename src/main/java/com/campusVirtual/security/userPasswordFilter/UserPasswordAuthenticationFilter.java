@@ -59,6 +59,7 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
         response.getWriter().flush();
         
         
-        super.successfulAuthentication(request, response, chain, authResult);
-	}
+        //super.successfulAuthentication(request, response, chain, authResult);
+        chain.doFilter(request, response);
+    }
 }

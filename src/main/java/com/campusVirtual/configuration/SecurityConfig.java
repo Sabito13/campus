@@ -41,7 +41,7 @@ public class SecurityConfig {
        UserPasswordAuthenticationFilter userPasswordAuthenticationFilter = new UserPasswordAuthenticationFilter();
        userPasswordAuthenticationFilter.setAuthenticationManager(authManager);
        userPasswordAuthenticationFilter.setFilterProcessesUrl(
-        "/v1/login");
+        "/v1/auth/login");
         
         try {
             return http
