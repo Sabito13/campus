@@ -3,6 +3,7 @@ package com.campusVirtual.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -44,15 +45,15 @@ public class SecurityConfig {
         "/v1/auth/login");
         
         try {
+
+        
             return http
                         .csrf().disable()
-                        .authorizeRequests()
-                        //.antMatchers(HttpMethod.POST, "/v1/login").permitAll()
-                        .anyRequest()
-                        .authenticated()
+                        .authorizeRequests().antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
                         .and()
-                        .sessionManagement()
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .authorizeRequests().anyRequest().authenticated()
+                        .and()
+                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .and()
                         .addFilter(userPasswordAuthenticationFilter)
                         .addFilterBefore(new JwtRequestFilter(), UsernamePasswordAuthenticationFilter.class)

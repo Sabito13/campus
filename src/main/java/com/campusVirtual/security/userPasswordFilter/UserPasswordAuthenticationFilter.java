@@ -2,7 +2,7 @@ package com.campusVirtual.security.userPasswordFilter;
 
 
 import com.campusVirtual.security.jwtFilter.*;
-import com.campusVirtual.dto.AuthCredentialsDto;
+import com.campusVirtual.dto.UserCredentialsDto;
 
 
 import java.io.IOException;
@@ -28,10 +28,10 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
 			throws AuthenticationException {
 	
 
-        AuthCredentialsDto AuthCredentialsDto = new AuthCredentialsDto();
+        UserCredentialsDto AuthCredentialsDto = new UserCredentialsDto();
         try{
             
-            AuthCredentialsDto = new ObjectMapper().readValue(request.getReader(),AuthCredentialsDto.class);
+            AuthCredentialsDto = new ObjectMapper().readValue(request.getReader(),UserCredentialsDto.class);
         
         
         }catch(IOException e){
@@ -40,7 +40,7 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
         
 
         UsernamePasswordAuthenticationToken userPAT= new UsernamePasswordAuthenticationToken(
-            AuthCredentialsDto.getUsuario(),  AuthCredentialsDto.getPassword(),
+            AuthCredentialsDto.getDocumento(),  AuthCredentialsDto.getPassword(),
             Collections.emptyList()/*roles*/);
 		
         return getAuthenticationManager().authenticate(userPAT);
@@ -55,7 +55,7 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
         
         UserDetailsImplementacion userImp= (UserDetailsImplementacion)authResult.getPrincipal();
         
-        String token = tokenJwtUtil.createToken(userImp.getUsername(),userImp.getId(),"ROLE_ADMIN");
+        String token = tokenJwtUtil.createToken(userImp.getUsername(),null,"ROLE_ADMIN");
 		
         response.addHeader("Authorization", "Bearer"+token);
         response.getWriter().flush();
