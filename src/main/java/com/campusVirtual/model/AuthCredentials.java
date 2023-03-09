@@ -36,7 +36,7 @@ public class AuthCredentials {
     )
     private String password;
 
-
+    public AuthCredentials(){}
     public AuthCredentials(Long dni,String nombre,String password){
         this.dni = dni;
         this.nombre = nombre;

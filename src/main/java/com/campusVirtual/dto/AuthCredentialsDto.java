@@ -14,12 +14,21 @@ public AuthCredentialsDto(String usuario, String password) {
     this.password = password;
 }
 
+public AuthCredentialsDto(Integer usuario, String password) {
+    this.usuario = ""+usuario;
+    this.password = password;
+}
+
 public String getUsuario() {
     return usuario;
 }
 
 public void setUsuario(String usuario) {
     this.usuario = usuario;
+}
+
+public void setUsuario(Integer usuario) {
+    this.usuario = ""+usuario;
 }
 
 public String getPassword() {

@@ -9,19 +9,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.model.AuthCredentials;
-//import com.campusVirtual.repository.AuthCredentialsRepository;
+import com.campusVirtual.repository.AuthCredentialsRepository;
+
+import com.campusVirtual.exception.AlumnoNotFoundException;
 
 @Service
 public class UserDetailServiceImplementacion implements UserDetailsService{
 
     @Autowired
-    //private AuthCredentialsRepository authCredentialsRepository;
+    private AuthCredentialsRepository authCredentialsRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException { 
-        Long id = (long) 1; 
-        //AuthCredentials  UserAuthNull = this.authCredentialsRepository.findById(id).get();
-        AuthCredentials  UserAuth = new AuthCredentials(id, "juan","a");
+    public UserDetails loadUserByUsername(String dniString) throws UsernameNotFoundException { 
+        Long dni = Long.parseLong(dniString); 
+        AuthCredentials  UserAuth = this.authCredentialsRepository.findById(dni).orElseThrow(()-> new AlumnoNotFoundException(dni));
+        //AuthCredentials  UserAuth = new AuthCredentials(dni, "juan","a");
         return new UserDetailsImplementacion(UserAuth);
     }
     

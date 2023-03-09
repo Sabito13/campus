@@ -28,17 +28,19 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
 			throws AuthenticationException {
 	
 
-        AuthCredentialsDto authCredentials = new AuthCredentialsDto();
+        AuthCredentialsDto AuthCredentialsDto = new AuthCredentialsDto();
         try{
             
-            authCredentials = new ObjectMapper().readValue(request.getReader(),AuthCredentialsDto.class);
+            AuthCredentialsDto = new ObjectMapper().readValue(request.getReader(),AuthCredentialsDto.class);
+        
+        
         }catch(IOException e){
             System.out.println("No se pueden validad las credenciales");
         }
         
 
         UsernamePasswordAuthenticationToken userPAT= new UsernamePasswordAuthenticationToken(
-            authCredentials.getUsuario(),  authCredentials.getPassword(),
+            AuthCredentialsDto.getUsuario(),  AuthCredentialsDto.getPassword(),
             Collections.emptyList()/*roles*/);
 		
         return getAuthenticationManager().authenticate(userPAT);
