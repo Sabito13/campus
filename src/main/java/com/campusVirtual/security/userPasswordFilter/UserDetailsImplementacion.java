@@ -55,5 +55,11 @@ public class UserDetailsImplementacion implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
+    public String getStringAuthorities() {
+        return this.userAuth.getAuthorities();
+    }
     
 }

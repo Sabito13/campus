@@ -55,7 +55,7 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
         
         UserDetailsImplementacion userImp= (UserDetailsImplementacion)authResult.getPrincipal();
         
-        String token = tokenJwtUtil.createToken(userImp.getUsername(),null,"ROLE_ADMIN");
+        String token = tokenJwtUtil.createToken(userImp.getUsername(),null,userImp.getStringAuthorities());
 		
         response.addHeader("Authorization", "Bearer"+token);
         response.getWriter().flush();

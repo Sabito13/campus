@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.AlumnoEnCursoDto;
 import com.campusVirtual.dto.ProfesorEnCursoDto;
+import com.campusVirtual.service.IAdminService;
 import com.campusVirtual.service.IAlumnoEnCursoService;
 import com.campusVirtual.service.IProfesorEnCursoService;
 
@@ -21,13 +22,16 @@ public class AdminController {
 
     private IProfesorEnCursoService profesorEnCursoService;
     private IAlumnoEnCursoService alumnoEnCursoService;
+    private IAdminService adminService;
 
     @Autowired
     public AdminController(
         IProfesorEnCursoService profesorEnCursoService,
-        IAlumnoEnCursoService alumnoEnCursoService){
+        IAlumnoEnCursoService alumnoEnCursoService,
+        IAdminService adminService){
             this.profesorEnCursoService=profesorEnCursoService;
             this.alumnoEnCursoService=alumnoEnCursoService;
+            this.adminService=adminService;
     }
   
 
@@ -70,7 +74,11 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
    
-
+    @PostMapping(path ="user/{id}/role/admin")
+    public void asignarRoleUser(
+        @PathVariable("id") Long id){
+         this.adminService.asignarRoleUser("ROLE_ADMIN", id);             
+        }
     
 
 

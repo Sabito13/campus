@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.AlumnoDto;
@@ -26,12 +27,14 @@ public class AlumnoController {
     
     
     @GetMapping(path="/id/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public  ResponseEntity<AlumnoDto> getAlumnoDtoById(@PathVariable("id") Long id){
         return  ResponseEntity.ok()
                 .body(this.alumnoService.getAlumnoDtoById(id));
     }
 
     @GetMapping(path="/todos")
+    @PreAuthorize("hasRole('ROLE_ALUMNO')")
     public ResponseEntity<List<AlumnoDto>> getAllAlumnoDto(){
         return ResponseEntity.ok()
                 .body(this.alumnoService.getAllAlumnoDto());

@@ -28,10 +28,21 @@ public class UserCredentials {
     )
     private String password;
 
+
+    @Column(
+        name="authorities",
+        updatable = true,
+        nullable = false,
+        unique = false
+    )
+    private String authorities = "ROLE_ALUMNO";
+
+
     public UserCredentials(){}
     public UserCredentials(Long documento,String password){
         this.documento = documento;
         this.password = password;
+        this.authorities = "ROLE_ALUMNO";
     }
 
 
@@ -50,6 +61,14 @@ public class UserCredentials {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAuthorities() {
+        return this.authorities;
+    }
+
+    public void addAuthorities(String authorities) {
+        this.authorities += ","+authorities;
     }
 
 
