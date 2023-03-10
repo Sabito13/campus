@@ -1,41 +1,25 @@
 package com.campusVirtual.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter 
+@Setter
 public class UserCredentialsDto {
 
-private String documento;
+private Long documento;
 private String password;
+
 
 public UserCredentialsDto() {
     super();
 }
 
-public UserCredentialsDto(String documento, String password) {
-    this.documento = documento;
-    this.password = password;
+
+public String getDocumentoString() {
+    return ""+this.documento;
 }
 
-public UserCredentialsDto(Integer documento, String password) {
-    this.documento = ""+documento;
-    this.password = password;
-}
-
-public String getDocumento() {
-    return documento;
-}
-
-public void setDocumento(String documento) {
-    this.documento = documento;
-}
-
-public void setDocumento(Integer documento) {
-    this.documento = ""+documento;
-}
-
-public String getPassword() {
-    return password;
-}
-
-public void setPassword(String password) {
-    this.password = password;
-}
 }

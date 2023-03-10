@@ -1,19 +1,16 @@
 package com.campusVirtual.dto;
 
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class ProfesorDto {
     private Long id;
     private String nombre;
     private String especialidad;
 
     public ProfesorDto(){}
-    public ProfesorDto(
-        Long id,
-        String nombre,
-        String especialidad){
-            this.id=id;
-            this.nombre=nombre;
-            this.especialidad=especialidad;
-        }
+   
 
     public void setId(Long id) {
         this.id = id;
@@ -38,4 +35,5 @@ public class ProfesorDto {
     public String getEspecialidad() {
         return this.especialidad;
     }
+
 }

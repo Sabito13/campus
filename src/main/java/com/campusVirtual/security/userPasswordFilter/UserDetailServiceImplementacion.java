@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.model.UserCredentials;
 import com.campusVirtual.repository.UserCredentialsRepository;
+import com.campusVirtual.dto.UserRegisterDto;
 import com.campusVirtual.exception.UserNotFoundException;
 
 @Service
@@ -31,7 +32,7 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
     }
 
 
-    public String saveUser(UserCredentials userCredentials){
+    public String saveUser(UserRegisterDto userCredentials){
         
         Long documento = userCredentials.getDocumento();
 		String password = userCredentials.getPassword();
@@ -45,11 +46,16 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
         
         if ((""+documento).isBlank() || password.isBlank())
 			throw new RuntimeException("Documento o password no puede estar vacio");
+
+        if (this.authCredentialsRepository.existsById(documento))
+			throw new RuntimeException("Usuario con ese documento ya existe");
 		
 	
         userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
 		
-		this.authCredentialsRepository.save(userCredentials);
+		this.authCredentialsRepository.save(new UserCredentials(userCredentials.getDocumento(),
+        userCredentials.getPassword(),
+        userCredentials.getNombre(),userCredentials.getApellido()));
 		
 		
 		return  " your registration was successful!";

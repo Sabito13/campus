@@ -3,9 +3,9 @@ package com.campusVirtual.model;
 import javax.persistence.*;
 
 
-@Entity(name = "AuthCredentials")
+@Entity(name = "UserCredentials")
 @Table(
-    name="authcredentials",
+    name="usercredentials",
     uniqueConstraints = {
         @UniqueConstraint(name="user_dni_constraint",columnNames = "documento")
     })
@@ -37,12 +37,34 @@ public class UserCredentials {
     )
     private String authorities = "ROLE_ALUMNO";
 
+    @Column(
+        name="nombre",
+        updatable = true,
+        nullable = false,
+        unique = false
+    )
+    private String nombre;
+
+    @Column(
+        name="apellido",
+        updatable = true,
+        nullable = false,
+        unique = false
+    )
+    private String apellido;
+
 
     public UserCredentials(){}
-    public UserCredentials(Long documento,String password){
+    public UserCredentials(
+        Long documento,
+        String password,
+        String nombre,
+        String apellido){
         this.documento = documento;
         this.password = password;
         this.authorities = "ROLE_ALUMNO";
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
 
@@ -55,6 +77,18 @@ public class UserCredentials {
         return this.password;
     }
 
+    public String getAuthorities() {
+        return this.authorities;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
     public void setDocumento(Long documento) {
         this.documento = documento;
     }
@@ -63,8 +97,12 @@ public class UserCredentials {
         this.password = password;
     }
 
-    public String getAuthorities() {
-        return this.authorities;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public void addAuthorities(String authorities) {

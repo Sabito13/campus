@@ -7,10 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.campusVirtual.dto.UserRegisterDto;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.model.Curso;
 import com.campusVirtual.model.Profesor;
-import com.campusVirtual.model.UserCredentials;
 import com.campusVirtual.security.userPasswordFilter.UserDetailServiceImplementacion;
 import com.campusVirtual.service.IAdminService;
 import com.campusVirtual.service.implementation.AlumnoEnCursoService;
@@ -76,11 +76,8 @@ public class EmpleadosApiApplication {
 
 	System.out.println(passwordEncoder.encode("1"));
 
-	
-	udsi.saveUser(new UserCredentials((long)1,"1"));
+	udsi.saveUser(new UserRegisterDto((long)1,"1", "admin", "admin"));
 	ias.asignarRoleUser("ROLE_ADMIN",(long)1);
-	
-
 		};
 	
 	}

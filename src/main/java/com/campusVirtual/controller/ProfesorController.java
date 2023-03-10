@@ -15,42 +15,38 @@ import java.util.List;
 @RequestMapping(path="v1/profesor")
 public class ProfesorController {
 
+    @Autowired
     private IProfesorService profesorService;
 
-    @Autowired
-    public ProfesorController(IProfesorService profesorService){
-       this.profesorService=profesorService;
-    }
-
-    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<ProfesorDto> getProfesorDtoById(
         @PathVariable("id") Long id){
         return ResponseEntity.ok()
         .body(profesorService.getProfesorDtoById(id));
     }
 
-    @GetMapping(path = "/todos")
-    public ResponseEntity<List<ProfesorDto>> getAllProfesorDto(){
-        return ResponseEntity.ok()
-        .body(this.profesorService.getAllProfesorDto());
-    }
+    //@GetMapping(path = "/todos")
+    //public ResponseEntity<List<ProfesorDto>> getAllProfesorDto(){
+    //    return ResponseEntity.ok()
+    //    .body(this.profesorService.getAllProfesorDto());
+    //}
 
 
-    @GetMapping(path ="/cursos/profesor/{id}")
+    @GetMapping(path ="/{id}/cursos")
     public ResponseEntity<List<CursoDto>> getAllCursosProfesor(
         @PathVariable("id") Long id){
         return ResponseEntity.ok()
         .body(this.profesorService.getAllCursosProfesor(id));
     }
 
-    @PostMapping(path ="/nuevo")
+    @PostMapping(path ="")
     public ResponseEntity<ProfesorDto> nuevoProfesor(
         @RequestBody ProfesorDto profesorDto){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.profesorService.saveProfesorDto(profesorDto));
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProfesorById(@PathVariable("id") Long id){
         this.profesorService.deleteProfesorById(id);
         return ResponseEntity.noContent().build();

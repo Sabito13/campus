@@ -17,13 +17,9 @@ import com.campusVirtual.service.IAlumnoService;
 @RestController
 @RequestMapping(path="v1/alumno")
 public class AlumnoController {
-
-    private IAlumnoService alumnoService;
-
+    
     @Autowired
-    public AlumnoController(IAlumnoService alumnoService){
-        this.alumnoService=alumnoService;
-    }
+    private IAlumnoService alumnoService;
     
     
     @GetMapping(path="/{id}")
