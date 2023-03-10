@@ -23,7 +23,7 @@ public class CursoController {
     }
 
 
-    @GetMapping(path="/id/{id}")
+    @GetMapping(path="/{id}")
     public ResponseEntity<CursoDto> getCursoDtoById(@PathVariable("id") Long id){
         return ResponseEntity.ok()
         .body(this.cursoService.getCursoDtoById(id));
@@ -37,7 +37,7 @@ public class CursoController {
     
   
 
-    @PostMapping(path="/nuevo")
+    @PostMapping(path="")
     public ResponseEntity<CursoDto> crearCursos(@RequestBody CursoDto cursoDto){
         return ResponseEntity.status(HttpStatus.CREATED)
         .body(this.cursoService.saveCursoDto(cursoDto));
@@ -45,7 +45,7 @@ public class CursoController {
 
 
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarCurso(@PathVariable("id") Long id){
         this.cursoService.deleteCursoById(id);
         return ResponseEntity.noContent().build();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.model.UserCredentials;
 import com.campusVirtual.repository.UserCredentialsRepository;
-import com.campusVirtual.exception.AlumnoNotFoundException;
+import com.campusVirtual.exception.UserNotFoundException;
 
 @Service
 public class UserDetailServiceImplementacion implements UserDetailsService{
@@ -25,7 +25,7 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String dniString) throws UsernameNotFoundException { 
         Long dni = Long.parseLong(dniString); 
-        UserCredentials  UserAuth = this.authCredentialsRepository.findById(dni).orElseThrow(()-> new AlumnoNotFoundException(dni));
+        UserCredentials  UserAuth = this.authCredentialsRepository.findById(dni).orElseThrow(()-> new UserNotFoundException(dni));
         //AuthCredentials  UserAuth = new AuthCredentials(dni, "juan","a");
         return new UserDetailsImplementacion(UserAuth);
     }

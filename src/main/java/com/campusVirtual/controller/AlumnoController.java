@@ -26,7 +26,7 @@ public class AlumnoController {
     }
     
     
-    @GetMapping(path="/id/{id}")
+    @GetMapping(path="/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public  ResponseEntity<AlumnoDto> getAlumnoDtoById(@PathVariable("id") Long id){
         return  ResponseEntity.ok()
@@ -40,20 +40,20 @@ public class AlumnoController {
                 .body(this.alumnoService.getAllAlumnoDto());
     }
 
-    @GetMapping(path="cursos/alumno/{id}")
+    @GetMapping(path="/{id}/cursos")
     public ResponseEntity<List<CursoDto>> getAllCursosAlumno(@PathVariable("id") Long id){
         return ResponseEntity.ok()
                 .body(this.alumnoService.getAllCursosAlumno(id));
     }
     
 
-    @PostMapping(path="/nuevo")
+    @PostMapping(path="")
     public ResponseEntity<AlumnoDto> nuevoAlumno(@RequestBody AlumnoDto alumnoDto){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.alumnoService.saveAlumnoDto(alumnoDto));
     }
 
-    @DeleteMapping(path="/eliminar/{id}")
+    @DeleteMapping(path="/{id}")
     public ResponseEntity<?> deleteAlumno(@PathVariable("id") Long id){
         this.alumnoService.deleteAlumnoById(id);
         return ResponseEntity.noContent().build();

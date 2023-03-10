@@ -38,18 +38,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http,AuthenticationManager authManager){
+    SecurityFilterChain filterChain(HttpSecurity http,AuthenticationManager authManager)throws Exception{
        UserPasswordAuthenticationFilter userPasswordAuthenticationFilter = new UserPasswordAuthenticationFilter();
        userPasswordAuthenticationFilter.setAuthenticationManager(authManager);
        userPasswordAuthenticationFilter.setFilterProcessesUrl(
         "/v1/auth/login");
         
-        try {
+        //try {
 
         
             return http
                         .csrf().disable()
                         .authorizeRequests().antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
+                        .and()
+                        .authorizeRequests().antMatchers("/v1/admin/**").hasAuthority("ROLE_ADMIN")
                         .and()
                         .authorizeRequests().anyRequest().authenticated()
                         .and()
@@ -59,10 +61,10 @@ public class SecurityConfig {
                         .addFilterBefore(new JwtRequestFilter(), UsernamePasswordAuthenticationFilter.class)
                         .build();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //    return null;
+        //}
     }
 
     @Bean 
