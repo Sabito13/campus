@@ -10,6 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.campusVirtual.model.Alumno;
 import com.campusVirtual.model.Curso;
 import com.campusVirtual.model.Profesor;
+import com.campusVirtual.model.UserCredentials;
+import com.campusVirtual.security.userPasswordFilter.UserDetailServiceImplementacion;
+import com.campusVirtual.service.IAdminService;
 import com.campusVirtual.service.implementation.AlumnoEnCursoService;
 import com.campusVirtual.service.implementation.AlumnoService;
 import com.campusVirtual.service.implementation.CursoService;
@@ -31,7 +34,9 @@ public class EmpleadosApiApplication {
 			AlumnoService alumnoService,
 			ProfesorEnCursoService profesorEnCursoService,
 			AlumnoEnCursoService alumnoEnCursoService,
-			PasswordEncoder passwordEncoder){
+			PasswordEncoder passwordEncoder,
+			UserDetailServiceImplementacion udsi,
+			IAdminService ias){
 	return args -> {
 	Profesor proIngles=profesorService.saveProfesorNoDto(new Profesor("matias","ingles"));
 	Profesor proIngles2=profesorService.saveProfesorNoDto(new Profesor("matia22s","ingles"));
@@ -70,6 +75,10 @@ public class EmpleadosApiApplication {
 	//profesorService.deleteProfesorById(proIngles.getId());
 
 	System.out.println(passwordEncoder.encode("1"));
+
+	
+	udsi.saveUser(new UserCredentials((long)1,"1"));
+	ias.asignarRoleUser("ROLE_ADMIN",(long)1);
 	
 
 		};
