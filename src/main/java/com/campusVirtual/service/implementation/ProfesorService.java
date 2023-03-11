@@ -17,14 +17,11 @@ import com.campusVirtual.service.IProfesorService;
 @Service
 public class ProfesorService implements IProfesorService{
     
+    @Autowired
     ProfesorRepository profesorRepository;
     ProfesorMapper profesorMapper = new ProfesorMapper();
     private CursoMapper cursoMapper = new CursoMapper();
 
-    @Autowired
-    public ProfesorService( ProfesorRepository profesorRepository){
-        this.profesorRepository=profesorRepository;
-    }
 
     @Override
     public Profesor saveProfesorNoDto(Profesor profesor) {

@@ -16,12 +16,10 @@ import com.campusVirtual.service.ICursoService;
 public class CursoService implements ICursoService {
 
     private CursoMapper cursoMapper = new CursoMapper();
+    @Autowired
     private CursoRepository cursoRepository;
 
-    @Autowired
-    public CursoService(CursoRepository cursoRepository){
-        this.cursoRepository=cursoRepository;
-    }
+   
 
     @Override
     public CursoDto saveCursoDto(CursoDto cursoDto) {

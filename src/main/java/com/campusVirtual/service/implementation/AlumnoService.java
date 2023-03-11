@@ -20,13 +20,10 @@ public class AlumnoService implements IAlumnoService {
     private AlumnoMapper alumnoMapper = new AlumnoMapper();
     private CursoMapper cursoMapper = new CursoMapper();
 
+    @Autowired
     private AlumnoRepository alumnoRepository;
 
-    @Autowired
-    public AlumnoService(
-        AlumnoRepository alumnoRepository){
-        this.alumnoRepository=alumnoRepository;
-    }
+  
 
     @Override
     public Alumno saveAlumnoNoDto(Alumno alumno){

@@ -27,14 +27,15 @@ public class SecurityConfig {
     
 
     private final UserDetailsService miUserDetailsService;
+    @Autowired
     private PasswordEncoder passwordeEncoder;
    
-    @Autowired
+    
     public SecurityConfig( 
-        UserDetailsService miUserDetailsService,
-        PasswordEncoder passwordeEncoder){
+        UserDetailsService miUserDetailsService
+        /*PasswordEncoder passwordeEncoder*/){
             this.miUserDetailsService=miUserDetailsService;
-            this.passwordeEncoder=passwordeEncoder;
+            //this.passwordeEncoder=passwordeEncoder;
     }
 
     @Bean

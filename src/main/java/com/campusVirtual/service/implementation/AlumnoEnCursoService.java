@@ -1,6 +1,7 @@
 package com.campusVirtual.service.implementation;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.AlumnoEnCursoDto;
@@ -17,20 +18,17 @@ import com.campusVirtual.service.ICursoService;
 
 @Service
 public class AlumnoEnCursoService  implements IAlumnoEnCursoService{
+    
     private AlumnoEnCursoMapper alumnoEnCursoMapper = new AlumnoEnCursoMapper();
+    
+    @Autowired
     private IAlumnoService alumnoService;
+    @Autowired
     private ICursoService cursoService;
+    @Autowired
     private AlumnoEnCursoRepository alumnoEnCursoRepository;
 
-    public AlumnoEnCursoService(
-        IAlumnoService alumnoService,
-        ICursoService cursoService,
-        AlumnoEnCursoRepository alumnoEnCursoRepository
-    ){
-        this.alumnoService=alumnoService;
-        this.cursoService=cursoService;
-        this.alumnoEnCursoRepository=alumnoEnCursoRepository;
-    }
+   
 
     @Override
     public AlumnoEnCursoDto asignarAlumnoCurso(Long alumnoId,Long cursoId){

@@ -19,21 +19,14 @@ import com.campusVirtual.service.IProfesorEnCursoService;
 @RestController
 @RequestMapping(path="v1/admin")
 public class AdminController {
-
+    
+    @Autowired
     private IProfesorEnCursoService profesorEnCursoService;
+    @Autowired
     private IAlumnoEnCursoService alumnoEnCursoService;
+    @Autowired
     private IAdminService adminService;
 
-    @Autowired
-    public AdminController(
-        IProfesorEnCursoService profesorEnCursoService,
-        IAlumnoEnCursoService alumnoEnCursoService,
-        IAdminService adminService){
-            this.profesorEnCursoService=profesorEnCursoService;
-            this.alumnoEnCursoService=alumnoEnCursoService;
-            this.adminService=adminService;
-    }
-  
 
     @PostMapping(path ="/asignar/profesor/{idProfesor}/curso/{idCurso}")
     public ResponseEntity<ProfesorEnCursoDto> asignarProfesorCurso(

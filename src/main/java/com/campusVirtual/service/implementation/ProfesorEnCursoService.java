@@ -19,22 +19,16 @@ import com.campusVirtual.service.IProfesorService;
 
 @Service
 public class ProfesorEnCursoService implements IProfesorEnCursoService{
-    
+    @Autowired
     private ProfesorEnCursoRepository profesorEnCursoRepository;
+    @Autowired
     private IProfesorService profesorService;
+    @Autowired
     private ICursoService cursoService;
     private ProfesorEnCursoMapper pecMapper= new ProfesorEnCursoMapper();
     
 
-    @Autowired
-    public ProfesorEnCursoService( 
-        ProfesorEnCursoRepository profesorEnCursoRepository,
-        IProfesorService profesorService,
-        ICursoService cursoService){
-        this.profesorEnCursoRepository=profesorEnCursoRepository;
-        this.profesorService=profesorService;
-        this.cursoService=cursoService;
-    }
+    
 
     //public ProfesorEnCurso asignarProfesorCurso(Profesor profesor,Curso curso){
     //    ProfesorEnCurso ensenia = new ProfesorEnCurso(profesor, curso);
