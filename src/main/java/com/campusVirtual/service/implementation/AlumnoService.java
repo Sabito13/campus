@@ -65,7 +65,7 @@ public class AlumnoService implements IAlumnoService {
 
     @Override
     public List<CursoDto> getAllCursosAlumno(Long idAlumno){
-        Alumno alumno = this.alumnoRepository.findById(idAlumno).get();
+        Alumno alumno = this.alumnoRepository.findById(idAlumno).orElseThrow(()-> new AlumnoNotFoundException(idAlumno));
         
         List<CursoDto> cursosAlumnoById= cursoMapper.manyAlumnoEnCursoToCursoDto(alumno.getAlumnoEnCurso()); 
         

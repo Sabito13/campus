@@ -109,6 +109,10 @@ public class Curso {
         return alumnoEnCurso;
     }
 
+    public List<ProfesorEnCurso> getProfesorEnCurso() {
+        return profesorEnCurso;
+    }
+
     
     @Override
     public String toString() {

@@ -12,7 +12,7 @@ import com.campusVirtual.service.ICursoService;
 
 
 @RestController
-@RequestMapping(path="v1/curso")
+@RequestMapping(path="v1/courses")
 public class CursoController {
     
     @Autowired
@@ -25,7 +25,7 @@ public class CursoController {
         .body(this.cursoService.getCursoDtoById(id));
     }
 
-    @GetMapping(path="/cursos")
+    @GetMapping(path="/all")
     public ResponseEntity<List<CursoDto>> getCursoDtoById(){
         return ResponseEntity.ok()
         .body(this.cursoService.getAllCursosDto());
@@ -33,7 +33,7 @@ public class CursoController {
     
   
 
-    @PostMapping(path="")
+    @PostMapping
     public ResponseEntity<CursoDto> crearCursos(@RequestBody CursoDto cursoDto){
         return ResponseEntity.status(HttpStatus.CREATED)
         .body(this.cursoService.saveCursoDto(cursoDto));

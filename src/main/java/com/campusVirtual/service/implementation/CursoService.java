@@ -1,14 +1,19 @@
 package com.campusVirtual.service.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.CursoDto;
+import com.campusVirtual.dto.ProfesorDto;
 import com.campusVirtual.exception.CursoNotFoundException;
 import com.campusVirtual.mapper.CursoMapper;
+import com.campusVirtual.mapper.ProfesorMapper;
 import com.campusVirtual.model.Curso;
+import com.campusVirtual.model.Profesor;
+import com.campusVirtual.model.ProfesorEnCurso;
 import com.campusVirtual.repository.CursoRepository;
 import com.campusVirtual.service.ICursoService;
 
@@ -16,6 +21,7 @@ import com.campusVirtual.service.ICursoService;
 public class CursoService implements ICursoService {
 
     private CursoMapper cursoMapper = new CursoMapper();
+    private ProfesorMapper profesorMapper = new ProfesorMapper();
     @Autowired
     private CursoRepository cursoRepository;
 
@@ -67,6 +73,21 @@ public class CursoService implements ICursoService {
     @Override
     public boolean existsCursoById(Long idCurso) {
         return this.cursoRepository.existsById(idCurso);
+    }
+
+   
+
+    @Override
+    public List<ProfesorDto> getAllProfesoresOfCurso(Long idCurso) {
+        Curso curso = this.cursoRepository.findById(idCurso).orElseThrow(()-> new CursoNotFoundException(idCurso));
+        
+        List<ProfesorEnCurso> profesoresRelacion=curso.getProfesorEnCurso();
+        
+        List<Profesor> profesores=new ArrayList<>();
+        for (ProfesorEnCurso profesor : profesoresRelacion) {
+            profesores.add(profesor.getProfesor());
+        }
+        return this.profesorMapper.manyProfesorToProfesorDto(profesores);
     }
 
    
