@@ -1,12 +1,9 @@
 package com.campusVirtual.dto;
 
-import java.util.List;
-import java.util.ArrayList;
 public class CursoDto {
     
     private Long id;
     private String nombre;
-    private List<ProfesorDto> profesoresCurso = new ArrayList<>();
 
 
     public CursoDto(){}
@@ -34,13 +31,7 @@ public class CursoDto {
         this.nombre = nombre;
     }
 
-    public List<ProfesorDto> getProfesoresCurso() {
-        return profesoresCurso;
-    }
 
-    public void setProfesoresCurso(ProfesorDto profesor) {
-        this.profesoresCurso.add(profesor);
-    }
     
     
 }

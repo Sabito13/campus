@@ -15,7 +15,7 @@ import com.campusVirtual.service.IAlumnoService;
 
 
 @RestController
-@RequestMapping(path="v1/students")
+@RequestMapping(path="v1/alumnos")
 public class AlumnoController {
     
     @Autowired
@@ -29,14 +29,14 @@ public class AlumnoController {
                 .body(this.alumnoService.getAlumnoDtoById(id));
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/todos")
     @PreAuthorize("hasRole('ROLE_ALUMNO')")
     public ResponseEntity<List<AlumnoDto>> getAllAlumnoDto(){
         return ResponseEntity.ok()
                 .body(this.alumnoService.getAllAlumnoDto());
     }
 
-    @GetMapping(path="/{id}/courses")
+    @GetMapping(path="/{id}/cursos")
     public ResponseEntity<List<CursoDto>> getAllCursosAlumno(@PathVariable("id") Long id){
         return ResponseEntity.ok()
                 .body(this.alumnoService.getAllCursosAlumno(id));

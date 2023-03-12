@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.campusVirtual.dto.CursoDto;
-import com.campusVirtual.dto.ProfesorDto;
 import com.campusVirtual.model.AlumnoEnCurso;
 import com.campusVirtual.model.Curso;
 import com.campusVirtual.model.ProfesorEnCurso;
@@ -24,10 +23,7 @@ public class CursoMapper {
 
     public CursoDto cursoToCursoDto(Curso curso){
        CursoDto cursoDto= new CursoDto(curso.getId(),curso.getNombre());
-        List<ProfesorDto> profesores = this.cursoService.getAllProfesoresOfCurso(curso.getId());
-       for (ProfesorDto pdt : profesores) {
-        cursoDto.setProfesoresCurso(pdt);
-       }
+
        return cursoDto;
     }
 

@@ -2,6 +2,7 @@ package com.campusVirtual.service;
 
 import java.util.List;
 
+import com.campusVirtual.dto.AlumnoDto;
 import com.campusVirtual.dto.CursoDto;
 import com.campusVirtual.dto.ProfesorDto;
 import com.campusVirtual.model.Curso;
@@ -24,5 +25,6 @@ public interface ICursoService {
 
      public List<ProfesorDto> getAllProfesoresOfCurso(Long idCurso);
 
+     public List<AlumnoDto> getAllAlumnosOfCurso(Long idCurso);
      
 }

@@ -6,13 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import com.campusVirtual.dto.AlumnoDto;
 import com.campusVirtual.dto.CursoDto;
+import com.campusVirtual.dto.ProfesorDto;
 import com.campusVirtual.service.ICursoService;
 
 
 @RestController
-@RequestMapping(path="v1/courses")
+@RequestMapping(path="v1/cursos")
 public class CursoController {
     
     @Autowired
@@ -25,10 +26,24 @@ public class CursoController {
         .body(this.cursoService.getCursoDtoById(id));
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/todos")
     public ResponseEntity<List<CursoDto>> getCursoDtoById(){
         return ResponseEntity.ok()
         .body(this.cursoService.getAllCursosDto());
+    }
+
+    @GetMapping(path="/{id}/profesores")
+    public ResponseEntity<List<ProfesorDto>> getProfesorsById(
+        @PathVariable("id") Long id){
+        return ResponseEntity.ok()
+        .body(this.cursoService.getAllProfesoresOfCurso(id));
+    }
+
+    @GetMapping(path="/{id}/alumnos")
+    public ResponseEntity<List<AlumnoDto>> getAlumnosById(
+        @PathVariable("id") Long id){
+        return ResponseEntity.ok()
+        .body(this.cursoService.getAllAlumnosOfCurso(id));
     }
     
   
