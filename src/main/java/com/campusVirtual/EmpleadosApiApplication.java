@@ -71,11 +71,7 @@ public class EmpleadosApiApplication {
 	alumnoEnCursoService.asignarAlumnoCurso(alumno3.getId(),redes.getId());
 	alumnoEnCursoService.asignarAlumnoCurso(alumno4.getId(),redes.getId());
 
-	System.out.println(alumnoService.getAlumnoNoDtoById(alumno2.getId()).getAlumnoEnCurso());
-	//profesorService.deleteProfesorById(proIngles.getId());
-
-	System.out.println(passwordEncoder.encode("1"));
-
+	
 	udsi.saveUser(new UserRegisterDto((long)1,"1", "admin", "admin"));
 	ias.asignarRoleUser("ROLE_ADMIN",(long)1);
 		};
