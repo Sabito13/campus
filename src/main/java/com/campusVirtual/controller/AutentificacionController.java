@@ -21,6 +21,7 @@ public class AutentificacionController {
     }
 
     @PostMapping(path ="/register")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String register(@RequestBody UserRegisterDto urdto){
         return userDetailServiceImplementacion.saveUser(urdto);
     }

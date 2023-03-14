@@ -58,10 +58,11 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
         String token = tokenJwtUtil.createToken(userImp.getUsername(),null,userImp.getStringAuthorities());
 		
         response.addHeader("Authorization", "Bearer"+token);
+	response.addHeader("Access-Control-Allow-Origin", "*");
         response.getWriter().flush();
         
         
-        //super.successfulAuthentication(request, response, chain, authResult);
-        chain.doFilter(request, response);
+        super.successfulAuthentication(request, response, chain, authResult);
+        //chain.doFilter(request, response);
     }
 }
