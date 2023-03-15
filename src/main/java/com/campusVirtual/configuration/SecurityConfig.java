@@ -49,7 +49,7 @@ public class SecurityConfig {
 
         
             return http
-                        .csrf().disable()
+                        .csrf().disable().cors().and()
                         .authorizeRequests().antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
                         .and()
                         .authorizeRequests().antMatchers("/v1/admin/**").hasAuthority("ROLE_ADMIN")

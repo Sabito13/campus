@@ -25,6 +25,7 @@ public class AlumnoController {
     @GetMapping(path="/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public  ResponseEntity<AlumnoDto> getAlumnoDtoById(@PathVariable("id") Long id){
+        
         return  ResponseEntity.ok()
                 .body(this.alumnoService.getAlumnoDtoById(id));
     }
