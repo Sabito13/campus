@@ -9,6 +9,7 @@ import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.exception.AlumnoNotFoundException;
 import com.campusVirtual.mapper.CourseMapper;
 import com.campusVirtual.model.Student;
+import com.campusVirtual.model.Userdata;
 import com.campusVirtual.repository.StudentRepository;
 import com.campusVirtual.service.IStudentService;
 import com.campusVirtual.service.IUserDataService;
@@ -47,8 +48,10 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public List<CourseDto> getAllCoursesStudent(Long idStudent) {
-        Student student = this.studentRepository.findById(idStudent).orElseThrow(()-> new AlumnoNotFoundException(idStudent));
+    public List<CourseDto> getAllCoursesStudent(Long idStudent){
+        Userdata userData = this.userDataService.getUserById(idStudent);
+
+        Student student = userData.getStudent();
         
         List<CourseDto> coursesStudent= this.cMapper.manyStudentInCourseToCourseDto(student.getStudentInCourse());
         

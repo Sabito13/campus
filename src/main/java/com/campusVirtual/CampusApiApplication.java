@@ -11,22 +11,16 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-import com.campusVirtual.dto.UserRegisterDto;
 import com.campusVirtual.model.Student;
 import com.campusVirtual.model.Userdata;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Professor;
-import com.campusVirtual.security.userPasswordFilter.UserDetailServiceImplementacion;
 import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IProfessorInCourseService;
 import com.campusVirtual.service.IProfessorService;
 import com.campusVirtual.service.IStudentInCourseService;
 import com.campusVirtual.service.IStudentService;
 import com.campusVirtual.service.IUserDataService;
-import com.campusVirtual.service.implementation.StudentService;
-
-import lombok.val;
-
 
 @SpringBootApplication
 public class CampusApiApplication {
@@ -42,22 +36,28 @@ public class CampusApiApplication {
 			IProfessorService professorService,
 			ICourseService ico,
 			IProfessorInCourseService pic,
-			IStudentInCourseService sic
+			IStudentInCourseService sic,
+			PasswordEncoder passwordEncoder
 			){
 	return args -> {
 		
-		userDataService.saveUser(new Userdata((long)111,"pass","name","last","mail"));
+		String allPass = passwordEncoder.encode("password");
+
+		Userdata admin = new Userdata((long)1,allPass,"name","last","mailAdmin");
+		admin.addAuthorities("ROLE_ADMIN");
+		userDataService.saveUser(admin);
+
+
+		userDataService.saveUser(new Userdata((long)111,allPass,"name","last","mail"));
 		studentService.saveStudent(new Student(), (long)111);
 
-		userDataService.saveUser(new Userdata((long)222,"pass","name","last","mail1"));
+		userDataService.saveUser(new Userdata((long)222,allPass,"name","last","mail1"));
 		studentService.saveStudent(new Student(), (long)222);
 
-		
-
-		userDataService.saveUser(new Userdata((long)333,"pass","name","last","ad1"));
+		userDataService.saveUser(new Userdata((long)333,allPass,"name","last","ad1"));
 		professorService.saveProfessor(new Professor("ingles"), (long)333);
 		
-		userDataService.saveUser(new Userdata((long)444,"pass","name","last","ad2"));
+		userDataService.saveUser(new Userdata((long)444,allPass,"name","last","ad2"));
 		professorService.saveProfessor(new Professor("redes"), (long)444);
 
 		
@@ -69,7 +69,8 @@ public class CampusApiApplication {
 		pic.setProfessorInCourse((long)2, (long)3);
 
 		sic.setStudentInCourse((long)1, (long)1);
-		sic.setStudentInCourse((long)2, (long)1);
+		sic.setStudentInCourse((long)1, (long)2);
+		sic.setStudentInCourse((long)2, (long)2);
 		
 		System.out.println(
 		ico.getAllProfessorsOfCourse((long)1)

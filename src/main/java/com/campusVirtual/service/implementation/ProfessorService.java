@@ -9,6 +9,7 @@ import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.exception.ProfesorNotFoundException;
 import com.campusVirtual.mapper.CourseMapper;
 import com.campusVirtual.model.Professor;
+import com.campusVirtual.model.Userdata;
 import com.campusVirtual.repository.ProfessorRepository;
 import com.campusVirtual.service.IProfessorService;
 import com.campusVirtual.service.IUserDataService;
@@ -43,8 +44,10 @@ public class ProfessorService implements IProfessorService{
 
     @Override
     public List<CourseDto> getAllCoursesProfessor(Long idProfessor) {
-        Professor professor = this.professorRepository.findById(idProfessor).orElseThrow(()-> new ProfesorNotFoundException(idProfessor));
-        
+        Userdata userData = this.userDataService.getUserById(idProfessor);
+
+        Professor professor = userData.getProfessor();
+
         List<CourseDto> coursesProfessor= this.cMapper.manyProfessorInCourseToCourseDto(professor.getProfessorInCourse());
         
         return coursesProfessor;
