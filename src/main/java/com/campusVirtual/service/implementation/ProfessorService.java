@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.ProfessorDto;
-import com.campusVirtual.exception.ProfesorNotFoundException;
+import com.campusVirtual.exception.ProfessorNotFoundException;
 import com.campusVirtual.mapper.ProfessorMapper;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Professor;
@@ -32,15 +32,26 @@ public class ProfessorService implements IProfessorService{
     private ProfessorMapper pMapper = new ProfessorMapper();
 
     @Override
-    public void saveProfessor(Professor professor, Long document) {
-        Professor profesorSet = this.professorRepository.save(professor);
+    public ProfessorDto saveProfessor(ProfessorDto professorDto, Long document) {
+        Professor profesorSet = new Professor(professorDto.getEspeciality());
+
+        profesorSet = this.professorRepository.save(profesorSet);
+
         profesorSet.setUser(this.userDataService.getUserById(document));
-        this.professorRepository.save(profesorSet);
+        
+        profesorSet = this.professorRepository.save(profesorSet);
+
+        return pMapper.professorToProfessorDto(profesorSet);
     }
 
     @Override
     public Professor getProfessorById(Long idProfessor) {
-      return  this.professorRepository.findById(idProfessor).get();
+      return  this.professorRepository.findById(idProfessor).orElseThrow(()-> new ProfessorNotFoundException(idProfessor));
+    }
+
+    @Override
+    public ProfessorDto getProfessorDtoById(Long idProfessor) {
+      return pMapper.professorToProfessorDto(getProfessorById(idProfessor));
     }
 
     @Override
@@ -48,6 +59,10 @@ public class ProfessorService implements IProfessorService{
         return  this.professorRepository.findAll();  
     }
 
+    @Override
+    public List<ProfessorDto> getAllProfessorsDto() {
+        return  pMapper.manyProfessorToProfessorDto(getAllProfessors());  
+    }
     
 
     @Override
@@ -73,7 +88,7 @@ public class ProfessorService implements IProfessorService{
         if(this.professorRepository.existsById(idProfessor)){
             this.professorRepository.deleteById(idProfessor);
         }else{
-            throw new ProfesorNotFoundException(idProfessor);
+            throw new ProfessorNotFoundException(idProfessor);
         }
     }
     

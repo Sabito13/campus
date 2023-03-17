@@ -46,10 +46,18 @@ public class StudentController {
                 .body(this.studentService.getAllStudentsDto());
     }
 
+    @GetMapping(path ="/course/{id}")
+    public ResponseEntity<List<StudentDto>> getAllStudentsOfCourse(
+        @PathVariable("id") Long id){
+        return ResponseEntity.ok()
+        .body(this.studentService.getAllStudentsOfCourse(id));
+    }
+
   
     
 
     @PostMapping(path="/{document}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<StudentDto> createStudent(
         @RequestBody StudentDto studentDto,
         @PathVariable("document") Long document){
@@ -58,6 +66,7 @@ public class StudentController {
     }
 
     @DeleteMapping(path="/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteAlumno(@PathVariable("id") Long id){
         this.studentService.deleteStudentById(id);
         return ResponseEntity.noContent().build();

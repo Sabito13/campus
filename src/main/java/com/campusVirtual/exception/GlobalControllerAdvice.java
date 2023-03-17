@@ -17,15 +17,15 @@ public class GlobalControllerAdvice{
 	}
 
 
-	@ExceptionHandler(ProfesorNotFoundException.class)
-	public ResponseEntity<Error> handleProfesorNotFoundException(ProfesorNotFoundException ex){
+	@ExceptionHandler(ProfessorNotFoundException.class)
+	public ResponseEntity<Error> handleProfesorNotFoundException(ProfessorNotFoundException ex){
 		Error error = new Error(HttpStatus.NOT_FOUND, ex.getMessage());
         
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 
-	@ExceptionHandler(CursoNotFoundException.class)
-	public ResponseEntity<Error> handleCursoNotFoundException(CursoNotFoundException ex){
+	@ExceptionHandler(CourseNotFoundException.class)
+	public ResponseEntity<Error> handleCursoNotFoundException(CourseNotFoundException ex){
 		Error error = new Error(HttpStatus.NOT_FOUND, ex.getMessage());
         
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);

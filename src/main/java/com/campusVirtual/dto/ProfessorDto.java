@@ -14,4 +14,8 @@ public class ProfessorDto {
 
     public ProfessorDto(){}
 
+    public ProfessorDto(String especiality){
+        this.especiality = especiality;
+    }
+
 }

@@ -62,12 +62,6 @@ public class StudentService implements IStudentService {
        
     }
 
-    @Override
-    public List<StudentDto> getManyStudentDtoById() {
-        return this.sMapper.manyStudentToStudentDto(getAllStudents());
-    }
-
-
 
     @Override
     public List<Student> getAllStudents() {

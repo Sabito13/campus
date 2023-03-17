@@ -12,8 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 import com.campusVirtual.model.Userdata;
+import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.model.Course;
-import com.campusVirtual.model.Professor;
 import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IProfessorInCourseService;
 import com.campusVirtual.service.IProfessorService;
@@ -54,10 +54,10 @@ public class CampusApiApplication {
 		studentService.saveStudent((long)222);
 
 		userDataService.saveUser(new Userdata((long)333,allPass,"name","last","ad1"));
-		professorService.saveProfessor(new Professor("ingles"), (long)333);
+		professorService.saveProfessor(new ProfessorDto("ingles"), (long)333);
 		
 		userDataService.saveUser(new Userdata((long)444,allPass,"name","last","ad2"));
-		professorService.saveProfessor(new Professor("redes"), (long)444);
+		professorService.saveProfessor(new ProfessorDto("redes"), (long)444);
 
 		
 		ico.saveCourse(new Course("Ingles"));
