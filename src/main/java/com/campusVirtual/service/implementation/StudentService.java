@@ -1,16 +1,19 @@
 package com.campusVirtual.service.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.campusVirtual.dto.CourseDto;
-import com.campusVirtual.exception.AlumnoNotFoundException;
-import com.campusVirtual.mapper.CourseMapper;
+import com.campusVirtual.dto.StudentDto;
+import com.campusVirtual.exception.StudentNotFoundException;
+import com.campusVirtual.mapper.StudentMapper;
+import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Student;
-import com.campusVirtual.model.Userdata;
+import com.campusVirtual.model.StudentInCourse;
 import com.campusVirtual.repository.StudentRepository;
+import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IStudentService;
 import com.campusVirtual.service.IUserDataService;
 
@@ -23,20 +26,45 @@ public class StudentService implements IStudentService {
     private StudentRepository studentRepository;
 
     @Autowired
-    private IUserDataService userDataService;   
+    private IUserDataService userDataService;  
+    
+    @Autowired
+    private ICourseService courseService; 
 
-    private CourseMapper cMapper = new CourseMapper();
+    private StudentMapper sMapper = new StudentMapper();
 
     @Override
-    public void saveStudent(Student student, Long document) {
-        Student studentSet = this.studentRepository.save(student);
+    public StudentDto saveStudent(Long document) {
+        Student studentSet;
+        
+        studentSet = this.studentRepository.save(new Student());
         studentSet.setUser(this.userDataService.getUserById(document));
-        this.studentRepository.save(studentSet);
+        
+        studentSet = this.studentRepository.save(studentSet);
+        
+
+        return this.sMapper.studentToStudentDto(studentSet);
     }
+   
+
 
     @Override
     public Student getStudentById(Long idStudent) {
-        return this.studentRepository.findById(idStudent).get();
+        return this.studentRepository.findById(idStudent).orElseThrow(()->new StudentNotFoundException(idStudent));
+    }
+
+
+    @Override
+    public StudentDto getStudentDtoById(Long idStudent) {
+        Student student = this.getStudentById(idStudent);
+
+        return this.sMapper.studentToStudentDto(student);
+       
+    }
+
+    @Override
+    public List<StudentDto> getManyStudentDtoById() {
+        return this.sMapper.manyStudentToStudentDto(getAllStudents());
     }
 
 
@@ -46,16 +74,27 @@ public class StudentService implements IStudentService {
         return this.studentRepository.findAll();
     }
 
+    @Override
+    public List<StudentDto> getAllStudentsDto() {
+        return this.sMapper.manyStudentToStudentDto(getAllStudents());
+        }
+
+
+  
+
 
     @Override
-    public List<CourseDto> getAllCoursesStudent(Long idStudent){
-        Userdata userData = this.userDataService.getUserById(idStudent);
+    public List<StudentDto> getAllStudentsOfCourse(Long idCourse) {
+        Course course = this.courseService.getCourseById(idCourse);
+        
+        List<StudentInCourse> studentsRelation=course.getStudentInCourse();
+        
+        List<Student> students=new ArrayList<>();
+        for (StudentInCourse studentR : studentsRelation) {
+            students.add(studentR.getStudent());
+        }
 
-        Student student = userData.getStudent();
-        
-        List<CourseDto> coursesStudent= this.cMapper.manyStudentInCourseToCourseDto(student.getStudentInCourse());
-        
-        return coursesStudent;
+        return this.sMapper.manyStudentToStudentDto(students);
     }
 
     @Override
@@ -68,7 +107,9 @@ public class StudentService implements IStudentService {
         if(this.studentRepository.existsById(idAlumno)){
             this.studentRepository.deleteById(idAlumno);
         }else{
-            throw new AlumnoNotFoundException(idAlumno);
+            throw new StudentNotFoundException(idAlumno);
         }
     }
+
+  
 }

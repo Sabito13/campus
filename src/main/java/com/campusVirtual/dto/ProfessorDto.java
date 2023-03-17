@@ -1,39 +1,17 @@
 package com.campusVirtual.dto;
 
 
-import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@AllArgsConstructor
+
+@Getter 
+@Setter
 public class ProfessorDto {
     private Long id;
-    private String nombre;
-    private String especialidad;
+    private String name;
+    private String especiality;
 
     public ProfessorDto(){}
-   
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public String getEspecialidad() {
-        return this.especialidad;
-    }
 
 }

@@ -1,24 +1,30 @@
 package com.campusVirtual.mapper;
 
+import java.util.List;
+import java.util.ArrayList;
 
-public class ProfessorMapper {/* 
-    public ProfessorInCourseDto profesorEnCursoToDto(ProfessorInCourse profesorEnCurso){
-       ProfessorInCourseDto pecdto = new ProfessorInCourseDto();
+import com.campusVirtual.dto.ProfessorDto;
+import com.campusVirtual.model.Professor;
 
-        pecdto.setId(profesorEnCurso.getId());
-        pecdto.setProfesorId(profesorEnCurso.getProfesor().getId());
-        pecdto.setCursoId(profesorEnCurso.getCurso().getId());
-        pecdto.setProfesorNombre(profesorEnCurso.getProfesor().getNombre());
-        pecdto.setCursoNombre(profesorEnCurso.getCurso().getNombre());
-        return pecdto;
+public class ProfessorMapper {
+     public ProfessorDto professorToProfessorDto(Professor professor){
+        ProfessorDto  pDto = new ProfessorDto();
+
+        pDto.setId(professor.getId());
+        pDto.setName(professor.getUser().getName());
+        pDto.setEspeciality(professor.getEspeciality());
+
+        return pDto;
     }
 
-    public List<ProfessorInCourseDto> manyProfesorEnCursoToDto(List<ProfessorInCourse> pecs) {
-       List<ProfessorInCourseDto> profesorEnCursoDtos =new ArrayList<>();
-       
-        for (ProfessorInCourse profesorEnCurso : pecs) {
-            profesorEnCursoDtos.add(profesorEnCursoToDto(profesorEnCurso));
-       }
-       return profesorEnCursoDtos;
-    }*/
-}
+    public List<ProfessorDto> manyProfessorToProfessorDto(List<Professor> professors){
+        
+        List<ProfessorDto>  pDtos =  new ArrayList<>();
+
+        for (Professor professor : professors) {
+            pDtos.add(professorToProfessorDto(professor));
+        }
+
+            return pDtos;
+        }
+    }

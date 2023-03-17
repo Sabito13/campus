@@ -1,33 +1,31 @@
 package com.campusVirtual.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import com.campusVirtual.dto.StudentDto;
+import com.campusVirtual.model.Student;
 
-public class StudentMapper {/* 
-    
-    
-    public StudentInCourseDto  alumnoEnCursoToDto(StudentInCourseDto aecNoDto){
-        StudentInCourseDto  aecdto=new StudentInCourseDto();
-        aecdto.setId(aecNoDto.getId());
-        aecdto.setAlumnoId(aecNoDto.getAlumno().getId());
-        aecdto.setAlumnoNombre(aecNoDto.getAlumno().getUserCredentials().getNombre());
-        aecdto.setCursoId(aecNoDto.getCurso().getId());
-        aecdto.setCursoNombre(aecNoDto.getCurso().getNombre());
+public class StudentMapper {
 
-        return aecdto;
+    public StudentDto studentToStudentDto(Student student){
+        StudentDto  sDto = new StudentDto();
+
+        sDto.setId(student.getId());
+        sDto.setName(student.getUser().getName());
+
+        return sDto;
     }
 
+    public List<StudentDto> manyStudentToStudentDto(List<Student> students){
+        
+        List<StudentDto>  sDtos =  new ArrayList<>();
 
-
-    public List<StudentInCourseDto> manyAlumnoEnCursoToDto(List<StudentInCourseDto> aecNoDtos) {
-        List<StudentInCourseDto> aecdtos = new ArrayList<>();
-
-        for (StudentInCourseDto alumnoEnCurso : aecNoDtos) {
-            aecdtos.add(alumnoEnCursoToDto(alumnoEnCurso));
+        for (Student student : students) {
+            sDtos.add(studentToStudentDto(student));
         }
 
-        return aecdtos;
+            return sDtos;
+        }
     }
 
-
-    */
-}

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalControllerAdvice{
 
     
-    @ExceptionHandler(AlumnoNotFoundException.class)
-	public ResponseEntity<Error> handleAlumnoNotFoundException(AlumnoNotFoundException ex){
+    @ExceptionHandler(StudentNotFoundException.class)
+	public ResponseEntity<Error> handleAlumnoNotFoundException(StudentNotFoundException ex){
 		Error error = new Error(HttpStatus.NOT_FOUND, ex.getMessage());
         
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);

@@ -9,15 +9,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.campusVirtual.model.Student;
-import com.campusVirtual.dto.CourseDto;
+import com.campusVirtual.dto.StudentDto;
 import com.campusVirtual.service.IStudentService;
 
 
 
 @RestController
-@RequestMapping(path="v1/alumnos")
-public class StudentController {/* 
+@RequestMapping(path="v1/student")
+public class StudentController { 
     
     @Autowired
     private IStudentService studentService;
@@ -25,46 +24,44 @@ public class StudentController {/*
     
     @GetMapping(path="/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public  ResponseEntity<Student> getStudenById(@PathVariable("id") Long id){
+    public  ResponseEntity<StudentDto> getStudenById(@PathVariable("id") Long id){
         return  ResponseEntity.ok()
-                .body(this.studentService.getStudentById(id));
+                .body(this.studentService.getStudentDtoById(id));
     }
 
     @GetMapping(path="/me")
     @PreAuthorize("hasRole('ROLE_ALUMNO')")
-    public  /*ResponseEntity<AlumnoDto>String getAlumnoDtoByContex(){
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-        //return  ResponseEntity.ok()
-        //        .body(this.alumnoService.getAlumnoDtoById(id));
+    public ResponseEntity<StudentDto> getStudentDtoByContex(){
+        Long id= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+        return  ResponseEntity.ok()
+               .body(this.studentService.getStudentDtoById(id));
     }
 
 
 
-    @GetMapping(path="/todos")
-    @PreAuthorize("hasRole('ROLE_ALUMNO')")
+    @GetMapping(path="/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<StudentDto>> getAllAlumnoDto(){
         return ResponseEntity.ok()
-                .body(this.alumnoService.getAllAlumnoDto());
+                .body(this.studentService.getAllStudentsDto());
     }
 
-    @GetMapping(path="/{id}/cursos")
-    public ResponseEntity<List<CourseDto>> getAllCursosAlumno(@PathVariable("id") Long id){
-        return ResponseEntity.ok()
-                .body(this.alumnoService.getAllCursosAlumno(id));
-    }
+  
     
 
-    @PostMapping(path="")
-    public ResponseEntity<StudentDto> nuevoAlumno(@RequestBody StudentDto alumnoDto){
+    @PostMapping(path="/{document}")
+    public ResponseEntity<StudentDto> createStudent(
+        @RequestBody StudentDto studentDto,
+        @PathVariable("document") Long document){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.alumnoService.saveAlumnoDto(alumnoDto));
+                .body(this.studentService.saveStudent(document));
     }
 
     @DeleteMapping(path="/{id}")
     public ResponseEntity<?> deleteAlumno(@PathVariable("id") Long id){
-        this.alumnoService.deleteAlumnoById(id);
+        this.studentService.deleteStudentById(id);
         return ResponseEntity.noContent().build();
     }
 
-    */
+   
 }

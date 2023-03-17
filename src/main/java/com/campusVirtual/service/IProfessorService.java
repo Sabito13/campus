@@ -2,7 +2,7 @@ package com.campusVirtual.service;
 
 import java.util.List;
 
-import com.campusVirtual.dto.CourseDto;
+import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.model.Professor;
 
 public interface IProfessorService {
@@ -12,7 +12,7 @@ public interface IProfessorService {
 
     public List<Professor> getAllProfessors();
     
-    public List<CourseDto> getAllCoursesProfessor(Long idProfessor);
+    public List<ProfessorDto> getAllProfessorsOfCourse(Long idCourse);
 
     public boolean existProfessorById(Long idProfessor);
     

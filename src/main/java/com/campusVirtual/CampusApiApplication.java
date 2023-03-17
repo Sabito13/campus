@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-import com.campusVirtual.model.Student;
 import com.campusVirtual.model.Userdata;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Professor;
@@ -49,10 +48,10 @@ public class CampusApiApplication {
 
 
 		userDataService.saveUser(new Userdata((long)111,allPass,"name","last","mail"));
-		studentService.saveStudent(new Student(), (long)111);
+		studentService.saveStudent((long)111);
 
 		userDataService.saveUser(new Userdata((long)222,allPass,"name","last","mail1"));
-		studentService.saveStudent(new Student(), (long)222);
+		studentService.saveStudent((long)222);
 
 		userDataService.saveUser(new Userdata((long)333,allPass,"name","last","ad1"));
 		professorService.saveProfessor(new Professor("ingles"), (long)333);
@@ -72,12 +71,7 @@ public class CampusApiApplication {
 		sic.setStudentInCourse((long)1, (long)2);
 		sic.setStudentInCourse((long)2, (long)2);
 		
-		System.out.println(
-		ico.getAllProfessorsOfCourse((long)1)
-		);
-		System.out.println(
-		ico.getAllStudentsOfCourse((long)1)
-		);
+	
 		
 	};
 	

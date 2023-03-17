@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.service.ICourseService;
-import com.campusVirtual.service.IProfessorService;
-import com.campusVirtual.service.IStudentService;
+
 
 
 @RestController
@@ -20,12 +19,6 @@ public class CourseController {
     
     @Autowired
     private ICourseService courseService;
-
-    @Autowired
-    private IStudentService studentService;
-
-    @Autowired
-    private IProfessorService professorService;
 
 
     @GetMapping(path="/{id}")
@@ -51,7 +44,7 @@ public class CourseController {
         Long idStudent = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
         
         return ResponseEntity.ok()
-        .body(this.studentService.getAllCoursesStudent(idStudent));
+        .body(this.courseService.getAllCoursesOfStudent(idStudent));
     }
 
 
@@ -66,7 +59,7 @@ public class CourseController {
         Long idProfessor = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
         
         return ResponseEntity.ok()
-        .body(this.professorService.getAllCoursesProfessor(idProfessor));
+        .body(this.courseService.getAllCoursesOfProfessor(idProfessor));
     }
 
    

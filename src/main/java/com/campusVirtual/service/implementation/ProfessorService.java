@@ -1,16 +1,19 @@
 package com.campusVirtual.service.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.campusVirtual.dto.CourseDto;
+import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.exception.ProfesorNotFoundException;
-import com.campusVirtual.mapper.CourseMapper;
+import com.campusVirtual.mapper.ProfessorMapper;
+import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Professor;
-import com.campusVirtual.model.Userdata;
+import com.campusVirtual.model.ProfessorInCourse;
 import com.campusVirtual.repository.ProfessorRepository;
+import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IProfessorService;
 import com.campusVirtual.service.IUserDataService;
 
@@ -23,7 +26,10 @@ public class ProfessorService implements IProfessorService{
     @Autowired
     private IUserDataService userDataService; 
 
-    private CourseMapper cMapper = new CourseMapper();
+    @Autowired
+    private ICourseService courseService;
+
+    private ProfessorMapper pMapper = new ProfessorMapper();
 
     @Override
     public void saveProfessor(Professor professor, Long document) {
@@ -42,15 +48,19 @@ public class ProfessorService implements IProfessorService{
         return  this.professorRepository.findAll();  
     }
 
+    
+
     @Override
-    public List<CourseDto> getAllCoursesProfessor(Long idProfessor) {
-        Userdata userData = this.userDataService.getUserById(idProfessor);
+    public List<ProfessorDto> getAllProfessorsOfCourse(Long idCourse) {
+        Course course = this.courseService.getCourseById(idCourse);
 
-        Professor professor = userData.getProfessor();
-
-        List<CourseDto> coursesProfessor= this.cMapper.manyProfessorInCourseToCourseDto(professor.getProfessorInCourse());
+        List<ProfessorInCourse> professorsRelation=course.getProfessorInCourse();
         
-        return coursesProfessor;
+        List<Professor> professors=new ArrayList<>();
+        for (ProfessorInCourse professor : professorsRelation) {
+            professors.add(professor.getProfessor());
+        }
+        return this.pMapper.manyProfessorToProfessorDto(professors);
     }
 
     @Override

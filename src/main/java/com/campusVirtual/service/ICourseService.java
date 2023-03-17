@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.model.Course;
-import com.campusVirtual.model.Professor;
-import com.campusVirtual.model.Student;
 
 public interface ICourseService {
     
@@ -15,8 +13,8 @@ public interface ICourseService {
     public List<Course> getAllCourses();
     public void deleteCourseById(Long idCourse);
     public boolean existsCourseById(Long idCourse);
-    public List<Professor> getAllProfessorsOfCourse(Long idCourse);
-    public List<Student> getAllStudentsOfCourse(Long idCourse);
+    public List<CourseDto> getAllCoursesOfProfessor(Long idProfessor);
+    public List<CourseDto> getAllCoursesOfStudent(Long idStudent);
      
     public CourseDto getCourseDtoById(Long id);
     public List<CourseDto> getAllCoursesDtos();
