@@ -11,6 +11,8 @@ public interface IProfessorService {
     public Professor getProfessorById(Long idProfessor);
 
     public ProfessorDto getProfessorDtoById(Long idProfessor);
+    
+    public ProfessorDto getProfessorDtoByDocument(Long document);
 
     public List<Professor> getAllProfessors();
 

@@ -12,10 +12,12 @@ import com.campusVirtual.mapper.StudentMapper;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Student;
 import com.campusVirtual.model.StudentInCourse;
+import com.campusVirtual.model.Userdata;
 import com.campusVirtual.repository.StudentRepository;
 import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IStudentService;
 import com.campusVirtual.service.IUserDataService;
+
 
 
 
@@ -103,6 +105,14 @@ public class StudentService implements IStudentService {
         }else{
             throw new StudentNotFoundException(idAlumno);
         }
+    }
+
+
+
+    @Override
+    public StudentDto getStudentDtoByDocument(Long document) {
+        Userdata ud =this.userDataService.getUserById(document);
+       return this.getStudentDtoById(ud.getStudent().getId());
     }
 
   

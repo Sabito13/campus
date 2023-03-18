@@ -12,6 +12,7 @@ import com.campusVirtual.mapper.ProfessorMapper;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Professor;
 import com.campusVirtual.model.ProfessorInCourse;
+import com.campusVirtual.model.Userdata;
 import com.campusVirtual.repository.ProfessorRepository;
 import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IProfessorService;
@@ -90,6 +91,12 @@ public class ProfessorService implements IProfessorService{
         }else{
             throw new ProfessorNotFoundException(idProfessor);
         }
+    }
+
+    @Override
+    public ProfessorDto getProfessorDtoByDocument(Long document) {
+        Userdata ud =this.userDataService.getUserById(document);
+       return this.getProfessorDtoById(ud.getProfessor().getId());
     }
     
    

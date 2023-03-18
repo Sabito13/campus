@@ -32,9 +32,9 @@ public class StudentController {
     @GetMapping(path="/me")
     @PreAuthorize("hasRole('ROLE_ALUMNO')")
     public ResponseEntity<StudentDto> getStudentDtoByContex(){
-        Long id= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+        Long document= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
         return  ResponseEntity.ok()
-               .body(this.studentService.getStudentDtoById(id));
+               .body(this.studentService.getStudentDtoByDocument(document));
     }
 
 

@@ -34,7 +34,7 @@ public class ProfessorController {
         ){
         Long id= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
         return ResponseEntity.ok()
-        .body(professorService.getProfessorDtoById(id));
+        .body(professorService.getProfessorDtoByDocument(id));
     }
 
     @GetMapping(path = "/all")

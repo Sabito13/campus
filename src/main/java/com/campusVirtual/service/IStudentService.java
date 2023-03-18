@@ -13,6 +13,8 @@ public interface IStudentService {
 
     public StudentDto getStudentDtoById(Long idStudent);
 
+    public StudentDto getStudentDtoByDocument(Long document);
+
     public List<Student> getAllStudents();
 
     public List<StudentDto>getAllStudentsDto();
