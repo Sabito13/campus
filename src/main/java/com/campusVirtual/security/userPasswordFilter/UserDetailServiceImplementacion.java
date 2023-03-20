@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.model.Userdata;
-import com.campusVirtual.repository.UserCredentialsRepository;
+import com.campusVirtual.repository.UserDataRepository;
 import com.campusVirtual.dto.UserRegisterDto;
 import com.campusVirtual.exception.UserNotFoundException;
 
@@ -18,7 +18,7 @@ import com.campusVirtual.exception.UserNotFoundException;
 public class UserDetailServiceImplementacion implements UserDetailsService{
 
     @Autowired
-    private UserCredentialsRepository authCredentialsRepository;
+    private UserDataRepository authCredentialsRepository;
 
     @Autowired
 	PasswordEncoder passwordEncoder;

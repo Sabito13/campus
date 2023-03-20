@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.exception.UserNotFoundException;
 import com.campusVirtual.model.Userdata;
-import com.campusVirtual.repository.UserCredentialsRepository;
+import com.campusVirtual.repository.UserDataRepository;
 import com.campusVirtual.service.IUserDataService;
 
 @Service
 public class UserDataService implements IUserDataService {
 
     @Autowired
-    private UserCredentialsRepository userRepository;
+    private UserDataRepository userRepository;
 
     @Override
     public Userdata getUserById(Long document) {

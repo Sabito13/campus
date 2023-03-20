@@ -77,6 +77,7 @@ public class CampusApiApplication {
 	
 	}
 
+	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
     		return new WebMvcConfigurer() {

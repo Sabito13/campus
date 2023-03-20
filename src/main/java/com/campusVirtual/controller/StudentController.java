@@ -30,7 +30,7 @@ public class StudentController {
     }
 
     @GetMapping(path="/me")
-    @PreAuthorize("hasRole('ROLE_ALUMNO')")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     public ResponseEntity<StudentDto> getStudentDtoByContex(){
         Long document= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
         return  ResponseEntity.ok()

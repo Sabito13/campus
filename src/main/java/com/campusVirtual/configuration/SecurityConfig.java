@@ -44,13 +44,14 @@ public class SecurityConfig {
        userPasswordAuthenticationFilter.setAuthenticationManager(authManager);
        userPasswordAuthenticationFilter.setFilterProcessesUrl(
         "/v1/auth/login");
-        
-        //try {
-
-        
             return http
-                        .csrf().disable().cors().and()
-                        .authorizeRequests().antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
+                        .csrf().disable().cors()
+                        //.and() .headers().contentTypeOptions().disable()
+                        .and().authorizeRequests().antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
+                        .and()
+                        .authorizeRequests().antMatchers("/swagger-ui.html/",
+                        "/v3/api-docs/","/v3/api-docs/**", "/v3/api-docs.yaml","/swagger-ui/**"
+                        ).permitAll()
                         .and()
                         .authorizeRequests().antMatchers("/v1/admin/**").hasAuthority("ROLE_ADMIN")
                         .and()
@@ -62,10 +63,6 @@ public class SecurityConfig {
                         .addFilterBefore(new JwtRequestFilter(), UsernamePasswordAuthenticationFilter.class)
                         .build();
 
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //    return null;
-        //}
     }
 
     @Bean 
@@ -81,3 +78,18 @@ public class SecurityConfig {
 
    
 }
+/*  posible swagger config
+"/swagger-ui/index.html/swagger-ui.css/",
+"/swagger-ui/swagger-ui.css?v=3.0.0.css/",
+"/swagger-ui/springfox.css?v=3.0.0/",
+"/swagger-ui/index.html/swagger-ui.css?v=3.0.0",
+/* "/api/swagger-ui/**",
+"/v3/**","/swagger-ui/index.html/**","/swagger-resources/**",
+"/swagger-ui.html","/webjars/**","/swagger.json",
+"/swagger-ui/index.html/*" 
+----------------------------
+"/swagger-ui.html" <-- for UI
+"/swagger-ui/**" <-- for UI redirects
+"/v3/api-docs/**" <-- for json docs and openapi configuration
+"/v3/api-docs.yaml" <-- for yaml docs
+*/
