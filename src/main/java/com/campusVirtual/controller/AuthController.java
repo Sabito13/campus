@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.UserRegisterDto;
+import com.campusVirtual.dto.UserCredentialsDto;
 import com.campusVirtual.security.userPasswordFilter.UserDetailServiceImplementacion;
 
 
@@ -15,6 +16,11 @@ public class AuthController {
     @Autowired
     UserDetailServiceImplementacion userDetailServiceImplementacion;
     
+    @PostMapping(path ="/login")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String register(@RequestBody UserCredentialsDto urdto){
+       return "login";
+    }
 
     @PostMapping(path ="/register")
     //@PreAuthorize("hasRole('ROLE_ADMIN')")

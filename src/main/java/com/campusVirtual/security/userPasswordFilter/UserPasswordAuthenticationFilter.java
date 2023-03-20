@@ -59,9 +59,9 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
 	
 	//response.addHeader("Access-Control-Allow-Origin", "*,*");	
 
-    //commetn for swagger
-	//response.addHeader("Access-Control-Expose-Headers","Authorization");	
-	//response.addHeader("Access-Control-Allow-Headers","Authorization,X-PINGOTHER,Origin,X-Requested-with,Content-type,Accept,X-Custom-header");
+ 
+	response.addHeader("Access-Control-Expose-Headers","Authorization");	
+	response.addHeader("Access-Control-Allow-Headers","Authorization,X-PINGOTHER,Origin,X-Requested-with,Content-type,Accept,X-Custom-header");
         response.addHeader("Authorization", "Bearer "+token);
 
         response.getWriter().flush();
