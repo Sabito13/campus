@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.service.ICourseService;
 
@@ -48,10 +49,6 @@ public class CourseController {
     }
 
 
-
-
-
-
     @GetMapping(path="/professor/courses")
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     public ResponseEntity<List<CourseDto>> getAllCoursesOfProfessor(){
@@ -78,6 +75,22 @@ public class CourseController {
     public ResponseEntity<?> eliminarCurso(@PathVariable("id") Long id){
         this.courseService.deleteCourseById(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+
+    @PostMapping("/{id}/content")
+    public ResponseEntity<?> addCourseContent(@PathVariable("id") Long id,@RequestBody CourseContentDto ccDto){
+        this.courseService.addCourseContent(id, ccDto.getContent());;
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping(path="/{id}/content")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<List<CourseContentDto>> getAllCourseContentDtoById(@PathVariable("id") Long id){
+        return ResponseEntity.ok()
+        .body(this.courseService.getAllCourseContent(id));
     }
  
 }
