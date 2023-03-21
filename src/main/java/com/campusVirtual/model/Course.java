@@ -67,8 +67,17 @@ public class Course {
         private List<StudentInCourse> studentInCourse = new ArrayList<StudentInCourse>();
         
     
-       
+        @OneToMany(
+            mappedBy = "course",
+            orphanRemoval = true,
+            cascade ={CascadeType.PERSIST,CascadeType.REMOVE}
+            //fetch = FetchType.EAGER
+        )
+        @OnDelete(action = OnDeleteAction.CASCADE)
+        @LazyCollection(LazyCollectionOption.FALSE)
+        private List<CourseContent> courseContent = new ArrayList<CourseContent>();
 
+        
     public Course(){}
     public Course(String name){
         this.name = name;

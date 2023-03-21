@@ -1,4 +1,4 @@
-package com.empleados.empleadosApi;
+package com.campusVirtual;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
