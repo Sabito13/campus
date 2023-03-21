@@ -77,7 +77,7 @@ public class Course {
         @LazyCollection(LazyCollectionOption.FALSE)
         private List<CourseContent> courseContent = new ArrayList<CourseContent>();
 
-        
+
     public Course(){}
     public Course(String name){
         this.name = name;
@@ -89,6 +89,10 @@ public class Course {
 
     public String getName() {
         return this.name;
+    }
+
+    public List<CourseContent> getCourseContent() {
+        return this.courseContent;
     }
 
     public List<ProfessorInCourse> getProfessorInCourse() {
@@ -107,17 +111,17 @@ public class Course {
         this.name = name;
     }
 
-    public void addProfessorInCourse(ProfessorInCourse professorInCourse) {
-        if (!this.professorInCourse.contains(professorInCourse)) {
-            this.professorInCourse.add(professorInCourse);
-        }
-    }
+    //public void addProfessorInCourse(ProfessorInCourse professorInCourse) {
+    //    if (!this.professorInCourse.contains(professorInCourse)) {
+    //        this.professorInCourse.add(professorInCourse);
+    //    }
+    //}
 
-    public void addAlumnoEnCurso(StudentInCourse studentInCourse) {
-        if (!this.studentInCourse.contains(studentInCourse)) {
-            this.studentInCourse.add(studentInCourse);
-        }
-    }
+    //public void addAlumnoEnCurso(StudentInCourse studentInCourse) {
+    //    if (!this.studentInCourse.contains(studentInCourse)) {
+    //        this.studentInCourse.add(studentInCourse);
+    //    }
+    //}
 
     /*public void removeProfesorEnCurso(ProfesorEnCurso profesorEnCurso) {
         if (this.profesorEnCurso.contains(profesorEnCurso)) {

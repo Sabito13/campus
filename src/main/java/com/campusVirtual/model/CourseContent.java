@@ -1,5 +1,7 @@
 package com.campusVirtual.model;
 
+import java.util.Calendar;
+
 import javax.persistence.*;
 
 @Entity(name="CourseContent")
@@ -35,6 +37,11 @@ public class CourseContent {
         private String content;
 
 
+        //@Column(name = "REGIST_DATE", updatable = false, nullable = false)
+        //@Temporal(TemporalType.DATE)
+        //private Calendar registDate;
+
+
         @ManyToOne()
         @JoinColumn(
             name="course_id",
@@ -45,4 +52,27 @@ public class CourseContent {
             
         )
         private Course course;
+
+        public CourseContent(){}
+
+        public void setCourse(Course course) {
+            this.course = course;
+        }
+        public void setId(Long id) {
+            this.id = id;
+        }
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public Course getCourse() {
+            return this.course;
+        }
+
+        public Long getId() {
+            return this.id;
+        }
+        public String getContent() {
+            return this.content;
+        }
 }

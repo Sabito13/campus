@@ -63,6 +63,12 @@ public class CampusApiApplication {
 		ico.saveCourse(new Course("Ingles"));
 		ico.saveCourse(new Course("reded"));
 		ico.saveCourse(new Course("redes"));
+		
+		ico.addCourseContent((long)1, "hola alumnos");
+		ico.addCourseContent((long)1, "tema 1");
+		ico.addCourseContent((long)2, "examen");
+
+		System.out.println(ico.getAllCourseContent((long)1)); 
 
 		pic.setProfessorInCourse((long)1, (long)1);
 		pic.setProfessorInCourse((long)2, (long)3);
