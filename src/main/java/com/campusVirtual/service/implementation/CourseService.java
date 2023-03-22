@@ -5,17 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.campusVirtual.dto.CourseContentDto;
+
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.exception.CourseNotFoundException;
-import com.campusVirtual.mapper.CourseContentMapper;
+
 import com.campusVirtual.mapper.CourseMapper;
 import com.campusVirtual.model.Student;
 import com.campusVirtual.model.Userdata;
 import com.campusVirtual.model.Course;
-import com.campusVirtual.model.CourseContent;
 import com.campusVirtual.model.Professor;
-import com.campusVirtual.repository.CourseContentRepository;
 import com.campusVirtual.repository.CourseRepository;
 import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IUserDataService;
@@ -23,18 +21,14 @@ import com.campusVirtual.service.IUserDataService;
 @Service
 public class CourseService implements ICourseService {
 
-    
     @Autowired
     private CourseRepository courseRepository;
-
-    @Autowired
-    private CourseContentRepository cContentRepository;
 
     @Autowired
     private IUserDataService userDataService;
 
     private CourseMapper cMapper = new CourseMapper();
-    private CourseContentMapper courseContentMapper = new CourseContentMapper();
+   
    
 
     @Override
@@ -114,21 +108,5 @@ public class CourseService implements ICourseService {
 
     }
 
-    @Override
-    public List<CourseContentDto> getAllCourseContent(Long idCourse) {
-        List<CourseContent> cContent = getCourseById(idCourse).getCourseContent();
-        return this.courseContentMapper.manyCourseContentToDto(cContent);
-    }
-
-
-    @Override
-    public void addCourseContent(Long idCourse,String content) {
-        CourseContent cContent = new CourseContent();
-        cContent.setContent(content);
-        cContent.setCourse(getCourseById(idCourse));
-
-        this.cContentRepository.save(cContent);
-    }
    
-    
 }

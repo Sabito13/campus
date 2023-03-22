@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.campusVirtual.model.Userdata;
 import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.model.Course;
+import com.campusVirtual.service.ICourseContentService;
 import com.campusVirtual.service.ICourseService;
 import com.campusVirtual.service.IProfessorInCourseService;
 import com.campusVirtual.service.IProfessorService;
@@ -36,7 +37,8 @@ public class CampusApiApplication {
 			ICourseService ico,
 			IProfessorInCourseService pic,
 			IStudentInCourseService sic,
-			PasswordEncoder passwordEncoder
+			PasswordEncoder passwordEncoder,
+			ICourseContentService icc
 			){
 	return args -> {
 		
@@ -64,11 +66,11 @@ public class CampusApiApplication {
 		ico.saveCourse(new Course("reded"));
 		ico.saveCourse(new Course("redes"));
 		
-		ico.addCourseContent((long)1, "hola alumnos");
-		ico.addCourseContent((long)1, "tema 1");
-		ico.addCourseContent((long)2, "examen");
+		icc.addCourseContent((long)1, "hola alumnos");
+		icc.addCourseContent((long)1, "tema 1");
+		icc.addCourseContent((long)2, "examen");
 
-		System.out.println(ico.getAllCourseContent((long)1)); 
+		System.out.println(icc.getAllCourseContent((long)1)); 
 
 		pic.setProfessorInCourse((long)1, (long)1);
 		pic.setProfessorInCourse((long)2, (long)3);

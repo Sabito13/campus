@@ -21,8 +21,4 @@ public interface ICourseService {
     public List<CourseDto> getAllCoursesDtos();
     public CourseDto saveCourseDto(CourseDto courseDto);
 
-
-    public List<CourseContentDto> getAllCourseContent(Long idCourse);
-
-    public void addCourseContent(Long idCourse,String content);
 }

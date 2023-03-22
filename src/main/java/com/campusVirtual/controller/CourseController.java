@@ -8,9 +8,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.service.ICourseService;
+
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 
 
@@ -21,7 +27,12 @@ public class CourseController {
     @Autowired
     private ICourseService courseService;
 
-
+    @Operation(summary = "Return course by Id", responses = {
+        @ApiResponse(responseCode = "200", description = "Course found by id", 
+                content = @Content(mediaType = "application/json", 
+                array = @ArraySchema( schema = @Schema(implementation = CourseDto.class)))),
+        @ApiResponse(responseCode = "404", description = "Course not found by id", 
+                content = @Content)	})
     @GetMapping(path="/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<CourseDto> getCourseDtoById(@PathVariable("id") Long id){
@@ -79,18 +90,6 @@ public class CourseController {
 
 
 
-    @PostMapping("/{id}/content")
-    public ResponseEntity<?> addCourseContent(@PathVariable("id") Long id,@RequestBody CourseContentDto ccDto){
-        this.courseService.addCourseContent(id, ccDto.getContent());;
-        return ResponseEntity.noContent().build();
-    }
-
-
-    @GetMapping(path="/{id}/content")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<CourseContentDto>> getAllCourseContentDtoById(@PathVariable("id") Long id){
-        return ResponseEntity.ok()
-        .body(this.courseService.getAllCourseContent(id));
-    }
+    
  
 }
