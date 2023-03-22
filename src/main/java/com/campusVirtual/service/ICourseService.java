@@ -2,7 +2,6 @@ package com.campusVirtual.service;
 
 import java.util.List;
 
-import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.model.Course;
 

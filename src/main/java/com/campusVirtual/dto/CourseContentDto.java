@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter 
 @Setter
 public class CourseContentDto {
+    private Long id;
     private String content;
     
     public CourseContentDto(){}

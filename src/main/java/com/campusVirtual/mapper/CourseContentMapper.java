@@ -10,7 +10,8 @@ public class CourseContentMapper {
     public CourseContentDto courseContentToDto(CourseContent cContent){
         CourseContentDto ccDto = new CourseContentDto();
         ccDto.setContent(cContent.getContent());
-        return ccDto;
+        ccDto.setId(cContent.getId());
+        return ccDto; 
     }
 
     public List<CourseContentDto> manyCourseContentToDto(List<CourseContent> cContent){

@@ -129,7 +129,11 @@ public class Course {
         }
     }*/
    
-
+    public void removeContentOfCourse(CourseContent courseContent) {
+        if (this.courseContent.contains(courseContent)) {
+            this.courseContent.remove(courseContent);
+        }
+    }
 
     
 

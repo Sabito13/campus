@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.mapper.CourseContentMapper;
+import com.campusVirtual.model.Course;
 import com.campusVirtual.model.CourseContent;
 import com.campusVirtual.repository.CourseContentRepository;
 
@@ -32,12 +33,32 @@ public class CourseContentService implements ICourseContentService {
 
 
     @Override
-    public void addCourseContent(Long idCourse,String content) {
+    public void addCourseContent(Long idCourse,CourseContentDto ccDto) {
         CourseContent cContent = new CourseContent();
-        cContent.setContent(content);
+        cContent.setContent(ccDto.getContent());
         cContent.setCourse(this.courseService.getCourseById(idCourse));
 
         this.cContentRepository.save(cContent);
+    }
+
+
+    @Override
+    public void updateCourseContent(CourseContentDto ccDto) {
+        CourseContent cContent = this.cContentRepository.findById(ccDto.getId()).get();
+        cContent.setContent(ccDto.getContent());
+        this.cContentRepository.save(cContent);
+    }
+
+
+    @Override
+    public void deleteCourseContent(Long courseId,Long contentId) {
+        if(this.cContentRepository.existsById(contentId)){
+            Course course =this.courseService.getCourseById(courseId);
+            course.removeContentOfCourse(this.cContentRepository.findById(contentId).get());
+            this.cContentRepository.deleteById(contentId);
+        }else{
+            throw new RuntimeException("Content not found");
+        }
     }
    
     

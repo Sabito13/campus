@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 import com.campusVirtual.model.Userdata;
+import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.service.ICourseContentService;
@@ -66,9 +67,12 @@ public class CampusApiApplication {
 		ico.saveCourse(new Course("reded"));
 		ico.saveCourse(new Course("redes"));
 		
-		icc.addCourseContent((long)1, "hola alumnos");
-		icc.addCourseContent((long)1, "tema 1");
-		icc.addCourseContent((long)2, "examen");
+		CourseContentDto ccDtos = new CourseContentDto();
+		ccDtos.setContent("hola alumonos");
+
+		icc.addCourseContent((long)1, ccDtos);
+		icc.addCourseContent((long)1, ccDtos);
+		icc.addCourseContent((long)2, ccDtos);
 
 		System.out.println(icc.getAllCourseContent((long)1)); 
 
