@@ -1,0 +1,16 @@
+insert into userdata values('555','ROLE_STUDENT','freeze','6mail@com','juan','$2a$10$ZUQjsajCqyKcFsrDtSobTe6OzLCQP3JXKqQXNTEwY3qWLH8Flb6Wa'),
+('666','ROLE_STUDENT','freeze6','1mail@com','juan','$2a$10$ZUQjsajCqyKcFsrDtSobTe6OzLCQP3JXKqQXNTEwY3qWLH8Flb6Wa'),
+('777','ROLE_STUDENT','freeze7','2mail@com','juan','$2a$10$ZUQjsajCqyKcFsrDtSobTe6OzLCQP3JXKqQXNTEwY3qWLH8Flb6Wa'),
+('888','ROLE_STUDENT','freeze8','3mail@com','juan','$2a$10$ZUQjsajCqyKcFsrDtSobTe6OzLCQP3JXKqQXNTEwY3qWLH8Flb6Wa'),
+('999','ROLE_STUDENT','freeze9','4mail@com','juan','$2a$10$ZUQjsajCqyKcFsrDtSobTe6OzLCQP3JXKqQXNTEwY3qWLH8Flb6Wa'),
+('1000','ROLE_STUDENT','freeze10','5mail@com','juan','$2a$10$ZUQjsajCqyKcFsrDtSobTe6OzLCQP3JXKqQXNTEwY3qWLH8Flb6Wa');
+
+insert into professor values(3,'Ingles 2',666),(4,'ingenenieria',777),(5,'sistemas',888);
+
+insert into course values(4,'ingenieria'),(5,'sistemas'),(6,'computacion');
+
+ insert into professorincourse values(3,1,4),(4,1,5),(5,3,3);
+
+insert into studentincourse values(4,2,1),(5,3,1);
+
+
