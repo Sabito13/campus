@@ -13,10 +13,10 @@ import com.campusVirtual.service.ICourseService;
 
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 
@@ -27,12 +27,19 @@ public class CourseController {
     @Autowired
     private ICourseService courseService;
 
-    @Operation(summary = "Return course by Id", responses = {
-        @ApiResponse(responseCode = "200", description = "Course found by id", 
-                content = @Content(mediaType = "application/json", 
-                array = @ArraySchema( schema = @Schema(implementation = CourseDto.class)))),
-        @ApiResponse(responseCode = "404", description = "Course not found by id", 
-                content = @Content)	})
+
+    @Operation(summary = "Get Course by Course id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid field",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
     @GetMapping(path="/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<CourseDto> getCourseDtoById(@PathVariable("id") Long id){
@@ -40,6 +47,19 @@ public class CourseController {
         .body(this.courseService.getCourseDtoById(id));
     }
 
+
+    @Operation(summary = "Get all Courses")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid field",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
     @GetMapping(path="/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CourseDto>> getAllCourseDtoById(){
@@ -49,6 +69,19 @@ public class CourseController {
 
 
 
+
+    @Operation(summary = "Get Courses of student by student id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid field",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
     @GetMapping(path="/student/courses")
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     public ResponseEntity<List<CourseDto>> getAllCoursesOfStudent(){
@@ -60,6 +93,19 @@ public class CourseController {
     }
 
 
+
+    @Operation(summary = "Get Courses of professor by professor id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid field",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
     @GetMapping(path="/professor/courses")
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     public ResponseEntity<List<CourseDto>> getAllCoursesOfProfessor(){
@@ -73,7 +119,18 @@ public class CourseController {
    
     
   
-
+    @Operation(summary = "Create Course")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid field",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
     @PostMapping
     public ResponseEntity<CourseDto> createCourse(@RequestBody CourseDto cursoDto){
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -81,7 +138,18 @@ public class CourseController {
     }
 
 
-
+    @Operation(summary = "Create Course")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid field",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarCurso(@PathVariable("id") Long id){
         this.courseService.deleteCourseById(id);

@@ -12,6 +12,14 @@ import com.campusVirtual.service.IProfessorService;
 
 import java.util.List;
 
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
 @RestController
 @RequestMapping(path="v1/professor")
 public class ProfessorController {
@@ -19,6 +27,13 @@ public class ProfessorController {
     @Autowired
     private IProfessorService professorService;
 
+
+    @Operation(summary = "Get Professor by Professor id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProfessorDto.class)) }),
+  })
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProfessorDto> getProfessorDtoById(
@@ -27,7 +42,12 @@ public class ProfessorController {
         .body(professorService.getProfessorDtoById(id));
     }
 
-
+    @Operation(summary = "Get mi Professor by security context")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProfessorDto.class)) }),
+  })
     @GetMapping(path = "/me")
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     public ResponseEntity<ProfessorDto> getProfessorDtoByContext(
@@ -37,6 +57,13 @@ public class ProfessorController {
         .body(professorService.getProfessorDtoByDocument(id));
     }
 
+
+    @Operation(summary = "Get all professor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProfessorDto.class)) }),
+  })
     @GetMapping(path = "/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<ProfessorDto>> getAllProfessorDto(){
@@ -45,6 +72,16 @@ public class ProfessorController {
     }
 
 
+
+
+
+
+    @Operation(summary = "Get all Professors of one course by course id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProfessorDto.class)) }),
+  })
     @GetMapping(path ="/course/{id}")
     public ResponseEntity<List<ProfessorDto>> getAllProfessorsOfCourse(
         @PathVariable("id") Long id){
@@ -52,6 +89,13 @@ public class ProfessorController {
         .body(this.professorService.getAllProfessorsOfCourse(id));
     }
 
+
+    @Operation(summary = "Asign role and Professor functions to a one user by user document")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProfessorDto.class)) }),
+  })
     @PostMapping(path ="/{document}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProfessorDto> createProfessor(
@@ -61,6 +105,15 @@ public class ProfessorController {
                 .body(this.professorService.saveProfessor(profesorDto,document));
     }
 
+
+
+
+    @Operation(summary = "Delete professor by Professor id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Update Activity",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProfessorDto.class)) }),
+  })
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteProfessorById(@PathVariable("id") Long id){
