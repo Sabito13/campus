@@ -13,8 +13,8 @@ public interface ICourseService {
     public List<Course> getAllCourses();
     public void deleteCourseById(Long idCourse);
     public boolean existsCourseById(Long idCourse);
-    public List<CourseDto> getAllCoursesOfProfessor(Long idProfessor);
-    public List<CourseDto> getAllCoursesOfStudent(Long idStudent);
+    public List<CourseDto> getAllCoursesOfProfessor(String username);
+    public List<CourseDto> getAllCoursesOfStudent(String username);
      
     public CourseDto getCourseDtoById(Long id);
     public List<CourseDto> getAllCoursesDtos();

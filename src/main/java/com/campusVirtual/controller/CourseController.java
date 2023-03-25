@@ -86,10 +86,10 @@ public class CourseController {
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     public ResponseEntity<List<CourseDto>> getAllCoursesOfStudent(){
         
-        Long idStudent = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
         
         return ResponseEntity.ok()
-        .body(this.courseService.getAllCoursesOfStudent(idStudent));
+        .body(this.courseService.getAllCoursesOfStudent(username));
     }
 
 
@@ -110,10 +110,10 @@ public class CourseController {
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     public ResponseEntity<List<CourseDto>> getAllCoursesOfProfessor(){
 
-        Long idProfessor = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
         
         return ResponseEntity.ok()
-        .body(this.courseService.getAllCoursesOfProfessor(idProfessor));
+        .body(this.courseService.getAllCoursesOfProfessor(username));
     }
 
    

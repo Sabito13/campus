@@ -76,8 +76,8 @@ public class CourseService implements ICourseService {
    
 
     @Override
-    public List<CourseDto> getAllCoursesOfProfessor(Long idProfessor) {
-        Userdata userData = this.userDataService.getUserById(idProfessor);
+    public List<CourseDto> getAllCoursesOfProfessor(String username) {
+        Userdata userData = this.userDataService.getUserById(username);
 
         Professor professor = userData.getProfessor();
 
@@ -87,8 +87,8 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public List<CourseDto> getAllCoursesOfStudent(Long idStudent){
-        Userdata userData = this.userDataService.getUserById(idStudent);
+    public List<CourseDto> getAllCoursesOfStudent(String username){
+        Userdata userData = this.userDataService.getUserById(username);
 
         Student student = userData.getStudent();
 

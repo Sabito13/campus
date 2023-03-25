@@ -13,7 +13,7 @@ public class AdminService implements IAdminService{
     private IUserDataService userDataService;
 
     @Override
-    public void setRoleUser(String role, Long id) {
-        this.userDataService.getUserById(id).addAuthorities(role);
+    public void setRoleUser(String role,String username) {
+        this.userDataService.getUserById(username).addAuthorities(role);
     }
 }

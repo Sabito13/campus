@@ -15,8 +15,8 @@ public class UserDataService implements IUserDataService {
     private UserDataRepository userRepository;
 
     @Override
-    public Userdata getUserById(Long document) {
-        return this.userRepository.findById(document).orElseThrow(()-> new UserNotFoundException(document));
+    public Userdata getUserById(String username) {
+        return this.userRepository.findById(username).orElseThrow(()-> new UserNotFoundException(username));
     }
 
     @Override

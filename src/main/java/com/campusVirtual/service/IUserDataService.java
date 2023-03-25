@@ -5,7 +5,7 @@ import com.campusVirtual.model.Userdata;
 
 
 public interface IUserDataService {
-    public Userdata getUserById(Long document);
+    public Userdata getUserById(String username);
 
     public Userdata saveUser(Userdata user);
 }

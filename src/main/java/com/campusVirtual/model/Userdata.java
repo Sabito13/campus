@@ -7,17 +7,17 @@ import javax.persistence.*;
 @Table(
     name="userdata",
     uniqueConstraints = {
-        @UniqueConstraint(name="user_dni_constraint",columnNames = "document")
+        @UniqueConstraint(name="user_dni_constraint",columnNames = "user_name")
     })
 public class Userdata {
     @Id
     @Column(
-        name = "document",
+        name = "user_name",
         updatable = false,
         nullable = false,
         unique = true
     )
-    private Long document;
+    private String username;
 
 
     @Column(
@@ -76,12 +76,12 @@ public class Userdata {
 
     public Userdata(){}
     public Userdata(
-        Long document,
+        String username,
         String password,
         String name,
         String lastName,
         String mail){
-        this.document = document;
+        this.username = username;
         this.password = password;
         this.authorities = "ROLE_STUDENT";
         this.name = name;
@@ -90,8 +90,8 @@ public class Userdata {
     }
 
 
-    public Long getDocument() {
-        return this.document;
+    public String getUsername() {
+        return this.username;
     }
 
 
@@ -123,8 +123,8 @@ public class Userdata {
         return professor;
     }
 
-    public void setDocument(Long document) {
-        this.document = document;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {

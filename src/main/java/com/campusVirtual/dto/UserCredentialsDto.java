@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UserCredentialsDto {
 
-private Long documento;
+private String username;
 private String password;
 
 
@@ -17,9 +17,5 @@ public UserCredentialsDto() {
     super();
 }
 
-
-public String getDocumentoString() {
-    return ""+this.documento;
-}
 
 }

@@ -24,38 +24,40 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
 	PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String dniString) throws UsernameNotFoundException { 
-        Long dni = Long.parseLong(dniString); 
-        Userdata  UserAuth = this.authCredentialsRepository.findById(dni).orElseThrow(()-> new UserNotFoundException(dni));
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException { 
+        Userdata  UserAuth = this.authCredentialsRepository.findById(userName).orElseThrow(()-> new UserNotFoundException(userName));
         //AuthCredentials  UserAuth = new AuthCredentials(dni, "juan","a");
         return new UserDetailsImplementacion(UserAuth);
     }
 
 
-    public String saveUser(UserRegisterDto userCredentials){
+    public String saveUser(UserRegisterDto userRegister){
         
-        Long documento = userCredentials.getDocumento();
-		String password = userCredentials.getPassword();
+        String username = userRegister.getUsername();
+		String password = userRegister.getPassword();
 
 		
 		 if (password == null)
 			throw new RuntimeException("the password was not entered");
-        else if (documento == null)
-			throw new RuntimeException("the dni was not entered");
+        else if (username == null)
+			throw new RuntimeException("the username was not entered");
 		
         
-        if ((""+documento).isBlank() || password.isBlank())
-			throw new RuntimeException("Documento o password no puede estar vacio");
+        if (username.isBlank() || password.isBlank())
+			throw new RuntimeException("username or password is blank");
 
-        if (this.authCredentialsRepository.existsById(documento))
-			throw new RuntimeException("Usuario con ese documento ya existe");
+        if (this.authCredentialsRepository.existsById(username))
+			throw new RuntimeException("Already exists user with that username");
 		
 	
-        userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+            userRegister.setPassword(passwordEncoder.encode(userRegister.getPassword()));
 		
-		this.authCredentialsRepository.save(new Userdata(userCredentials.getDocumento(),
-        userCredentials.getPassword(),
-        userCredentials.getNombre(),userCredentials.getApellido(),userCredentials.getMail()));
+		this.authCredentialsRepository.save(new Userdata(
+            userRegister.getUsername(),
+            userRegister.getPassword(),
+            userRegister.getNombre(),
+            userRegister.getApellido(),
+            userRegister.getMail()));
 		
 		
 		return  " your registration was successful!";

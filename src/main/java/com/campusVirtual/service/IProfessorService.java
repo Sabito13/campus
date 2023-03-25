@@ -6,13 +6,13 @@ import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.model.Professor;
 
 public interface IProfessorService {
-    public ProfessorDto saveProfessor(ProfessorDto professor,Long document);
+    public ProfessorDto saveProfessor(ProfessorDto professor,String username);
 
     public Professor getProfessorById(Long idProfessor);
 
     public ProfessorDto getProfessorDtoById(Long idProfessor);
     
-    public ProfessorDto getProfessorDtoByDocument(Long document);
+    public ProfessorDto getProfessorDtoByUsername(String username);
 
     public List<Professor> getAllProfessors();
 

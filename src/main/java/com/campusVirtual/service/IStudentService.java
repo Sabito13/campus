@@ -7,13 +7,13 @@ import com.campusVirtual.model.Student;
 
 public interface IStudentService {
     
-    public StudentDto saveStudent(Long document);
+    public StudentDto saveStudent(String username);
     
     public Student getStudentById(Long idStudent);
 
     public StudentDto getStudentDtoById(Long idStudent);
 
-    public StudentDto getStudentDtoByDocument(Long document);
+    public StudentDto getStudentDtoByUsername(String username);
 
     public List<Student> getAllStudents();
 

@@ -36,11 +36,11 @@ public class StudentService implements IStudentService {
     private StudentMapper sMapper = new StudentMapper();
 
     @Override
-    public StudentDto saveStudent(Long document) {
+    public StudentDto saveStudent(String username) {
         Student studentSet;
         
         studentSet = this.studentRepository.save(new Student());
-        studentSet.setUser(this.userDataService.getUserById(document));
+        studentSet.setUser(this.userDataService.getUserById(username));
         
         studentSet = this.studentRepository.save(studentSet);
         
@@ -110,8 +110,8 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public StudentDto getStudentDtoByDocument(Long document) {
-        Userdata ud =this.userDataService.getUserById(document);
+    public StudentDto getStudentDtoByUsername(String username) {
+        Userdata ud =this.userDataService.getUserById(username);
        return this.getStudentDtoById(ud.getStudent().getId());
     }
 

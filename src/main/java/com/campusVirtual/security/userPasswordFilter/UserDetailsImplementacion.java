@@ -33,7 +33,7 @@ public class UserDetailsImplementacion implements UserDetails {
 
     @Override
     public String getUsername() {
-       return ""+userAuth.getDocument();
+       return userAuth.getUsername();
     }
 
     @Override

@@ -40,7 +40,7 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
         
 
         UsernamePasswordAuthenticationToken userPAT= new UsernamePasswordAuthenticationToken(
-            AuthCredentialsDto.getDocumentoString(),  AuthCredentialsDto.getPassword(),
+            AuthCredentialsDto.getUsername(),  AuthCredentialsDto.getPassword(),
             Collections.emptyList()/*roles*/);
 		
         return getAuthenticationManager().authenticate(userPAT);

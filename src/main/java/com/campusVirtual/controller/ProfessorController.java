@@ -52,9 +52,9 @@ public class ProfessorController {
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     public ResponseEntity<ProfessorDto> getProfessorDtoByContext(
         ){
-        Long id= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+                String username= SecurityContextHolder.getContext().getAuthentication().getName();
         return ResponseEntity.ok()
-        .body(professorService.getProfessorDtoByDocument(id));
+        .body(professorService.getProfessorDtoByUsername(username));
     }
 
 
@@ -96,13 +96,13 @@ public class ProfessorController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProfessorDto.class)) }),
   })
-    @PostMapping(path ="/{document}")
+    @PostMapping(path ="/{username}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProfessorDto> createProfessor(
         @RequestBody ProfessorDto profesorDto,
-        @PathVariable("document") long document ){
+        @PathVariable("username") String username ){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.professorService.saveProfessor(profesorDto,document));
+                .body(this.professorService.saveProfessor(profesorDto,username));
     }
 
 

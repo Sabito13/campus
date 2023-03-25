@@ -33,12 +33,12 @@ public class ProfessorService implements IProfessorService{
     private ProfessorMapper pMapper = new ProfessorMapper();
 
     @Override
-    public ProfessorDto saveProfessor(ProfessorDto professorDto, Long document) {
+    public ProfessorDto saveProfessor(ProfessorDto professorDto, String username) {
         Professor profesorSet = new Professor(professorDto.getEspeciality());
 
         profesorSet = this.professorRepository.save(profesorSet);
 
-        profesorSet.setUser(this.userDataService.getUserById(document));
+        profesorSet.setUser(this.userDataService.getUserById(username));
         
         profesorSet = this.professorRepository.save(profesorSet);
 
@@ -94,8 +94,8 @@ public class ProfessorService implements IProfessorService{
     }
 
     @Override
-    public ProfessorDto getProfessorDtoByDocument(Long document) {
-        Userdata ud =this.userDataService.getUserById(document);
+    public ProfessorDto getProfessorDtoByUsername(String username) {
+        Userdata ud =this.userDataService.getUserById(username);
        return this.getProfessorDtoById(ud.getProfessor().getId());
     }
     

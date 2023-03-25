@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.model.StudentInCourse;
+import com.campusVirtual.model.Userdata;
 import com.campusVirtual.service.IAdminService;
 import com.campusVirtual.service.IStudentInCourseService;
+import com.campusVirtual.service.IUserDataService;
 import com.campusVirtual.service.IProfessorInCourseService;
 
 
@@ -25,6 +27,10 @@ public class AdminController {
     private IStudentInCourseService sicService;
     @Autowired
     private IAdminService adminService;
+
+
+    @Autowired
+    private IUserDataService userDataService;
 
 
     @PostMapping(path ="/set/professor/{idProfessor}/course/{idCourse}")
@@ -66,22 +72,28 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
    
-    @PostMapping(path ="user/{id}/role/admin")
+    @PostMapping(path ="user/{username}/role/admin")
     public void asignarRoleUser(
-        @PathVariable("id") Long id){
-         this.adminService.setRoleUser("ROLE_ADMIN", id);             
+        @PathVariable("username") String username){
+         this.adminService.setRoleUser("ROLE_ADMIN", username);             
         }
 
         @PostMapping(path ="user/{id}/role/professor")
     public void asignarRoleProfessorUser(
-        @PathVariable("id") Long id){
-         this.adminService.setRoleUser("ROLE_PROFESSOR", id);             
+        @PathVariable("username") String username){
+         this.adminService.setRoleUser("ROLE_PROFESSOR", username);             
         }
     
 
 
    
         
+
+        @GetMapping(path = "user/{username}")
+        public Userdata getUser(
+        @PathVariable("username") String username){
+         return this.userDataService.getUserById(username);             
+        }
     
 
    

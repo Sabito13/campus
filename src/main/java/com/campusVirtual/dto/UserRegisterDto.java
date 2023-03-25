@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter 
 @Setter
 public class UserRegisterDto {
-    private Long documento;
+    private String username;
     private String password;
     private String nombre;
     private String apellido;

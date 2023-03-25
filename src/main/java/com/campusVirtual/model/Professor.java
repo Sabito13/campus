@@ -58,7 +58,7 @@ public class Professor {
         @OneToOne(cascade = CascadeType.ALL)
         @JoinColumn(
             name="userdata_document",
-            referencedColumnName = "document",
+            referencedColumnName = "user_name",
             foreignKey = @ForeignKey(
                 name = "user_id_fk"
             )

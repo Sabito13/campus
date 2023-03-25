@@ -54,9 +54,13 @@ public class StudentController {
     @GetMapping(path="/me")
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     public ResponseEntity<StudentDto> getStudentDtoByContex(){
-        Long document= Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(username);
+        System.out.println("");
+        System.out.println("");
+
         return  ResponseEntity.ok()
-               .body(this.studentService.getStudentDtoByDocument(document));
+               .body(this.studentService.getStudentDtoByUsername(username));
     }
 
 
@@ -100,13 +104,13 @@ public class StudentController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StudentDto.class)) }),
   })
-    @PostMapping(path="/{document}")
+    @PostMapping(path="/{username}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<StudentDto> createStudent(
         @RequestBody StudentDto studentDto,
-        @PathVariable("document") Long document){
+        @PathVariable("username") String username){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.studentService.saveStudent(document));
+                .body(this.studentService.saveStudent(username));
     }
 
     
