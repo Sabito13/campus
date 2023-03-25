@@ -5,7 +5,7 @@ import java.util.Calendar;
 import javax.persistence.*;
 
 @Entity(name="CourseContent")
-@Table(name = "coursecontent",
+@Table(name = "course_content",
 uniqueConstraints ={
     @UniqueConstraint(name="course_content_id_constraint",columnNames = "id")
 })
