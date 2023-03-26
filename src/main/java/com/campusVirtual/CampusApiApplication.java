@@ -29,7 +29,7 @@ public class CampusApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CampusApiApplication.class, args);
 	}
- 
+ /* 
 	@Bean
     CommandLineRunner commandLineRunner(
 			IStudentService studentService,
@@ -89,7 +89,7 @@ public class CampusApiApplication {
 	
 	}
 
-	
+	*/
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
     		return new WebMvcConfigurer() {
