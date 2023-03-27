@@ -9,25 +9,24 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalControllerAdvice{
 
     
-    @ExceptionHandler(StudentNotFoundException.class)
-	public ResponseEntity<Error> handleAlumnoNotFoundException(StudentNotFoundException ex){
-		Error error = new Error(HttpStatus.NOT_FOUND, ex.getMessage());
+    @ExceptionHandler(ObjectNotFoundException.class)
+	public ResponseEntity<ErrorDetails> handleObjectNotFoundException(ObjectNotFoundException objectException){
+		ErrorDetails error = new ErrorDetails(HttpStatus.NOT_FOUND, objectException.getMessage());
         
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 
-
-	@ExceptionHandler(ProfessorNotFoundException.class)
-	public ResponseEntity<Error> handleProfesorNotFoundException(ProfessorNotFoundException ex){
-		Error error = new Error(HttpStatus.NOT_FOUND, ex.getMessage());
+	@ExceptionHandler(UserAlreadyExistsException.class)
+	public ResponseEntity<ErrorDetails> handleUserAlreadyExistsException(UserAlreadyExistsException userException){
+		ErrorDetails error = new ErrorDetails(HttpStatus.BAD_REQUEST, userException.getMessage());
         
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 
-	@ExceptionHandler(CourseNotFoundException.class)
-	public ResponseEntity<Error> handleCursoNotFoundException(CourseNotFoundException ex){
-		Error error = new Error(HttpStatus.NOT_FOUND, ex.getMessage());
+	@ExceptionHandler(InvalidInputFieldException.class)
+	public ResponseEntity<ErrorDetails> handleInvalidInputDataException(InvalidInputFieldException dataException){
+		ErrorDetails error = new ErrorDetails(HttpStatus.BAD_REQUEST, dataException.getMessage());
         
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 }

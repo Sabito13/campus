@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.ProfessorDto;
-import com.campusVirtual.exception.ProfessorNotFoundException;
+import com.campusVirtual.exception.ObjectNotFoundException;
 import com.campusVirtual.mapper.ProfessorMapper;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Professor;
@@ -47,7 +47,7 @@ public class ProfessorService implements IProfessorService{
 
     @Override
     public Professor getProfessorById(Long idProfessor) {
-      return  this.professorRepository.findById(idProfessor).orElseThrow(()-> new ProfessorNotFoundException(idProfessor));
+      return  this.professorRepository.findById(idProfessor).orElseThrow(()-> new ObjectNotFoundException("Professor",idProfessor));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ProfessorService implements IProfessorService{
         if(this.professorRepository.existsById(idProfessor)){
             this.professorRepository.deleteById(idProfessor);
         }else{
-            throw new ProfessorNotFoundException(idProfessor);
+            throw new  ObjectNotFoundException("Professor",idProfessor);
         }
     }
 

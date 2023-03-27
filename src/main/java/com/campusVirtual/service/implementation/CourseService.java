@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.campusVirtual.dto.CourseDto;
-import com.campusVirtual.exception.CourseNotFoundException;
+import com.campusVirtual.exception.ObjectNotFoundException;
 
 import com.campusVirtual.mapper.CourseMapper;
 import com.campusVirtual.model.Student;
@@ -38,7 +38,7 @@ public class CourseService implements ICourseService {
 
     @Override
     public Course getCourseById(Long id){
-        return this.courseRepository.findById(id).orElseThrow(()-> new CourseNotFoundException(id));
+        return this.courseRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Course",id));
     }
     
     @Override
@@ -64,7 +64,7 @@ public class CourseService implements ICourseService {
         if(this.courseRepository.existsById(idCourse)){
             this.courseRepository.deleteById(idCourse);
         }else{
-            throw new CourseNotFoundException(idCourse);
+            throw new ObjectNotFoundException("Course",idCourse);
         }
     }
 

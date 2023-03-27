@@ -14,14 +14,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @RequiredArgsConstructor @NoArgsConstructor @ToString
-public class Error {
+@Getter 
+@Setter 
+@RequiredArgsConstructor 
+@NoArgsConstructor 
+@ToString
+public class ErrorDetails {
 
 	@NonNull
-	private HttpStatus estado;
+	private HttpStatus status;
 	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDateTime timestamp = LocalDateTime.now();
 	@NonNull
-	private Object mensajes;
+	private Object Message;
 	
 }

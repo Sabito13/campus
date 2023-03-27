@@ -10,57 +10,70 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.model.Userdata;
-import com.campusVirtual.repository.UserDataRepository;
+import com.campusVirtual.service.IUserDataService;
 import com.campusVirtual.dto.UserRegisterDto;
-import com.campusVirtual.exception.UserNotFoundException;
+import com.campusVirtual.exception.InvalidInputFieldException;
+import com.campusVirtual.exception.UserAlreadyExistsException;
 
 @Service
 public class UserDetailServiceImplementacion implements UserDetailsService{
 
     @Autowired
-    private UserDataRepository authCredentialsRepository;
+    private IUserDataService userDataService;
 
     @Autowired
 	PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException { 
-        Userdata  UserAuth = this.authCredentialsRepository.findById(userName).orElseThrow(()-> new UserNotFoundException(userName));
+        //Userdata  UserAuth = this.authCredentialsRepository.findById(userName).orElseThrow(()-> new ObjectNotFoundException("User",userName));
         //AuthCredentials  UserAuth = new AuthCredentials(dni, "juan","a");
+        Userdata  UserAuth = userDataService.getUserById(userName);
         return new UserDetailsImplementacion(UserAuth);
     }
 
 
     public String saveUser(UserRegisterDto userRegister){
         
+        
+        
+
+
         String username = userRegister.getUsername();
 		String password = userRegister.getPassword();
 
-		
-		 if (password == null)
-			throw new RuntimeException("the password was not entered");
-        else if (username == null)
-			throw new RuntimeException("the username was not entered");
-		
+        
+        
+        
+
+		if (password == null || username == null)
+			throw new InvalidInputFieldException("Username or Password was not entered");
         
         if (username.isBlank() || password.isBlank())
-			throw new RuntimeException("username or password is blank");
+			throw new InvalidInputFieldException("Username or Password is blank");
+        
+        if (this.userDataService.existsUserById(username))
+            throw new UserAlreadyExistsException("Already exists user with that username");
+        
+        if (password == null || username == null)
+			throw new InvalidInputFieldException("Username or Password was not entered");
+        
+        if (username.isBlank() || password.isBlank())
+			throw new InvalidInputFieldException("Username or Password is blank");
 
-        if (this.authCredentialsRepository.existsById(username))
-			throw new RuntimeException("Already exists user with that username");
 		
 	
             userRegister.setPassword(passwordEncoder.encode(userRegister.getPassword()));
 		
-		this.authCredentialsRepository.save(new Userdata(
+		this.userDataService.saveUser(new Userdata(
             userRegister.getUsername(),
             userRegister.getPassword(),
-            userRegister.getNombre(),
-            userRegister.getApellido(),
+            userRegister.getName(),
+            userRegister.getLastName(),
             userRegister.getMail()));
 		
 		
-		return  " your registration was successful!";
+		return  "Your registration was successful!";
 		
 		}
 	

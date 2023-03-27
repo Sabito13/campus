@@ -8,4 +8,6 @@ public interface IUserDataService {
     public Userdata getUserById(String username);
 
     public Userdata saveUser(Userdata user);
+
+    public Boolean existsUserById(String userId);
 }

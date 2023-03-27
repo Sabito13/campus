@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.StudentDto;
-import com.campusVirtual.exception.StudentNotFoundException;
+import com.campusVirtual.exception.ObjectNotFoundException;
 import com.campusVirtual.mapper.StudentMapper;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.Student;
@@ -52,7 +52,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student getStudentById(Long idStudent) {
-        return this.studentRepository.findById(idStudent).orElseThrow(()->new StudentNotFoundException(idStudent));
+        return this.studentRepository.findById(idStudent).orElseThrow(()->new ObjectNotFoundException("Student",idStudent));
     }
 
 
@@ -99,11 +99,11 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void deleteStudentById(Long idAlumno){
-        if(this.studentRepository.existsById(idAlumno)){
-            this.studentRepository.deleteById(idAlumno);
+    public void deleteStudentById(Long idStudent){
+        if(this.studentRepository.existsById(idStudent)){
+            this.studentRepository.deleteById(idStudent);
         }else{
-            throw new StudentNotFoundException(idAlumno);
+            throw new ObjectNotFoundException("Student",idStudent);
         }
     }
 

@@ -41,7 +41,6 @@ public class CourseController {
                             schema = @Schema(implementation = CourseDto.class)) })
     })
     @GetMapping(path="/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<CourseDto> getCourseDtoById(@PathVariable("id") Long id){
         return ResponseEntity.ok()
         .body(this.courseService.getCourseDtoById(id));
@@ -61,7 +60,6 @@ public class CourseController {
                             schema = @Schema(implementation = CourseDto.class)) })
     })
     @GetMapping(path="/all")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CourseDto>> getAllCourseDtoById(){
         return ResponseEntity.ok()
         .body(this.courseService.getAllCoursesDtos());

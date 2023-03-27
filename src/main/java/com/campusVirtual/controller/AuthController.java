@@ -1,9 +1,12 @@
 package com.campusVirtual.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.UserRegisterDto;
+import com.campusVirtual.exception.ErrorDetails;
 import com.campusVirtual.dto.UserCredentialsDto;
 import com.campusVirtual.security.userPasswordFilter.UserDetailServiceImplementacion;
 
@@ -22,28 +25,38 @@ public class AuthController {
     @Autowired
     UserDetailServiceImplementacion userDetailServiceImplementacion;
     
-    @Operation(summary = "Log in user")
+    @Operation(summary = "Get an user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserCredentialsDto.class)) }),
-  })
+        @ApiResponse(responseCode = "200", description = "Found the user",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ErrorDetails.class))}),
+        @ApiResponse(responseCode = "404", description = "User not found",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ErrorDetails.class))})
+                        })
     @PostMapping(path ="/login")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String register(@RequestBody UserCredentialsDto urdto){
        return "login";
     }
 
 
-    @Operation(summary = "Register new User")
+    @Operation(summary = "Add a new user to the database")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserRegisterDto.class)) }),
-  })
+        @ApiResponse(responseCode = "201", description = "Create user",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = UserRegisterDto.class))}),
+        @ApiResponse(responseCode = "400", description = "Invalid field",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ErrorDetails.class))}),
+        @ApiResponse(responseCode = "400", description = "User Already Exists ",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ErrorDetails.class))})
+                        })
+
     @PostMapping(path ="/register")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String register(@RequestBody UserRegisterDto urdto){
-        return userDetailServiceImplementacion.saveUser(urdto);
+    public ResponseEntity<?> register(@RequestBody UserRegisterDto urdto){
+        userDetailServiceImplementacion.saveUser(urdto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+         
     }
 }
