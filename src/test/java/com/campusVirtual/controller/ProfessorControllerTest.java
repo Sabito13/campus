@@ -1,10 +1,10 @@
 package com.campusVirtual.controller;
 
 import static org.mockito.Mockito.when;
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -29,7 +29,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.service.implementation.ProfessorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 
@@ -46,89 +45,75 @@ public class ProfessorControllerTest {
     @MockBean
     private ProfessorService  professorService;
 
+    ProfessorDto professorDtoExpected;
+        
 
    
 
     @Autowired
     private ObjectMapper objectMapper;
+    @BeforeEach
+    void setUp(){
+        professorDtoExpected = new ProfessorDto();
+        professorDtoExpected.setEspeciality("medicine");
+        professorDtoExpected.setName("John");
+        professorDtoExpected.setId((long)1);
+    }
+
+    @Test
+    void getProfessorDtoById() throws Exception{
+        given(professorService.getProfessorDtoById(any(Long.class)))
+               .willReturn(professorDtoExpected);
+
+        MockHttpServletResponse response = mockMvc.perform(
+                get("/v1/professor/"+1)
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn()
+                .getResponse();
+        
+         // then
+         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        
+         assertThat(response.getContentAsString()).isNotEmpty();
+         
+         assertThat(response.getContentAsString()).isEqualTo(
+                 objectMapper.writeValueAsString(professorDtoExpected));
+    }
+
 
 
     @Test
     void testSaveProfessor() throws Exception{
-        ProfessorDto pDto = new ProfessorDto();
-        pDto.setEspeciality("medicine");
+  
+        ProfessorDto professorDtoToSend = new ProfessorDto();
+        professorDtoToSend.setEspeciality("medicine");
+
         
-
-
-
-        //response
-        ProfessorDto pDtoWithId = new ProfessorDto();
-        pDtoWithId.setEspeciality("medicine");
-        pDtoWithId.setName("John");
-        pDtoWithId.setId((long)1);
-
-        // given
-        //when(professorService.saveProfessor(pDto, "john"))
-        //        .thenReturn(pDtoWithId);
-
-        given(professorService.saveProfessor(pDto, "john"))
-                .willReturn(pDtoWithId);
+        given(professorService.saveProfessor(any(ProfessorDto.class), any(String.class)))
+               .willReturn(professorDtoExpected);
         
 
         // when
         MockHttpServletResponse response = mockMvc.perform(
                 post("/v1/professor/john")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(pDto))
+                        .content(objectMapper.writeValueAsString(professorDtoToSend))
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
                         .andExpect(status().isCreated())
                         .andReturn().getResponse();
         // then
-
-     
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        
-        assertThat(response.getContentAsString()).isEmpty();
-        
-        //assertThat(response.getContentAsString()).isEqualTo(
-        //        objectMapper.writeValueAsString(pDtoWithId));
-
-
-    }
-
-
-
-    @Test
-    void testGetProfessor() throws Exception{
-     
-
-        //response
-        ProfessorDto pDtoWithId = new ProfessorDto();
-        pDtoWithId.setEspeciality("medicine");
-        pDtoWithId.setName("John");
-        pDtoWithId.setId((long)1);
-
-        // given
-        when(professorService.getProfessorDtoById((long)1))
-                .thenReturn(pDtoWithId);
-
-        // when
-        MockHttpServletResponse response = mockMvc.perform(
-                get("/v1/professor/"+1)
-                        .accept(MediaType.APPLICATION_JSON))
-                        .andReturn()
-                        .getResponse();
-
-        // then
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         
         assertThat(response.getContentAsString()).isNotEmpty();
         
         assertThat(response.getContentAsString()).isEqualTo(
-                objectMapper.writeValueAsString(pDtoWithId));
+                objectMapper.writeValueAsString(professorDtoExpected));
 
 
     }
 
+
+
+    
 }
