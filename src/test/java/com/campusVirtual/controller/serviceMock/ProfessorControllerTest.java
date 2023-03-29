@@ -1,6 +1,6 @@
-package com.campusVirtual.controller;
+package com.campusVirtual.controller.serviceMock;
 
-import static org.mockito.Mockito.when;
+//import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-
+import com.campusVirtual.controller.ProfessorController;
 import com.campusVirtual.dto.ProfessorDto;
 import com.campusVirtual.service.implementation.ProfessorService;
 import com.fasterxml.jackson.databind.ObjectMapper;

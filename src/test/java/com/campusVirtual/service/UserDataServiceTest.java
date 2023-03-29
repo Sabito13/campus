@@ -16,7 +16,7 @@ import com.campusVirtual.model.Userdata;
 import com.campusVirtual.repository.UserDataRepository;
 import com.campusVirtual.service.implementation.UserDataService;
 
-public class UserServiceTest {
+public class UserDataServiceTest {
 
     @Mock
     private UserDataRepository userDataRepositoryTest;

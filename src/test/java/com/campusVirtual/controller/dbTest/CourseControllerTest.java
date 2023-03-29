@@ -1,4 +1,4 @@
-package com.campusVirtual.controller;
+package com.campusVirtual.controller.dbTest;
 
 
 import org.junit.jupiter.api.Test;
