@@ -1,23 +1,26 @@
 package com.campusVirtual.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.campusVirtual.dto.ProfessorDto;
+import com.campusVirtual.exception.ErrorDetails;
 import com.campusVirtual.service.IProfessorService;
 
-import java.util.List;
-
-
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
@@ -28,31 +31,33 @@ public class ProfessorController {
     private IProfessorService professorService;
 
 
-    @Operation(summary = "Get Professor by Professor id")
+    @Operation(summary = "Get a Professor by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProfessorDto.class)) }),
-  })
+        @ApiResponse(responseCode = "200", description = "Found the professor",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ProfessorDto.class))}),
+        @ApiResponse(responseCode = "404", description = "Professor not found",
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ErrorDetails.class))})
+                        })
     @GetMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProfessorDto> getProfessorDtoById(
         @PathVariable("id") Long id){
         return ResponseEntity.ok()
         .body(professorService.getProfessorDtoById(id));
     }
 
-    @Operation(summary = "Get mi Professor by security context")
+
+    @Operation(summary = "Get a Professor by security context")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Found the professor",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProfessorDto.class)) }),
-  })
+                })
     @GetMapping(path = "/me")
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
-    public ResponseEntity<ProfessorDto> getProfessorDtoByContext(
-        ){
-                String username= SecurityContextHolder.getContext().getAuthentication().getName();
+    public ResponseEntity<ProfessorDto> getProfessorDtoByContext(){
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
         return ResponseEntity.ok()
         .body(professorService.getProfessorDtoByUsername(username));
     }
@@ -60,7 +65,7 @@ public class ProfessorController {
 
     @Operation(summary = "Get all professor")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Get all professorDtos",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProfessorDto.class)) }),
   })
@@ -73,15 +78,12 @@ public class ProfessorController {
 
 
 
-
-
-
     @Operation(summary = "Get all Professors of one course by course id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "202", description = "All Professors of one course",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProfessorDto.class)) }),
-  })
+    })
     @GetMapping(path ="/course/{id}")
     public ResponseEntity<List<ProfessorDto>> getAllProfessorsOfCourse(
         @PathVariable("id") Long id){
@@ -90,30 +92,17 @@ public class ProfessorController {
     }
 
 
-    @Operation(summary = "Asign role and Professor functions to a one user by user document")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProfessorDto.class)) }),
-  })
-    @PostMapping(path ="/{username}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ProfessorDto> createProfessor(
-        @RequestBody ProfessorDto profesorDto,
-        @PathVariable("username") String username ){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.professorService.saveProfessor(profesorDto,username));
-    }
-
-
-
+    
 
     @Operation(summary = "Delete professor by Professor id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "204", description = "Delete the professor",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ProfessorDto.class)) }),
-  })
+        @ApiResponse(responseCode = "404", description = "Professor not found",
+                            content = { @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorDetails.class))})
+})
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteProfessorById(@PathVariable("id") Long id){

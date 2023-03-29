@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import com.campusVirtual.dto.CourseDto;
+import com.campusVirtual.exception.ErrorDetails;
 import com.campusVirtual.service.ICourseService;
 
 
@@ -30,15 +31,12 @@ public class CourseController {
 
     @Operation(summary = "Get Course by Course id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Course Found",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid field",
+            @ApiResponse(responseCode = "404", description = "Course not Found",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) })
+                            schema = @Schema(implementation = ErrorDetails.class)) })
     })
     @GetMapping(path="/{id}")
     public ResponseEntity<CourseDto> getCourseDtoById(@PathVariable("id") Long id){
@@ -49,13 +47,7 @@ public class CourseController {
 
     @Operation(summary = "Get all Courses")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid field",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+            @ApiResponse(responseCode = "200", description = "Courses Found",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseDto.class)) })
     })
@@ -67,16 +59,12 @@ public class CourseController {
 
 
 
-
-    @Operation(summary = "Get Courses of student by student id")
+    @Operation(summary = "Get all Courses Of Student by Security Contenxt")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Courses Found",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid field",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                            schema = @Schema(implementation = CourseDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Courses not Found",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseDto.class)) })
     })
@@ -92,15 +80,13 @@ public class CourseController {
 
 
 
-    @Operation(summary = "Get Courses of professor by professor id")
+   
+    @Operation(summary = "Get all Courses Of Professor by Security Context")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Courses Found",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid field",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
+                            schema = @Schema(implementation = CourseDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Courses not Found",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseDto.class)) })
     })
@@ -119,15 +105,9 @@ public class CourseController {
   
     @Operation(summary = "Create Course")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "201", description = "Course Created",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid field",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) })
     })
     @PostMapping
     public ResponseEntity<CourseDto> createCourse(@RequestBody CourseDto cursoDto){
@@ -136,26 +116,20 @@ public class CourseController {
     }
 
 
-    @Operation(summary = "Create Course")
+
+    @Operation(summary = "Delete Course by Course id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "204", description = "Delete the Course",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid field",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Invalid id supplied",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseDto.class)) })
-    })
+        @ApiResponse(responseCode = "404", description = "Course not found",
+                            content = { @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorDetails.class))})
+        })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminarCurso(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteCourse(@PathVariable("id") Long id){
         this.courseService.deleteCourseById(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
-    
  
 }

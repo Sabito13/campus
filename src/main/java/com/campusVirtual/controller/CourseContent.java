@@ -30,7 +30,7 @@ public class CourseContent {
 
     @Operation(summary = "Create Content for Course")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "201", description = "Content created",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
   })
@@ -43,7 +43,7 @@ public class CourseContent {
 
     @Operation(summary = "Get Content of Course by Course Id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Content of Course",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
   })
@@ -57,7 +57,7 @@ public class CourseContent {
 
     @Operation(summary = "Update Content of Course by Content id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "204", description = "Update Content",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
     })
@@ -70,7 +70,7 @@ public class CourseContent {
 
     @Operation(summary = "Delete content of course by Course id and Content id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "202", description = "Content deleted",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
   })

@@ -3,7 +3,6 @@ package com.campusVirtual.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,7 +32,7 @@ public class StudentController {
 
     @Operation(summary = "Get Student by Student id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "200", description = "Get Student",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StudentDto.class)) }),
   })
@@ -47,7 +46,7 @@ public class StudentController {
 
     @Operation(summary = "Get mi Student by security context")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "202", description = "Get mi Student",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StudentDto.class)) }),
   })
@@ -55,9 +54,6 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     public ResponseEntity<StudentDto> getStudentDtoByContex(){
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(username);
-        System.out.println("");
-        System.out.println("");
 
         return  ResponseEntity.ok()
                .body(this.studentService.getStudentDtoByUsername(username));
@@ -66,7 +62,7 @@ public class StudentController {
 
     @Operation(summary = "Get all students")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "202", description = "Get all students",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StudentDto.class)) }),
   })
@@ -82,7 +78,7 @@ public class StudentController {
 
     @Operation(summary = "Get all student of one course by course id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "202", description = "Get all students",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StudentDto.class)) }),
   })
@@ -93,26 +89,6 @@ public class StudentController {
         .body(this.studentService.getAllStudentsOfCourse(id));
     }
 
-  
-    
-
-
-
-    @Operation(summary = "Asign role and student functions to a one user by user document")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = StudentDto.class)) }),
-  })
-    @PostMapping(path="/{username}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<StudentDto> createStudent(
-        @RequestBody StudentDto studentDto,
-        @PathVariable("username") String username){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.studentService.saveStudent(username));
-    }
-
     
 
 
@@ -120,7 +96,7 @@ public class StudentController {
 
     @Operation(summary = "delete student by student id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "202", description = "Update Activity",
+            @ApiResponse(responseCode = "202", description = "Student deleted",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StudentDto.class)) }),
   })
