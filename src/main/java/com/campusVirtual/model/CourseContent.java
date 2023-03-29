@@ -1,6 +1,7 @@
 package com.campusVirtual.model;
 
-import java.util.Calendar;
+import java.util.Date;
+
 
 import javax.persistence.*;
 
@@ -35,11 +36,13 @@ public class CourseContent {
             unique = false
         )
         private String content;
-
+        
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date utilDate;
 
         //@Column(name = "REGIST_DATE", updatable = false, nullable = false)
         //@Temporal(TemporalType.DATE)
-        //private Calendar registDate;
+        //private Calendar utilCalendar;
 
 
         @ManyToOne()
@@ -65,6 +68,8 @@ public class CourseContent {
             this.content = content;
         }
 
+        
+
         public Course getCourse() {
             return this.course;
         }
@@ -75,4 +80,18 @@ public class CourseContent {
         public String getContent() {
             return this.content;
         }
+
+       
+        
+
+
+
+        public Date getUtilDate() {
+            return utilDate;
+        }
+     
+        public void setUtilDate(Date utilDate) {
+            this.utilDate = utilDate;
+        }
+       
 }

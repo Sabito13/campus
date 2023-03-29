@@ -29,6 +29,22 @@ public class CampusApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CampusApiApplication.class, args);
 	}
+		
+		@Bean
+    CommandLineRunner commandLineRunner(
+			ICourseContentService icc,
+			ICourseService ico
+		){
+
+			return args -> {
+				ico.saveCourse(new Course("redes"));
+
+				CourseContentDto ccdto=new CourseContentDto();
+				ccdto.setContent("Hi Students Welcome to Redes");
+
+				icc.addCourseContent((long)1, ccdto);
+			};
+		}
  /* 
 	@Bean
     CommandLineRunner commandLineRunner(

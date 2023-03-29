@@ -3,6 +3,8 @@ package com.campusVirtual.service.implementation;
 import com.campusVirtual.service.ICourseContentService;
 import com.campusVirtual.service.ICourseService;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class CourseContentService implements ICourseContentService {
         CourseContent cContent = new CourseContent();
         cContent.setContent(ccDto.getContent());
         cContent.setCourse(this.courseService.getCourseById(idCourse));
+
+        cContent.setUtilDate(new Date());
 
         this.cContentRepository.save(cContent);
     }
