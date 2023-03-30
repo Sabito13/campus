@@ -45,7 +45,7 @@ public class CampusApiApplication {
 				icc.addCourseContent((long)1, ccdto);
 			};
 		}
- 
+ */
 	@Bean
     CommandLineRunner commandLineRunner(
 			IStudentService studentService,
@@ -61,22 +61,22 @@ public class CampusApiApplication {
 		
 		String allPass = passwordEncoder.encode("password");
 
-		Userdata admin = new Userdata("admin",allPass,"name","last","mailAdmin");
+		Userdata admin = new Userdata("admin",allPass,"name","last","mailAdmin","ROLE_ADMIN");
 		admin.addAuthorities("ROLE_ADMIN");
 		userDataService.saveUser(admin);
 
 
-		userDataService.saveUser(new Userdata("pa",allPass,"name","last","mail"));
+		userDataService.saveUser(new Userdata("pa",allPass,"name","last","mail","ROLE_STUDENT"));
 		studentService.saveStudent("pa");
 
-		userDataService.saveUser(new Userdata("pe",allPass,"name","last","mail1"));
+		userDataService.saveUser(new Userdata("pe",allPass,"name","last","mail1","ROLE_STUDENT"));
 		studentService.saveStudent("pe");
 
-		userDataService.saveUser(new Userdata("pi",allPass,"name","last","ad1"));
-		professorService.saveProfessor(new ProfessorDto("ingles"), "pi");
+		userDataService.saveUser(new Userdata("pi",allPass,"name","last","ad1","ROLE_PROFESSOR"));
+		professorService.saveProfessor("pi");
 		
-		userDataService.saveUser(new Userdata("po",allPass,"name","last","ad2"));
-		professorService.saveProfessor(new ProfessorDto("redes"), "po");
+		userDataService.saveUser(new Userdata("po",allPass,"name","last","ad2","ROLE_PROFESSOR"));
+		professorService.saveProfessor("po");
 
 		
 		ico.saveCourse(new Course("Ingles"));
@@ -86,9 +86,9 @@ public class CampusApiApplication {
 		CourseContentDto ccDtos = new CourseContentDto();
 		ccDtos.setContent("hola alumonos");
 
-		icc.addCourseContent((long)1, ccDtos);
-		icc.addCourseContent((long)1, ccDtos);
-		icc.addCourseContent((long)2, ccDtos);
+		//icc.addCourseContent((long)1, ccDtos);
+		//icc.addCourseContent((long)1, ccDtos);
+		//icc.addCourseContent((long)2, ccDtos);
 
 		System.out.println(icc.getAllCourseContent((long)1)); 
 
@@ -105,7 +105,7 @@ public class CampusApiApplication {
 	
 	}
 
-	*/
+	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
     		return new WebMvcConfigurer() {

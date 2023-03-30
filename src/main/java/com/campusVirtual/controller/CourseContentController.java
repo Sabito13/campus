@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,7 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
 @RequestMapping("v1/content/")
-public class CourseContent {
+public class CourseContentController {
 
     @Autowired
     private ICourseContentService contentService;
@@ -34,10 +36,11 @@ public class CourseContent {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
   })
+    @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     @PostMapping("/course/{id}")
     public ResponseEntity<?> addCourseContent(@PathVariable("id") Long id,@RequestBody CourseContentDto ccDto){
         this.contentService.addCourseContent(id, ccDto);;
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
@@ -61,9 +64,10 @@ public class CourseContent {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
     })
-    @PutMapping(path="")
-    public ResponseEntity<?>updateCourseContent(@RequestBody CourseContentDto ccDto){
-        this.contentService.updateCourseContent(ccDto);
+    @PutMapping(path="/course/{id}")
+    public ResponseEntity<?>updateCourseContent(@RequestBody CourseContentDto ccDto,
+    @PathVariable("id") Long idCourse){
+        this.contentService.updateCourseContent(idCourse,ccDto);
         return ResponseEntity.noContent().build();
     }
 

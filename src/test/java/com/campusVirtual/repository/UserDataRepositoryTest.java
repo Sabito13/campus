@@ -31,7 +31,8 @@ public class UserDataRepositoryTest {
             "password",
           "jamila",
           "daz",
-          "jamila@gmail.com"
+          "jamila@gmail.com",
+          "ROLE_ADMIN"
     );
     userDataRepositoryTest.save(userdata);
         

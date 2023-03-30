@@ -15,7 +15,8 @@ public interface ICourseService {
     public boolean existsCourseById(Long idCourse);
     public List<CourseDto> getAllCoursesOfProfessor(String username);
     public List<CourseDto> getAllCoursesOfStudent(String username);
-     
+    
+
     public CourseDto getCourseDtoById(Long id);
     public List<CourseDto> getAllCoursesDtos();
     public CourseDto saveCourseDto(CourseDto courseDto);

@@ -89,7 +89,7 @@ public class ProfessorControllerTest {
         professorDtoToSend.setEspeciality("medicine");
 
         
-        given(professorService.saveProfessor(any(ProfessorDto.class), any(String.class)))
+        given(professorService.saveProfessor( any(String.class)))
                .willReturn(professorDtoExpected);
         
 

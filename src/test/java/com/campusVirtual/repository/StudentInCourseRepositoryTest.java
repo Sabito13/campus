@@ -39,7 +39,8 @@ public class StudentInCourseRepositoryTest {
             "password",
           "jamila",
           "daz",
-          "jamila@gmail.com"
+          "jamila@gmail.com",
+          "ROLE_STUDENT"
     );
     this.userDataRepository.save(userdata);
 

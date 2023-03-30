@@ -39,7 +39,7 @@ when(userDataRepositoryTest.findById("ded13"))
     "password",
   "jamila",
   "daz",
-  "jamila@gmail.com"
+  "jamila@gmail.com","ROLE_ADMIN"
 )));
         
         assertNotNull(userDataServiceTest.getUserById("ded13"));

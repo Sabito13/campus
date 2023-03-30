@@ -30,7 +30,7 @@ public class Professor {
         @Column(
             name="especiality",
             updatable =true,
-            nullable = false,
+            nullable = true,
             unique = false
         )
         private String especiality;

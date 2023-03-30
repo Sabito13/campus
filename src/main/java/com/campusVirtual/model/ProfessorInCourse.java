@@ -2,12 +2,7 @@ package com.campusVirtual.model;
 
 import javax.persistence.*;
     
-import lombok.Getter;
-import lombok.Setter;
 
-
-@Getter 
-@Setter
     @Entity(name="ProfessorInCourse")
     @Table(
         name="professor_in_course",
@@ -59,5 +54,27 @@ import lombok.Setter;
         this.course = course;
         }
         
+        public Long getId() {
+          return id;
+        }
+        
+        public Professor getProfessor() {
+          return professor;
+        }
 
+        public Course getCourse() {
+          return course;
+        }
+
+        public void setId(Long id) {
+          this.id = id;
+        }
+
+        public void setCourse(Course course) {
+          this.course = course;
+        }
+
+        public void setProfessor(Professor professor) {
+          this.professor = professor;
+        }
 }

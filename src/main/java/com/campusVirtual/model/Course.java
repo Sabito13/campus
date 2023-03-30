@@ -17,18 +17,9 @@ import javax.persistence.*;
     }
 )
 public class Course {
-    /*@Id
-    @SequenceGenerator(
-        name = "generadoIdCourse",
-        sequenceName = "COURSE_GENERADOR_ID",
-        initialValue=1,
-        allocationSize = 1
-    )
-    @GeneratedValue(
-        generator = "generadoIdCourse",
-        strategy = GenerationType.SEQUENCE)*/
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
         name = "id",
         updatable = false,

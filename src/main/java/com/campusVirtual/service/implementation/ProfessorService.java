@@ -33,10 +33,10 @@ public class ProfessorService implements IProfessorService{
     private ProfessorMapper pMapper = new ProfessorMapper();
 
     @Override
-    public ProfessorDto saveProfessor(ProfessorDto professorDto, String username) {
-        Professor profesorSet = new Professor(professorDto.getEspeciality());
+    public ProfessorDto saveProfessor(String username) {
+        //Professor profesorSet = new Professor(professorDto.getEspeciality());
 
-        profesorSet = this.professorRepository.save(profesorSet);
+        Professor profesorSet = this.professorRepository.save(new Professor());
 
         profesorSet.setUser(this.userDataService.getUserById(username));
         

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.model.Userdata;
 import com.campusVirtual.service.IUserDataService;
+import com.campusVirtual.service.implementation.ProfessorService;
+import com.campusVirtual.service.implementation.StudentService;
 import com.campusVirtual.dto.UserRegisterDto;
 import com.campusVirtual.exception.InvalidInputFieldException;
 import com.campusVirtual.exception.UserAlreadyExistsException;
@@ -24,6 +26,12 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
     @Autowired
 	PasswordEncoder passwordEncoder;
 
+    @Autowired
+	private ProfessorService professorService;
+
+    @Autowired
+	private StudentService StudentService;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException { 
         //Userdata  UserAuth = this.authCredentialsRepository.findById(userName).orElseThrow(()-> new ObjectNotFoundException("User",userName));
@@ -34,18 +42,10 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
 
 
     public String saveUser(UserRegisterDto userRegister){
-        
-        
-        
-
 
         String username = userRegister.getUsername();
-		String password = userRegister.getPassword();
-
+		String password = userRegister.getPassword(); 
         
-        
-        
-
 		if (password == null || username == null)
 			throw new InvalidInputFieldException("Username or Password was not entered");
         
@@ -70,9 +70,16 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
             userRegister.getPassword(),
             userRegister.getName(),
             userRegister.getLastName(),
-            userRegister.getMail()));
+            userRegister.getMail(),
+            userRegister.getRole()));
 		
-		
+		if(userRegister.getRole().equals("ROLE_STUDENT")){
+            this.StudentService.saveStudent(username);
+        }
+        if(userRegister.getRole().equals("ROLE_PROFESSOR")){
+            this.professorService.saveProfessor(username);    
+        }
+
 		return  "Your registration was successful!";
 		
 		}

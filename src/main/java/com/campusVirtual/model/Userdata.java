@@ -43,7 +43,7 @@ public class Userdata {
         nullable = false,
         unique = false
     )
-    private String authorities = "ROLE_STUDENT";
+    private String authorities;
 
     @Column(
         name="name",
@@ -80,13 +80,14 @@ public class Userdata {
         String password,
         String name,
         String lastName,
-        String mail){
+        String mail,
+        String role){
         this.username = username;
         this.password = password;
-        this.authorities = "ROLE_STUDENT";
         this.name = name;
         this.lastName = lastName;
         this.mail = mail;
+        this.authorities = role;
     }
 
 

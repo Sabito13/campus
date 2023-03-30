@@ -12,15 +12,7 @@ uniqueConstraints ={
 })
 public class CourseContent {
         
-        //@SequenceGenerator(
-        //    name = "generadoIdCourseContent",
-        //    sequenceName = "COURSE_CONTENT_GENERADOR_ID",
-        //    initialValue=1,
-        //    allocationSize = 1
-        //)
-        //@GeneratedValue(
-        //    generator = "generadoIdCourseContent",
-        //    strategy = GenerationType.SEQUENCE)
+        
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(
