@@ -11,7 +11,7 @@ public interface StudentInCourseRepository extends JpaRepository<StudentInCourse
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM AlumnoEnCurso aec where aec.alumno_id = ?1 and aec.curso_id = ?2",
+    @Query(value = "DELETE FROM student_in_course aic where aic.student_id = ?1 and aic.course_id = ?2",
     nativeQuery = true)
     void deleteStudentInCourseByBothId(Long idAlumno, Long idCurso);
      

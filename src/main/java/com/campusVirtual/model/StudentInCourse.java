@@ -20,16 +20,9 @@ import lombok.Setter;
     }
 )
 public class StudentInCourse {
-    @Id
-        @SequenceGenerator(
-            name = "generadoIdStudentInCourse",
-            sequenceName = "STUDENTINCOURSE_GENERADOR_ID",
-            initialValue=1,
-            allocationSize = 1
-        )
-        @GeneratedValue(
-            generator = "generadoIdStudentInCourse",
-            strategy = GenerationType.SEQUENCE)
+        
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(
             name = "id",
             updatable = false,

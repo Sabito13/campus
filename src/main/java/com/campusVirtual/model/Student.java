@@ -19,17 +19,9 @@ import org.hibernate.annotations.OnDeleteAction;
     }
 )
 public class Student {
-
-    @Id
-    @SequenceGenerator(
-            name = "generadoIdStudent",
-            sequenceName = "STUDENT_GENERADOR_ID",
-            initialValue=1,
-            allocationSize = 1
-        )
-        @GeneratedValue(
-            generator = "generadoIdStudent",
-            strategy = GenerationType.SEQUENCE)
+        
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(
             name = "id",
             updatable = false,

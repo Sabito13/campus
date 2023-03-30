@@ -1,5 +1,7 @@
 package com.campusVirtual.repository;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,24 +18,31 @@ public class UserDataRepositoryTest {
     @Autowired
     private UserDataRepository userDataRepositoryTest;
     
-    /*@AfterEach
+    @AfterEach
     void tearDown() {
         userDataRepositoryTest.deleteAll();
-    }*/
+    }
+
+    @BeforeEach
+    void setUp(){
+
+        Userdata userdata = new Userdata(
+            "ded13",
+            "password",
+          "jamila",
+          "daz",
+          "jamila@gmail.com"
+    );
+    userDataRepositoryTest.save(userdata);
+        
+    }
 
 
     
     @Test
     void itShouldCheckWhenStudentEmailExists() {
         // given
-        Userdata userdata = new Userdata(
-                "ded13",
-                "password",
-              "jamila",
-              "daz",
-              "jamila@gmail.com"
-        );
-        userDataRepositoryTest.save(userdata);
+       
 
         // when
         boolean expected = userDataRepositoryTest.existsById("ded13");

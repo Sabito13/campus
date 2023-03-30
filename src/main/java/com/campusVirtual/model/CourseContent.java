@@ -11,16 +11,18 @@ uniqueConstraints ={
     @UniqueConstraint(name="course_content_id_constraint",columnNames = "id")
 })
 public class CourseContent {
+        
+        //@SequenceGenerator(
+        //    name = "generadoIdCourseContent",
+        //    sequenceName = "COURSE_CONTENT_GENERADOR_ID",
+        //    initialValue=1,
+        //    allocationSize = 1
+        //)
+        //@GeneratedValue(
+        //    generator = "generadoIdCourseContent",
+        //    strategy = GenerationType.SEQUENCE)
         @Id
-        @SequenceGenerator(
-            name = "generadoIdCourseContent",
-            sequenceName = "COURSE_CONTENT_GENERADOR_ID",
-            initialValue=1,
-            allocationSize = 1
-        )
-        @GeneratedValue(
-            generator = "generadoIdCourseContent",
-            strategy = GenerationType.SEQUENCE)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(
             name = "id",
             updatable = false,

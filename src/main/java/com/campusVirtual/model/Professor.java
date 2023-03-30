@@ -17,15 +17,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Professor {
 
         @Id
-        @SequenceGenerator(
-            name = "generadoIdProfessor",
-            sequenceName = "PROFESSOR_GENERADOR_ID",
-            initialValue=1,
-            allocationSize = 1
-        )
-        @GeneratedValue(
-            generator = "generadoIdProfessor",
-            strategy = GenerationType.SEQUENCE)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(
             name = "id",
             updatable = false,
