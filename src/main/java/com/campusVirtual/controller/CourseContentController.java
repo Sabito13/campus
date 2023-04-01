@@ -39,22 +39,35 @@ public class CourseContentController {
     @PreAuthorize("hasRole('ROLE_PROFESSOR')")
     @PostMapping("/course/{id}")
     public ResponseEntity<?> addCourseContent(@PathVariable("id") Long id,@RequestBody CourseContentDto ccDto){
-        this.contentService.addCourseContent(id, ccDto);;
+        this.contentService.addCourseContentWithVerifier(id, ccDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
-    @Operation(summary = "Get Content of Course by Course Id")
+    @Operation(summary = "Get Content of Course for professor by Course Id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Content of Course",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CourseContentDto.class)) }),
   })
-    @GetMapping(path="/course/{id}")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<CourseContentDto>> getAllCourseContentDtoById(@PathVariable("id") Long id){
+    @GetMapping(path="/course/{id}/professor")
+    @PreAuthorize("hasRole('ROLE_PROFESSOR')")
+    public ResponseEntity<List<CourseContentDto>> getAllCourseContentDtoByIdForProfessor(@PathVariable("id") Long id){
         return ResponseEntity.ok()
-        .body(this.contentService.getAllCourseContent(id));
+        .body(this.contentService.getAllCourseContentDtoForProfessor(id));
+    }
+
+    @Operation(summary = "Get Content of Course for student by Course Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Content of Course",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseContentDto.class)) }),
+  })
+    @GetMapping(path="/course/{id}/student")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    public ResponseEntity<List<CourseContentDto>> getAllCourseContentDtoByIdForStudent(@PathVariable("id") Long id){
+        return ResponseEntity.ok()
+        .body(this.contentService.getAllCourseContentDtoForStudent(id));
     }
 
 

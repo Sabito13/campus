@@ -29,4 +29,11 @@ public class GlobalControllerAdvice{
         
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
+
+	@ExceptionHandler(PermissionDeniedException.class)
+	public ResponseEntity<ErrorDetails> handlePermissionDeniedException(PermissionDeniedException deniedException){
+		ErrorDetails error = new ErrorDetails(HttpStatus.BAD_REQUEST, deniedException.getMessage());
+        
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
 }

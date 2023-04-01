@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.dto.CourseDto;
+import com.campusVirtual.exception.PermissionDeniedException;
 import com.campusVirtual.mapper.CourseContentMapper;
 import com.campusVirtual.model.Course;
 import com.campusVirtual.model.CourseContent;
@@ -33,18 +34,43 @@ public class CourseContentService implements ICourseContentService {
 
 
     @Override
-    public List<CourseContentDto> getAllCourseContent(Long idCourse) {
+    public List<CourseContentDto> getAllCourseContentDtoForProfessor(Long idCourse) {
+        
+        this.professorHaveAccessVerifier(idCourse);
+
+        List<CourseContent> cContent = this.courseService.getCourseById(idCourse).getCourseContent();
+        return this.courseContentMapper.manyCourseContentToDto(cContent);
+    }
+
+    @Override
+    public List<CourseContentDto> getAllCourseContentDtoForStudent(Long idCourse) {
+
+        this.studentHaveAccessVerifier(idCourse);
+
         List<CourseContent> cContent = this.courseService.getCourseById(idCourse).getCourseContent();
         return this.courseContentMapper.manyCourseContentToDto(cContent);
     }
 
 
     @Override
-    public void addCourseContent(Long idCourse,CourseContentDto ccDto) {
+    public void addCourseContentWithVerifier(Long idCourse,CourseContentDto ccDto) {
 
         this.professorHaveAccessVerifier(idCourse);
 
 
+        CourseContent cContent = new CourseContent();
+        cContent.setContent(ccDto.getContent());
+        cContent.setCourse(this.courseService.getCourseById(idCourse));
+
+        cContent.setUtilDate(new Date());
+
+        this.cContentRepository.save(cContent);
+    }
+
+
+    @Override
+    public void addCourseContentWithoutVerifier(Long idCourse, CourseContentDto ccDto) {
+        
         CourseContent cContent = new CourseContent();
         cContent.setContent(ccDto.getContent());
         cContent.setCourse(this.courseService.getCourseById(idCourse));
@@ -85,7 +111,7 @@ public class CourseContentService implements ICourseContentService {
     @Override
     public void professorHaveAccessVerifier(Long courseId) throws RuntimeException{
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
-    
+       
         List<CourseDto> allCourseOfProfessor = this.courseService.getAllCoursesOfProfessor(username);
          
         List<CourseDto> courseOfProfessor = allCourseOfProfessor
@@ -94,9 +120,28 @@ public class CourseContentService implements ICourseContentService {
         .collect(Collectors.toList());
 
         if (courseOfProfessor.isEmpty()) {
-            throw new RuntimeException("Professor does not have acces to this course");
+            throw new PermissionDeniedException("Professor does not have access to this course");
         }
     }
+
+
+    @Override
+    public void studentHaveAccessVerifier(Long courseId) throws RuntimeException{
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        
+        List<CourseDto> allCourseOfStudent = this.courseService.getAllCoursesOfStudent(username);
+         
+        List<CourseDto> courseOfStudent = allCourseOfStudent
+        .stream()
+        .filter(c -> c.getId() == courseId)
+        .collect(Collectors.toList());
+
+        if (courseOfStudent.isEmpty()) {
+            throw new PermissionDeniedException("Student does not have access to this course");
+        }
+    }
+
+   
    
     
 }
