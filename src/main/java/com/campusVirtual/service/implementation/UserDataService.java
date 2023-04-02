@@ -1,8 +1,10 @@
 package com.campusVirtual.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.campusVirtual.dto.UserRegisterDto;
 import com.campusVirtual.exception.ObjectNotFoundException;
 import com.campusVirtual.model.Userdata;
 import com.campusVirtual.repository.UserDataRepository;
@@ -27,6 +29,26 @@ public class UserDataService implements IUserDataService {
     @Override
     public Boolean existsUserById(String userId) {
         return this.userRepository.existsById(userId);
+    }
+
+    @Override
+    public UserRegisterDto getUserDataDtoByContext() {
+
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+                
+        Userdata  user= this.getUserById(username);
+        
+        UserRegisterDto userRegistered = new UserRegisterDto();
+
+
+        userRegistered.setUsername(user.getUsername());
+        userRegistered.setName(user.getName());
+        userRegistered.setLastName(user.getLastName());
+        userRegistered.setMail(user.getMail());
+        userRegistered.setRole(user.getAuthorities());
+
+        return userRegistered;
+
     }
     
 }

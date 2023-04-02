@@ -50,30 +50,30 @@ public class RunnerConfig implements CommandLineRunner {
   private void setUsers(){
     // String username, String password, String name, String lastName, String mail,
     
-    UserRegisterDto admin = new UserRegisterDto("admin", "password", "ad", "lasto", "lasto@mail.com", "ROLE_ADMIN");
+    UserRegisterDto admin = new UserRegisterDto("admin", "password", "Adm", "Lasto", "lasto@mail.com", "ROLE_ADMIN");
     this.userDataService.saveUser(admin);
 
-    UserRegisterDto student1 = new UserRegisterDto("student1", "password", "ad", "lasto", "lasto1@mail.com",
+    UserRegisterDto student1 = new UserRegisterDto("student1", "password", "John", "Sal", "lasto1@mail.com",
         "ROLE_STUDENT");
     this.userDataService.saveUser(student1);
 
-    UserRegisterDto student2 = new UserRegisterDto("student2", "password", "ad", "lasto", "lasto2@mail.com",
+    UserRegisterDto student2 = new UserRegisterDto("student2", "password", "James", "Bond", "lasto2@mail.com",
         "ROLE_STUDENT");
     this.userDataService.saveUser(student2);
 
-    UserRegisterDto student3 = new UserRegisterDto("student3", "password", "ad", "lasto", "lasto3@mail.com",
+    UserRegisterDto student3 = new UserRegisterDto("student3", "password", "Numbi", "Nan", "lasto3@mail.com",
         "ROLE_STUDENT");
     this.userDataService.saveUser(student3);
 
-    UserRegisterDto professor1 = new UserRegisterDto("professor1", "password", "ad", "lasto", "lasto4@mail.com",
+    UserRegisterDto professor1 = new UserRegisterDto("professor1", "password", "Pablo", "Pam", "lasto4@mail.com",
         "ROLE_PROFESSOR");
     this.userDataService.saveUser(professor1);
 
-    UserRegisterDto professor2 = new UserRegisterDto("professor2", "password", "ad", "lasto", "lasto5@mail.com",
+    UserRegisterDto professor2 = new UserRegisterDto("professor2", "password", "Dwight", "Schrute", "lasto5@mail.com",
         "ROLE_PROFESSOR");
     this.userDataService.saveUser(professor2);
 
-    UserRegisterDto professor3 = new UserRegisterDto("professor3", "password", "ad", "lasto", "lasto6@mail.com",
+    UserRegisterDto professor3 = new UserRegisterDto("professor3", "password", "Jim", "Helper", "lasto6@mail.com",
         "ROLE_PROFESSOR");
     this.userDataService.saveUser(professor3);
   }

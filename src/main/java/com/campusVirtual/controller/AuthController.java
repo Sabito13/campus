@@ -25,7 +25,7 @@ public class AuthController {
     @Autowired
     UserDetailServiceImplementacion userDetailServiceImplementacion;
     
-    @Operation(summary = "Get an user")
+    @Operation(summary = "Get a Beaerer token")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Found the user",
                 content = { @Content(mediaType = "application/json",
