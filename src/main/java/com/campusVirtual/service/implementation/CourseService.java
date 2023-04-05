@@ -2,9 +2,13 @@ package com.campusVirtual.service.implementation;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.campusVirtual.dto.CourseDto;
 import com.campusVirtual.exception.ObjectNotFoundException;
@@ -55,9 +59,21 @@ public class CourseService implements ICourseService {
     }
 
     @Override
+    public Page<Course> getAllCoursesPage(Pageable pageable){
+        return this.courseRepository.findAll(pageable);
+    }
+
+    @Override
     public List<CourseDto> getAllCoursesDtos(){
        return this.cMapper.manyCourseToCourseDto(getAllCourses());
     }
+
+    @Override
+    public List<CourseDto> getAllCoursesPagesDtos(Pageable pageable){
+        List<Course> coursePage= this.getAllCoursesPage(pageable).toList();
+       return this.cMapper.manyCourseToCourseDto(coursePage);
+    }
+
 
     @Override
     public void deleteCourseById(Long idCourse){

@@ -2,6 +2,7 @@ package com.campusVirtual.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -55,6 +56,19 @@ public class CourseController {
     public ResponseEntity<List<CourseDto>> getAllCourseDtoById(){
         return ResponseEntity.ok()
         .body(this.courseService.getAllCoursesDtos());
+    }
+
+
+    @Operation(summary = "Get all Courses in pages")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Courses Found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseDto.class)) })
+    })
+    @GetMapping(path="/all/paged")
+    public ResponseEntity<?> getAllCoursePageDtoById(Pageable pageable){
+        return ResponseEntity.ok()
+        .body(this.courseService.getAllCoursesPagesDtos(pageable));
     }
 
 

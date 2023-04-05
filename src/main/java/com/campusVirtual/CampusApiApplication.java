@@ -29,6 +29,7 @@ public class CampusApiApplication {
                 	.allowedOrigins("http://localhost:4200/login")
 					.allowedOrigins("http://localhost:4200")
 					.allowedOrigins("*")
+					.allowedMethods("GET","POST","PUT","DELETE")
 					.allowedHeaders("*");
         		}
   		  };
