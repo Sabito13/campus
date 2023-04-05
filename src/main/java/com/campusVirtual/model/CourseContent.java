@@ -3,6 +3,7 @@ package com.campusVirtual.model;
 import java.util.Date;
 
 
+
 import javax.persistence.*;
 
 @Entity(name="CourseContent")
@@ -30,6 +31,14 @@ public class CourseContent {
             unique = false
         )
         private String content;
+
+        @Column(
+            name = "title",
+            updatable = true,
+            nullable = false,
+            unique = false
+        )
+        private String title;
         
         @Temporal(TemporalType.TIMESTAMP)
         private Date utilDate;
@@ -61,6 +70,9 @@ public class CourseContent {
         public void setContent(String content) {
             this.content = content;
         }
+        public void setTitle(String title) {
+          this.title = title;
+        }
 
         
 
@@ -73,6 +85,9 @@ public class CourseContent {
         }
         public String getContent() {
             return this.content;
+        }
+        public String getTitle() {
+          return this.title;
         }
 
        

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.campusVirtual.dto.CourseContentDto;
 import com.campusVirtual.dto.CourseDto;
+import com.campusVirtual.exception.ObjectNotFoundException;
 import com.campusVirtual.exception.PermissionDeniedException;
 import com.campusVirtual.mapper.CourseContentMapper;
 import com.campusVirtual.model.Course;
@@ -57,9 +58,9 @@ public class CourseContentService implements ICourseContentService {
 
         this.professorHaveAccessVerifier(idCourse);
 
-
         CourseContent cContent = new CourseContent();
         cContent.setContent(ccDto.getContent());
+        cContent.setTitle(ccDto.getTitle());
         cContent.setCourse(this.courseService.getCourseById(idCourse));
 
         cContent.setUtilDate(new Date());
@@ -71,13 +72,14 @@ public class CourseContentService implements ICourseContentService {
     @Override
     public void addCourseContentWithoutVerifier(Long idCourse, CourseContentDto ccDto) {
         
-        CourseContent cContent = new CourseContent();
-        cContent.setContent(ccDto.getContent());
-        cContent.setCourse(this.courseService.getCourseById(idCourse));
+        CourseContent newCourseContent = new CourseContent();
+        
+        newCourseContent.setContent(ccDto.getContent());
+        newCourseContent.setTitle(ccDto.getTitle());
+        newCourseContent.setCourse(this.courseService.getCourseById(idCourse));
+        newCourseContent.setUtilDate(new Date());
 
-        cContent.setUtilDate(new Date());
-
-        this.cContentRepository.save(cContent);
+        this.cContentRepository.save(newCourseContent);
     }
 
 
@@ -86,8 +88,7 @@ public class CourseContentService implements ICourseContentService {
 
         this.professorHaveAccessVerifier(idCourse);
 
-
-        CourseContent cContent = this.cContentRepository.findById(ccDto.getId()).get();
+        CourseContent cContent = this.cContentRepository.findById(ccDto.getId()).orElseThrow(()->new ObjectNotFoundException("Course content",ccDto.getId()));
         cContent.setContent(ccDto.getContent());
         this.cContentRepository.save(cContent);
     }

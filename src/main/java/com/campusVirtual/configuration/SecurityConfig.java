@@ -49,6 +49,8 @@ public class SecurityConfig {
                         //.and() .headers().contentTypeOptions().disable()
                         .and().authorizeRequests().antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
                         .and()
+                        .authorizeRequests().antMatchers(HttpMethod.GET, "/v1/course/all/paged").permitAll()
+                        .and()
                         .authorizeRequests().antMatchers("/swagger-ui.html/",
                         "/v3/api-docs/","/v3/api-docs/**", "/v3/api-docs.yaml","/swagger-ui/**"
                         ).permitAll()

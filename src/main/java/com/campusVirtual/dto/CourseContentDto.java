@@ -9,12 +9,8 @@ import lombok.Setter;
 public class CourseContentDto {
     private Long id;
     private String content;
+    private String title;
     
     public CourseContentDto(){}
 
-
-    @Override
-    public String toString() {
-        return this.content;
-    }
 }

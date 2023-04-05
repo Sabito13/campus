@@ -109,26 +109,32 @@ public class RunnerConfig implements CommandLineRunner {
     CourseContentDto ccdtoAux = new CourseContentDto();
     
     //Course 1
+    ccdtoAux.setTitle("one");
     ccdtoAux.setContent("Welcome to Math");
     this.courseContentService.addCourseContentWithoutVerifier((long)1,ccdtoAux);
 
     //Course 2
+    ccdtoAux.setTitle("two");
     ccdtoAux.setContent("Welcome to Operating System");
     this.courseContentService.addCourseContentWithoutVerifier((long)2,ccdtoAux);
 
     //Course 3
+    ccdtoAux.setTitle("three");
     ccdtoAux.setContent("Welcome Students");
     this.courseContentService.addCourseContentWithoutVerifier((long)3,ccdtoAux);
 
     //Course 1
+    ccdtoAux.setTitle("four");
     ccdtoAux.setContent("the Math are amazing");
     this.courseContentService.addCourseContentWithoutVerifier((long)1,ccdtoAux);
 
     //Course 1
+    ccdtoAux.setTitle("five");
     ccdtoAux.setContent("Please do the homework in time");
     this.courseContentService.addCourseContentWithoutVerifier((long)1,ccdtoAux);
 
     //Course 2
+    ccdtoAux.setTitle("six");
     ccdtoAux.setContent("Execute commands to prove the terminal");
     this.courseContentService.addCourseContentWithoutVerifier((long)2,ccdtoAux);
   

@@ -11,6 +11,7 @@ public class CourseContentMapper {
         CourseContentDto ccDto = new CourseContentDto();
         ccDto.setContent(cContent.getContent());
         ccDto.setId(cContent.getId());
+        ccDto.setTitle(cContent.getTitle());
         return ccDto; 
     }
 
