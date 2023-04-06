@@ -45,7 +45,7 @@ public class ProfessorInCourseService implements IProfessorInCourseService{
 
     @Override
     public CourseDto setProfessorInCourseByUsername(String username, Long idCourse) {
-        Long idProfessor =this.userDataService.getUserById(username).getStudent().getId();
+        Long idProfessor =this.userDataService.getUserById(username).getProfessor().getId();
     
         return this.setProfessorInCourse(idProfessor,idCourse);
     }
@@ -53,7 +53,7 @@ public class ProfessorInCourseService implements IProfessorInCourseService{
 
     @Override
     public void deleteProfessorInCourseByUsername(String username, Long idCourse) {
-        Long idProfessor =this.userDataService.getUserById(username).getStudent().getId();
+        Long idProfessor =this.userDataService.getUserById(username).getProfessor().getId();
        
         this.deleteProfessorInCourse(idProfessor,idCourse);
     }

@@ -90,6 +90,7 @@ public class CourseContentService implements ICourseContentService {
 
         CourseContent cContent = this.cContentRepository.findById(ccDto.getId()).orElseThrow(()->new ObjectNotFoundException("Course content",ccDto.getId()));
         cContent.setContent(ccDto.getContent());
+        cContent.setTitle(ccDto.getTitle());
         this.cContentRepository.save(cContent);
     }
 
